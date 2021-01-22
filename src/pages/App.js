@@ -3,16 +3,16 @@ import "../styles/App.css";
 import FilterArr from "./FileterArr";
 import DrawnDishList from "./DrawnDishList";
 let mainArr = [
-  "Domowa pizza",
-  "Serowa petarda",
+  { nazwa: "Serowa petarda", skladniki: "ser" },
   "Zapiekanka makaronowa z mięsem mielonym i cukinią",
-  "Kotlet z ziemniakami",
+  { nazwa: "Kotlet z ziemniakami", skladniki: "mieso" },
+  { nazwa: "Pierogi", skladniki: "pierogi" },
   "Wytrawne naleśniki",
+  "Domowa pizza",
   "Makaron z cukinią i mascarpone",
   "Zapiekanka ziemniaczna",
   " Zupa warzywna",
   " Schab w sosie koperkowym",
-  "Pierogi",
   "Krokiety po meksykańsku",
   "Kurczak w cieście z warzywami",
   "Gulasz",
@@ -33,7 +33,9 @@ function App() {
     setFilterSection((prevValue) => !prevValue);
   };
 
-  const fileterSection = filterSection && <FilterArr />;
+  const fileterSection = filterSection && (
+    <FilterArr allDishes={allDishes} setUserDishes={setUserDishes} />
+  );
   return (
     <>
       <p>powiedz nam czego Ci nie pokazywać</p>
