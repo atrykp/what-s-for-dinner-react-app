@@ -37,7 +37,7 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
           pierogi
         </label>
       </form>
-      <button onClick={() => setUserDishes(allDishes)}>zapisz zmiany</button>
+      <button onClick={() => setUserDishes(customedArr)}>zapisz zmiany</button>
     </>
   );
 };

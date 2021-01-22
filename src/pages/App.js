@@ -48,7 +48,7 @@ function App() {
       </button>
       {fileterSection}
       <h1>wylosowana potrawa to:</h1>
-      <DrawnDishList customedArr={allDishes} />
+      <DrawnDishList customedArr={userDishes ? userDishes : allDishes} />
     </>
   );
 }

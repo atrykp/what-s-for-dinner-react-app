@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+// tutaj otrzymuje przefiltrowaną tablicę dostosowaną do użytkownika bez potraw których nie lubi.
 
 const DrawnDishList = ({ customedArr }) => {
   const [drawnDish, setDrawnDish] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    let date = new Date();
+    setCurrentDate(date.getTime());
+  }, []);
+  console.log(currentDate);
+
   let notYetArr;
 
   const handleDraw = () => {
