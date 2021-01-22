@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/App.css";
+import FilterArr from "./FileterArr";
 import DrawnDishList from "./DrawnDishList";
 let mainArr = [
   "Domowa pizza",
@@ -26,11 +27,20 @@ let mainArr = [
 function App() {
   const [allDishes, setAllDishes] = useState(mainArr);
   const [userDishes, setUserDishes] = useState("");
+  const [filterSection, setFilterSection] = useState(false);
 
+  const showFilterArr = () => {
+    setFilterSection((prevValue) => !prevValue);
+  };
+
+  const fileterSection = filterSection && <FilterArr />;
   return (
     <>
       <p>powiedz nam czego Ci nie pokazywać</p>
-      <button>rozwiń</button>
+      <button onClick={showFilterArr}>
+        {filterSection ? "ukryj" : "rozwiń"}
+      </button>
+      {fileterSection}
       <h1>wylosowana potrawa to:</h1>
       <DrawnDishList customedArr={allDishes} />
     </>
