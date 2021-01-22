@@ -34,7 +34,11 @@ function App() {
   };
 
   const fileterSection = filterSection && (
-    <FilterArr allDishes={allDishes} setUserDishes={setUserDishes} />
+    <FilterArr
+      userDishes={userDishes}
+      allDishes={allDishes}
+      setUserDishes={setUserDishes}
+    />
   );
   return (
     <>

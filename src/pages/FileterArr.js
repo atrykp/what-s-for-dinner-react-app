@@ -1,19 +1,25 @@
 import React, { useState } from "react";
+// przefiltrować tablice z ustwionymi filtrami przekaza
 
-const FileterArr = ({ allDishes, setUserDishes }) => {
+const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
+  const [filter, setFileter] = useState([]);
   const [customedArr, setCustomedArr] = useState("");
   console.log(customedArr);
 
   const handleChange = (e) => {
     const checked = e.target.checked;
-    console.log(checked);
-
     const value = e.target.id;
-    let arr = [...allDishes];
-    let newArr = arr.filter((element) =>
-      checked ? element.skladniki !== value : element
-    );
-    setCustomedArr(newArr);
+    if (checked) {
+      let arr = customedArr ? [...customedArr] : [...allDishes];
+      let newArr = arr.filter((element) =>
+        checked ? element.skladniki !== value : element
+      );
+      setCustomedArr(newArr);
+    } else {
+      let arr = [...allDishes];
+      let dish = arr.filter((element) => element.skladniki === value);
+      setCustomedArr([...dish, ...customedArr]);
+    }
   };
   return (
     <>
