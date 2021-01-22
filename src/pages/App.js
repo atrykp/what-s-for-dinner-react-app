@@ -25,9 +25,12 @@ let mainArr = [
 ];
 function App() {
   const [allDishes, setAllDishes] = useState(mainArr);
+  const [userDishes, setUserDishes] = useState("");
 
   return (
     <>
+      <p>powiedz nam czego Ci nie pokazywać</p>
+      <button>rozwiń</button>
       <h1>wylosowana potrawa to:</h1>
       <DrawnDishList customedArr={allDishes} />
     </>
