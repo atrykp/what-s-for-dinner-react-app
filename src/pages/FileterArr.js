@@ -3,15 +3,16 @@ import Filter from "../components/Filter";
 
 const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
   const [filter, setFileter] = useState([
-    { name: "ser", active: true, id: 1 },
-    { name: "mięso", active: false, id: 2 },
+    { name: "ser", active: false, id: 1 },
+    { name: "mieso", active: false, id: 2 },
     { name: "pierogi", active: false, id: 3 },
   ]);
   const [customedArr, setCustomedArr] = useState("");
+  console.log(customedArr);
 
-  const handleChange = (e) => {
-    const checked = e.target.checked;
-    const value = e.target.id;
+  const handleChange = (element) => {
+    const checked = element.active;
+    const value = element.name;
     if (checked) {
       let arr = customedArr ? [...customedArr] : [...allDishes];
       let newArr = arr.filter((element) =>
@@ -23,11 +24,13 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
       let dish = arr.filter((element) => element.skladniki === value);
       setCustomedArr([...dish, ...customedArr]);
     }
+    setUserDishes(customedArr);
   };
   const changeFilterActivity = (id) => {
     let filters = [...filter];
     const elementId = filters.findIndex((elem) => elem.id === id);
     filters[elementId].active = !filters[elementId].active;
+    handleChange(filters[elementId]);
     setFileter(filters);
   };
   const filterArr = filter.map((element) => (
@@ -37,26 +40,7 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
       key={element.id}
     />
   ));
-  return (
-    <>
-      {filterArr}
-      <form action="">
-        <label htmlFor="ser">
-          <input type="checkbox" id={"ser"} onChange={handleChange} />
-          ser
-        </label>
-        <label htmlFor="mieso">
-          <input type="checkbox" id={"mieso"} onChange={handleChange} />
-          mięso
-        </label>
-        <label htmlFor="pierogi">
-          <input type="checkbox" id={"pierogi"} onChange={handleChange} />
-          pierogi
-        </label>
-      </form>
-      <button onClick={() => setUserDishes(customedArr)}>zapisz zmiany</button>
-    </>
-  );
+  return <>{filterArr}</>;
 };
 
 export default FileterArr;

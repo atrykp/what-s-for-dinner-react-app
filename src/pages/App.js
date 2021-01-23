@@ -28,6 +28,7 @@ function App() {
   const [allDishes, setAllDishes] = useState(mainArr);
   const [userDishes, setUserDishes] = useState("");
   const [filterSection, setFilterSection] = useState(false);
+  console.log(userDishes);
 
   const showFilterArr = () => {
     setFilterSection((prevValue) => !prevValue);

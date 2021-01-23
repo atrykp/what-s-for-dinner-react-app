@@ -9,7 +9,7 @@ const DrawnDishList = ({ customedArr }) => {
     let date = new Date();
     setCurrentDate(date.getTime());
   }, []);
-  console.log(currentDate);
+  console.log(customedArr);
 
   let notYetArr;
 
