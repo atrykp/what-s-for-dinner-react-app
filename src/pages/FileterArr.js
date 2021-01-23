@@ -24,9 +24,10 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
       setCustomedArr([...dish, ...customedArr]);
     }
   };
-  const filterArr = filter.map((element) => <Filter fileter={element} />);
+  const filterArr = filter.map((element) => <Filter filter={element} />);
   return (
-    <Filter>
+    <>
+      {filterArr}
       <form action="">
         <label htmlFor="ser">
           <input type="checkbox" id={"ser"} onChange={handleChange} />
@@ -42,7 +43,7 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
         </label>
       </form>
       <button onClick={() => setUserDishes(customedArr)}>zapisz zmiany</button>
-    </Filter>
+    </>
   );
 };
 
