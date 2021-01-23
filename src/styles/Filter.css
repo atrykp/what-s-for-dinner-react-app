@@ -1,0 +1,16 @@
+.filter {
+  border: 1px solid black;
+  width: 11%;
+  margin: 1%;
+}
+.filter button {
+  background-color: transparent;
+  font-size: 1.5rem;
+  border: none;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+}
+.activeFilter {
+  background-color: green;
+}

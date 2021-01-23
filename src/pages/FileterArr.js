@@ -3,9 +3,9 @@ import Filter from "../components/Filter";
 
 const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
   const [filter, setFileter] = useState([
-    { name: "ser", active: false },
-    { name: "mięso", active: false },
-    { name: "pierogi", active: false },
+    { name: "ser", active: true, id: 1 },
+    { name: "mięso", active: false, id: 2 },
+    { name: "pierogi", active: false, id: 3 },
   ]);
   const [customedArr, setCustomedArr] = useState("");
 
