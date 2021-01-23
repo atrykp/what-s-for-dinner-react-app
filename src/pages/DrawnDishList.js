@@ -19,11 +19,22 @@ const DrawnDishList = ({ customedArr }) => {
     setDrawnDish(notYetArr[index]);
     notYetArr.slice(index, 1);
   };
+  const handleShowDish = {};
+  const banForADay = {};
+  const filterArr = {};
+  const showDish = drawnDish && (
+    <div className="drawnDish">
+      <h1>{drawnDish}</h1>
+      <button onClick={handleShowDish}>Ok</button>
+      <button onClick={banForADay}>Nie dzisiaj</button>
+      <button onClick={filterArr}>Nie lubię</button>
+    </div>
+  );
 
   return (
     <>
       <button onClick={handleDraw}>Losuj</button>
-      <h1>{drawnDish}</h1>
+      {showDish}
     </>
   );
 };

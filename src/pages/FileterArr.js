@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-// przefiltrować tablice z ustwionymi filtrami przekaza
+import Filter from "../components/Filter";
 
 const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
-  const [filter, setFileter] = useState([]);
+  const [filter, setFileter] = useState([
+    { name: "ser", active: false },
+    { name: "mięso", active: false },
+    { name: "pierogi", active: false },
+  ]);
   const [customedArr, setCustomedArr] = useState("");
-  console.log(customedArr);
 
   const handleChange = (e) => {
     const checked = e.target.checked;
@@ -21,8 +24,9 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
       setCustomedArr([...dish, ...customedArr]);
     }
   };
+  const filterArr = filter.map((element) => <Filter fileter={element} />);
   return (
-    <>
+    <Filter>
       <form action="">
         <label htmlFor="ser">
           <input type="checkbox" id={"ser"} onChange={handleChange} />
@@ -38,7 +42,7 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
         </label>
       </form>
       <button onClick={() => setUserDishes(customedArr)}>zapisz zmiany</button>
-    </>
+    </Filter>
   );
 };
 
