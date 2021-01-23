@@ -24,7 +24,19 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
       setCustomedArr([...dish, ...customedArr]);
     }
   };
-  const filterArr = filter.map((element) => <Filter filter={element} />);
+  const changeFilterActivity = (id) => {
+    let filters = [...filter];
+    const elementId = filters.findIndex((elem) => elem.id === id);
+    filters[elementId].active = !filters[elementId].active;
+    setFileter(filters);
+  };
+  const filterArr = filter.map((element) => (
+    <Filter
+      filter={element}
+      changeFilterActivity={changeFilterActivity}
+      key={element.id}
+    />
+  ));
   return (
     <>
       {filterArr}
