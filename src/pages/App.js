@@ -26,19 +26,22 @@ let mainArr = [
 ];
 function App() {
   const [allDishes, setAllDishes] = useState(mainArr);
-  const [userDishes, setUserDishes] = useState("");
+  const [userDishes, setUserDishes] = useState(null);
   const [filterSection, setFilterSection] = useState(false);
   console.log(userDishes);
 
   const showFilterArr = () => {
     setFilterSection((prevValue) => !prevValue);
   };
+  const updateUserDishes = (arr) => {
+    setUserDishes(arr);
+  };
 
   const fileterSection = filterSection && (
     <FilterArr
       userDishes={userDishes}
       allDishes={allDishes}
-      setUserDishes={setUserDishes}
+      updateUserDishes={updateUserDishes}
     />
   );
   return (

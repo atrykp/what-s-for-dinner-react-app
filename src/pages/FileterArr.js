@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Filter from "../components/Filter";
 
-const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
+const FileterArr = ({ userDishes, allDishes, updateUserDishes }) => {
+  const [filterName, setFilterName] = useState("");
   const [filter, setFileter] = useState([
     { name: "ser", active: false, id: 1 },
     { name: "mieso", active: false, id: 2 },
@@ -19,12 +20,13 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
         checked ? element.skladniki !== value : element
       );
       setCustomedArr(newArr);
+      updateUserDishes(newArr);
     } else {
       let arr = [...allDishes];
       let dish = arr.filter((element) => element.skladniki === value);
       setCustomedArr([...dish, ...customedArr]);
+      updateUserDishes([...dish, ...customedArr]);
     }
-    setUserDishes(customedArr);
   };
   const changeFilterActivity = (id) => {
     let filters = [...filter];
@@ -33,6 +35,20 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
     handleChange(filters[elementId]);
     setFileter(filters);
   };
+  const addNewFilter = (e) => {
+    e.preventDefault();
+    const newFilter = {
+      name: filterName,
+      active: true,
+      id: Math.floor(Math.random() * 123),
+    };
+    setFileter([newFilter, ...filter]);
+    setFilterName("");
+  };
+  const handleInputValue = (e) => {
+    const value = e.target.value;
+    setFilterName(value);
+  };
   const filterArr = filter.map((element) => (
     <Filter
       filter={element}
@@ -40,7 +56,20 @@ const FileterArr = ({ userDishes, allDishes, setUserDishes }) => {
       key={element.id}
     />
   ));
-  return <>{filterArr}</>;
+  return (
+    <>
+      <form action="" onSubmit={addNewFilter}>
+        <input
+          type="text"
+          placeholder={"wpisz swój filtr"}
+          onChange={handleInputValue}
+          value={filterName}
+        />
+        <button onSubmit={addNewFilter}>dodaj</button>
+      </form>
+      {filterArr}
+    </>
+  );
 };
 
 export default FileterArr;
