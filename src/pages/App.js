@@ -16,7 +16,8 @@ let mainArr = [
       { krok1: "Lorem ipsum dolor sit amet" },
       { krok2: "Lorem ipsum dolor sit amet," },
     ],
-    id: "123",
+    id: 1,
+    ban: false,
   },
   {
     nazwa: "Kotlet z ziemniakami",
@@ -25,6 +26,8 @@ let mainArr = [
       { name: "ziemniaki", quantity: "100g" },
       { name: "surowka", quantity: "400g" },
     ],
+    id: 2,
+    ban: false,
   },
   {
     nazwa: "Pierogi",
@@ -33,6 +36,8 @@ let mainArr = [
       { name: "mąka", quantity: "100g" },
       { name: "ziemniaki", quantity: "400g" },
     ],
+    id: 3,
+    ban: false,
   },
 ];
 function App() {
@@ -46,6 +51,13 @@ function App() {
   };
   const updateUserDishes = (arr) => {
     setUserDishes(arr);
+  };
+  const banDish = (id) => {
+    const dishes = userDishes ? [...userDishes] : [...allDishes];
+    const dishIndex = dishes.findIndex((elem) => elem.id === id);
+    const dish = dishes[dishIndex];
+    dish.ban = true;
+    setUserDishes(dishes.filter((element) => !element.ban));
   };
 
   const fileterSection = filterSection && (
@@ -71,7 +83,10 @@ function App() {
       {dishesCounter}
 
       <h1>wylosowana potrawa to:</h1>
-      <DrawnDishList customedArr={userDishes ? userDishes : allDishes} />
+      <DrawnDishList
+        customedArr={userDishes ? userDishes : allDishes}
+        banDish={banDish}
+      />
     </>
   );
 }
