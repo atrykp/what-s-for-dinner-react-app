@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Filter from "../components/Filter";
 
-const FileterArr = ({ userDishes, allDishes, updateUserDishes }) => {
+const FileterArr = ({ allDishes, updateUserDishes }) => {
   const [filterName, setFilterName] = useState("");
   const [filter, setFileter] = useState([
-    { name: "ser", active: false, id: 1 },
     { name: "mieso", active: false, id: 2 },
     { name: "pierogi", active: false, id: 3 },
   ]);
@@ -42,17 +41,31 @@ const FileterArr = ({ userDishes, allDishes, updateUserDishes }) => {
       active: true,
       id: Math.floor(Math.random() * 123),
     };
+    handleChange(newFilter);
     setFileter([newFilter, ...filter]);
     setFilterName("");
+  };
+  const removeFilter = (id) => {
+    let filters = [...filter];
+    const elementId = filters.findIndex((elem) => elem.id === id);
+    const element = filters[elementId];
+    if (element.active) {
+      element.active = false;
+      handleChange(element);
+    }
+    filters.splice(elementId, 1);
+    setFileter(filters);
   };
   const handleInputValue = (e) => {
     const value = e.target.value;
     setFilterName(value);
   };
+
   const filterArr = filter.map((element) => (
     <Filter
       filter={element}
       changeFilterActivity={changeFilterActivity}
+      removeFilter={removeFilter}
       key={element.id}
     />
   ));
