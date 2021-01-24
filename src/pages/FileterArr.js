@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Filter from "../components/Filter";
 
 const FileterArr = ({ allDishes, updateUserDishes }) => {
   console.log("jestem w filter");
   const [filterSection, setFilterSection] = useState(false);
   const [filterName, setFilterName] = useState("");
-  const [filter, setFileter] = useState(
+  const [filters, setFileter] = useState(
     JSON.parse(localStorage.getItem("filterArr")) || []
   );
   const [customedArr, setCustomedArr] = useState("");
+  console.log(filters);
   console.log(customedArr);
+
   const showFilterArr = () => {
     setFilterSection((prevValue) => !prevValue);
   };
+
+  useEffect(() => {
+    filters.forEach((element) => handleChange(element));
+  }, [filters]);
+
   const handleChange = (element) => {
     const checked = element.active;
     const value = element.name;
@@ -33,11 +40,12 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
     }
   };
   const changeFilterActivity = (id) => {
-    let filters = [...filter];
-    const elementId = filters.findIndex((elem) => elem.id === id);
-    filters[elementId].active = !filters[elementId].active;
-    handleChange(filters[elementId]);
-    setFileter(filters);
+    let filtersArr = [...filters];
+    const elementId = filtersArr.findIndex((elem) => elem.id === id);
+    filtersArr[elementId].active = !filtersArr[elementId].active;
+    handleChange(filtersArr[elementId]);
+    setFileter(filtersArr);
+    setFilterStorage(filtersArr);
   };
   const setFilterStorage = (arr) => {
     localStorage.setItem("filterArr", JSON.stringify(arr));
@@ -50,22 +58,22 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
       id: Math.floor(Math.random() * 123),
     };
     handleChange(newFilter);
-    const allFilters = [newFilter, ...filter];
+    const allFilters = [newFilter, ...filters];
     setFileter(allFilters);
     setFilterStorage(allFilters);
     setFilterName("");
   };
   const removeFilter = (id) => {
-    let filters = [...filter];
-    const elementId = filters.findIndex((elem) => elem.id === id);
-    const element = filters[elementId];
+    let filtersArr = [...filters];
+    const elementId = filtersArr.findIndex((elem) => elem.id === id);
+    const element = filtersArr[elementId];
     if (element.active) {
       element.active = false;
       handleChange(element);
     }
-    filters.splice(elementId, 1);
-    setFileter(filters);
-    setFilterStorage(filters);
+    filtersArr.splice(elementId, 1);
+    setFileter(filtersArr);
+    setFilterStorage(filtersArr);
   };
   const handleInputValue = (e) => {
     const value = e.target.value;
@@ -83,7 +91,7 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
     </form>
   );
 
-  const filterArr = filter.map((element) => (
+  const filterArr = filters.map((element) => (
     <Filter
       filter={element}
       changeFilterActivity={changeFilterActivity}

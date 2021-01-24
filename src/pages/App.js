@@ -54,7 +54,9 @@ let mainArr = [
 ];
 function App() {
   const [allDishes, setAllDishes] = useState([...mainArr]);
-  const [userDishes, setUserDishes] = useState(null);
+  const [userDishes, setUserDishes] = useState(
+    JSON.parse(localStorage.getItem("userDishes")) || null
+  );
 
   const checkBanStatus = () => {
     const dishes = [...allDishes];
@@ -79,6 +81,7 @@ function App() {
           dishes[index] = element;
           setAllDishes(dishes);
           setUserDishes(dishes);
+          setUserStorage(dishes);
         }
       });
     }
@@ -89,6 +92,7 @@ function App() {
 
   const updateUserDishes = (arr) => {
     setUserDishes(arr);
+    setUserStorage(arr);
   };
   const banDish = (id, time, howLong) => {
     const dishes = userDishes ? [...userDishes] : [...allDishes];
@@ -100,6 +104,7 @@ function App() {
       howLong,
     };
     setUserDishes(dishes.filter((element) => !element.ban.status));
+    setUserStorage(dishes.filter((element) => !element.ban.status));
   };
 
   const fileterSection = (
@@ -115,6 +120,9 @@ function App() {
       {userDishes ? userDishes.length : allDishes.length})
     </p>
   );
+  const setUserStorage = (arr) => {
+    localStorage.setItem("userDishes", JSON.stringify(arr));
+  };
   return (
     <>
       <p>powiedz nam czego Ci nie pokazywać</p>

@@ -23,8 +23,6 @@ const DrawnDishList = ({ customedArr, banDish }) => {
     setDrawnDish(notYetArr[index]);
     notYetArr.slice(index, 1);
   };
-  const handleShowDish = {};
-  const banForADay = {};
 
   const ban = (id, howLong = "permament") => {
     const sinceWhenDate = getDate();
