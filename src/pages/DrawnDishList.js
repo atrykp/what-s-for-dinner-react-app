@@ -4,11 +4,16 @@ import React, { useEffect, useState } from "react";
 const DrawnDishList = ({ customedArr, banDish }) => {
   const [drawnDish, setDrawnDish] = useState("");
   const [currentDate, setCurrentDate] = useState("");
+  console.log(currentDate);
 
   useEffect(() => {
+    getDate();
+  }, []);
+  const getDate = () => {
     let date = new Date();
     setCurrentDate(date.getTime());
-  }, []);
+    return date.getTime();
+  };
 
   let notYetArr;
 
@@ -21,7 +26,9 @@ const DrawnDishList = ({ customedArr, banDish }) => {
   const handleShowDish = {};
   const banForADay = {};
   const ban = (id) => {
-    banDish(id);
+    const sinceWhenDate = getDate();
+    const howLong = 60000;
+    banDish(id, sinceWhenDate, howLong);
     setDrawnDish("");
   };
 
