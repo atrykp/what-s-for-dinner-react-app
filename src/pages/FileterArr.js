@@ -15,14 +15,16 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
     const value = element.name;
     if (checked) {
       let arr = customedArr ? [...customedArr] : [...allDishes];
-      let newArr = arr.filter((element) =>
-        checked ? element.skladniki !== value : element
+      let newArr = arr.filter(
+        (element) => !element.skladniki.find((elem) => elem.name === value)
       );
       setCustomedArr(newArr);
       updateUserDishes(newArr);
     } else {
       let arr = [...allDishes];
-      let dish = arr.filter((element) => element.skladniki === value);
+      let dish = arr.filter((element) =>
+        element.skladniki.find((elem) => elem.name === value)
+      );
       setCustomedArr([...dish, ...customedArr]);
       updateUserDishes([...dish, ...customedArr]);
     }
