@@ -59,14 +59,20 @@ function App() {
 
   const checkBanStatus = () => {
     const dishes = [...allDishes];
-    const banDishes = dishes.filter((element) => element.ban.status);
+    const banDishes = dishes.filter(
+      (element) => element.ban.status && element.ban.howLong !== "permament"
+    );
     if (banDishes.length !== 0) {
       let date = new Date().getTime();
       console.log(banDishes);
 
       banDishes.forEach((element) => {
         console.log(element);
-        if (date - (element.ban.howLong + element.ban.sinceWhen) > 0) {
+
+        if (
+          element.ban.howLong !== "permament" &&
+          date - (element.ban.howLong + element.ban.sinceWhen) > 0
+        ) {
           console.log("jestem w ifie");
 
           element.ban.status = false;

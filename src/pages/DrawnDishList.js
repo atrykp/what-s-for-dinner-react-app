@@ -25,9 +25,9 @@ const DrawnDishList = ({ customedArr, banDish }) => {
   };
   const handleShowDish = {};
   const banForADay = {};
-  const ban = (id) => {
+
+  const ban = (id, howLong = "permament") => {
     const sinceWhenDate = getDate();
-    const howLong = 60000;
     banDish(id, sinceWhenDate, howLong);
     setDrawnDish("");
   };
@@ -35,8 +35,8 @@ const DrawnDishList = ({ customedArr, banDish }) => {
   const showDish = drawnDish && (
     <div className="drawnDish">
       <h1>{drawnDish.nazwa}</h1>
-      <button onClick={handleShowDish}>Ok</button>
-      <button onClick={banForADay}>Nie dzisiaj</button>
+      <button onClick={() => ban(drawnDish.id, 10000)}>Ok</button>
+      <button onClick={() => ban(drawnDish.id, 6000)}>Nie dzisiaj</button>
       <button onClick={() => ban(drawnDish.id)}>Nie lubię</button>
     </div>
   );
