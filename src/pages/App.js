@@ -55,6 +55,12 @@ function App() {
       updateUserDishes={updateUserDishes}
     />
   );
+  const dishesCounter = (
+    <p>
+      Liczba potraw do wylosowania (
+      {userDishes ? userDishes.length : allDishes.length})
+    </p>
+  );
   return (
     <>
       <p>powiedz nam czego Ci nie pokazywać</p>
@@ -62,6 +68,8 @@ function App() {
         {filterSection ? "ukryj" : "rozwiń"}
       </button>
       {fileterSection}
+      {dishesCounter}
+
       <h1>wylosowana potrawa to:</h1>
       <DrawnDishList customedArr={userDishes ? userDishes : allDishes} />
     </>
