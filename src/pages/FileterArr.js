@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import Filter from "../components/Filter";
 
 const FileterArr = ({ allDishes, updateUserDishes }) => {
+  console.log("jestem w filter");
+  const [filterSection, setFilterSection] = useState(false);
   const [filterName, setFilterName] = useState("");
-  const [filter, setFileter] = useState([
-    { name: "mieso", active: false, id: 2 },
-    { name: "pierogi", active: false, id: 3 },
-  ]);
+  const [filter, setFileter] = useState(
+    JSON.parse(localStorage.getItem("filterArr")) || []
+  );
   const [customedArr, setCustomedArr] = useState("");
   console.log(customedArr);
-
+  const showFilterArr = () => {
+    setFilterSection((prevValue) => !prevValue);
+  };
   const handleChange = (element) => {
     const checked = element.active;
     const value = element.name;
@@ -36,6 +39,9 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
     handleChange(filters[elementId]);
     setFileter(filters);
   };
+  const setFilterStorage = (arr) => {
+    localStorage.setItem("filterArr", JSON.stringify(arr));
+  };
   const addNewFilter = (e) => {
     e.preventDefault();
     const newFilter = {
@@ -44,7 +50,9 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
       id: Math.floor(Math.random() * 123),
     };
     handleChange(newFilter);
-    setFileter([newFilter, ...filter]);
+    const allFilters = [newFilter, ...filter];
+    setFileter(allFilters);
+    setFilterStorage(allFilters);
     setFilterName("");
   };
   const removeFilter = (id) => {
@@ -57,11 +65,23 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
     }
     filters.splice(elementId, 1);
     setFileter(filters);
+    setFilterStorage(filters);
   };
   const handleInputValue = (e) => {
     const value = e.target.value;
     setFilterName(value);
   };
+  const filterForm = filterSection && (
+    <form action="" onSubmit={addNewFilter}>
+      <input
+        type="text"
+        placeholder={"wpisz swój filtr"}
+        onChange={handleInputValue}
+        value={filterName}
+      />
+      <button onSubmit={addNewFilter}>dodaj</button>
+    </form>
+  );
 
   const filterArr = filter.map((element) => (
     <Filter
@@ -73,16 +93,11 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
   ));
   return (
     <>
-      <form action="" onSubmit={addNewFilter}>
-        <input
-          type="text"
-          placeholder={"wpisz swój filtr"}
-          onChange={handleInputValue}
-          value={filterName}
-        />
-        <button onSubmit={addNewFilter}>dodaj</button>
-      </form>
-      {filterArr}
+      <button onClick={showFilterArr}>
+        {filterSection ? "ukryj" : "rozwiń"}
+      </button>
+      {filterForm}
+      {filterSection && filterArr}
     </>
   );
 };

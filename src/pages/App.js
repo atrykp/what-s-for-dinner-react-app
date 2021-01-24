@@ -55,7 +55,6 @@ let mainArr = [
 function App() {
   const [allDishes, setAllDishes] = useState([...mainArr]);
   const [userDishes, setUserDishes] = useState(null);
-  const [filterSection, setFilterSection] = useState(false);
 
   const checkBanStatus = () => {
     const dishes = [...allDishes];
@@ -88,9 +87,6 @@ function App() {
     window.setInterval(checkBanStatus, 6000);
   }, []);
 
-  const showFilterArr = () => {
-    setFilterSection((prevValue) => !prevValue);
-  };
   const updateUserDishes = (arr) => {
     setUserDishes(arr);
   };
@@ -106,7 +102,7 @@ function App() {
     setUserDishes(dishes.filter((element) => !element.ban.status));
   };
 
-  const fileterSection = filterSection && (
+  const fileterSection = (
     <FilterArr
       userDishes={userDishes}
       allDishes={allDishes}
@@ -122,9 +118,6 @@ function App() {
   return (
     <>
       <p>powiedz nam czego Ci nie pokazywać</p>
-      <button onClick={showFilterArr}>
-        {filterSection ? "ukryj" : "rozwiń"}
-      </button>
       {fileterSection}
       {dishesCounter}
 
