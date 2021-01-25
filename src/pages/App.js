@@ -53,7 +53,9 @@ let mainArr = [
   },
 ];
 function App() {
-  const [allDishes, setAllDishes] = useState([...mainArr]);
+  const [allDishes, setAllDishes] = useState(
+    JSON.parse(localStorage.getItem("allDishes")) || [...mainArr]
+  );
   const [userDishes, setUserDishes] = useState(
     JSON.parse(localStorage.getItem("userDishes")) || null
   );
@@ -86,9 +88,9 @@ function App() {
       });
     }
   };
-  useEffect(() => {
-    window.setInterval(checkBanStatus, 6000);
-  }, []);
+  // useEffect(() => {
+  //   window.setInterval(checkBanStatus, 6000);
+  // }, []);
 
   const updateUserDishes = (arr) => {
     setUserDishes(arr);
@@ -105,6 +107,7 @@ function App() {
     };
     setUserDishes(dishes.filter((element) => !element.ban.status));
     setUserStorage(dishes.filter((element) => !element.ban.status));
+    setAllDishesStorage(dishes);
   };
 
   const fileterSection = (
@@ -123,8 +126,12 @@ function App() {
   const setUserStorage = (arr) => {
     localStorage.setItem("userDishes", JSON.stringify(arr));
   };
+  const setAllDishesStorage = (arr) => {
+    localStorage.setItem("allDishes", JSON.stringify(arr));
+  };
   const reset = () => {
     localStorage.removeItem("userDishes");
+    localStorage.removeItem("allDishes");
   };
   return (
     <>
