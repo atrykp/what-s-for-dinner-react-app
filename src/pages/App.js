@@ -59,7 +59,6 @@ function App() {
   const [userDishes, setUserDishes] = useState(
     JSON.parse(localStorage.getItem("userDishes")) || null
   );
-  const filtersArray = JSON.parse(localStorage.getItem("filterArr")) || null;
 
   const checkBanStatus = () => {
     const dishes = [...allDishes];
@@ -68,7 +67,6 @@ function App() {
     );
     if (banDishes.length !== 0) {
       let date = new Date().getTime();
-      console.log(banDishes);
 
       banDishes.forEach((element) => {
         console.log(element);
@@ -80,15 +78,29 @@ function App() {
           console.log("jestem w ifie");
 
           element.ban.status = false;
+          element.ban.sinceWhen = "";
+          element.ban.howLong = "";
+
           const index = dishes.findIndex((elem) => elem.id === element.id);
           dishes[index] = element;
           setAllDishes(dishes);
+          const filtersArray =
+            JSON.parse(localStorage.getItem("filterArr")) || null;
           if (filtersArray) {
             const activeFilters = filtersArray.filter((item) => item.active);
-            console.log("przefiltruj");
-
-            // setUserDishes(dishes);
-            // setUserStorage(dishes);
+            let flag = false;
+            let showMe = element.skladniki.forEach((item) => {
+              filtersArray.forEach((elem) => {
+                if (elem.name === item.name) {
+                  console.log("przefiltrowane");
+                  flag = true;
+                }
+              });
+            });
+            if (!flag) {
+              setUserDishes(dishes);
+              setUserStorage(dishes);
+            }
           } else {
             setUserDishes(dishes);
             setUserStorage(dishes);
