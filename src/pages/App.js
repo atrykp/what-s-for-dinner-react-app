@@ -59,6 +59,7 @@ function App() {
   const [userDishes, setUserDishes] = useState(
     JSON.parse(localStorage.getItem("userDishes")) || null
   );
+  const filtersArray = JSON.parse(localStorage.getItem("filterArr")) || null;
 
   const checkBanStatus = () => {
     const dishes = [...allDishes];
@@ -82,15 +83,17 @@ function App() {
           const index = dishes.findIndex((elem) => elem.id === element.id);
           dishes[index] = element;
           setAllDishes(dishes);
+
           setUserDishes(dishes);
           setUserStorage(dishes);
         }
       });
     }
   };
-  // useEffect(() => {
-  //   window.setInterval(checkBanStatus, 6000);
-  // }, []);
+
+  useEffect(() => {
+    window.setInterval(checkBanStatus, 6000);
+  }, []);
 
   const updateUserDishes = (arr) => {
     setUserDishes(arr);
