@@ -1,55 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Filter from "../components/Filter";
 
-const FileterArr = ({ allDishes, updateUserDishes }) => {
-  console.log("jestem w filter");
+const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   const [filterSection, setFilterSection] = useState(false);
   const [filterName, setFilterName] = useState("");
   const [filters, setFileter] = useState(
     JSON.parse(localStorage.getItem("filterArr")) || []
   );
-  const [customedArr, setCustomedArr] = useState("");
-  console.log(filters);
-  console.log(customedArr);
 
   const showFilterArr = () => {
     setFilterSection((prevValue) => !prevValue);
   };
 
-  useEffect(() => {
-    filters.forEach((element) => handleChange(element));
-  }, [filters]);
-
-  const handleChange = (element) => {
+  const filterDishes = (element) => {
     const checked = element.active;
     const value = element.name;
     if (checked) {
-      let arr = customedArr ? [...customedArr] : [...allDishes];
+      let arr = userDishes ? [...userDishes] : [...allDishes];
       let newArr = arr.filter(
-        (element) => !element.skladniki.find((elem) => elem.name === value)
+        (item) => !item.skladniki.find((elem) => elem.name === value)
       );
-      setCustomedArr(newArr);
       updateUserDishes(newArr);
-    } else {
+    } else if (!checked) {
       let arr = [...allDishes];
       let dish = arr.filter((element) =>
         element.skladniki.find((elem) => elem.name === value)
       );
-      setCustomedArr([...dish, ...customedArr]);
-      updateUserDishes([...dish, ...customedArr]);
+      let userArr = [...userDishes];
+      updateUserDishes([...dish, ...userArr]);
     }
   };
+
   const changeFilterActivity = (id) => {
     let filtersArr = [...filters];
     const elementId = filtersArr.findIndex((elem) => elem.id === id);
     filtersArr[elementId].active = !filtersArr[elementId].active;
-    handleChange(filtersArr[elementId]);
+    filterDishes(filtersArr[elementId]);
     setFileter(filtersArr);
     setFilterStorage(filtersArr);
   };
+
   const setFilterStorage = (arr) => {
     localStorage.setItem("filterArr", JSON.stringify(arr));
   };
+
   const addNewFilter = (e) => {
     e.preventDefault();
     const newFilter = {
@@ -57,19 +51,20 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
       active: true,
       id: Math.floor(Math.random() * 123),
     };
-    handleChange(newFilter);
+    filterDishes(newFilter);
     const allFilters = [newFilter, ...filters];
     setFileter(allFilters);
     setFilterStorage(allFilters);
     setFilterName("");
   };
+
   const removeFilter = (id) => {
     let filtersArr = [...filters];
     const elementId = filtersArr.findIndex((elem) => elem.id === id);
     const element = filtersArr[elementId];
     if (element.active) {
       element.active = false;
-      handleChange(element);
+      filterDishes(element);
     }
     filtersArr.splice(elementId, 1);
     setFileter(filtersArr);
@@ -99,11 +94,15 @@ const FileterArr = ({ allDishes, updateUserDishes }) => {
       key={element.id}
     />
   ));
+  const reset = () => {
+    localStorage.removeItem("filterArr");
+  };
   return (
     <>
       <button onClick={showFilterArr}>
         {filterSection ? "ukryj" : "rozwiń"}
       </button>
+      <button onClick={reset}>usuń pamięć</button>
       {filterForm}
       {filterSection && filterArr}
     </>

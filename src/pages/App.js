@@ -123,8 +123,12 @@ function App() {
   const setUserStorage = (arr) => {
     localStorage.setItem("userDishes", JSON.stringify(arr));
   };
+  const reset = () => {
+    localStorage.removeItem("userDishes");
+  };
   return (
     <>
+      <button onClick={reset}>usuń pamięć</button>
       <p>powiedz nam czego Ci nie pokazywać</p>
       {fileterSection}
       {dishesCounter}
