@@ -83,9 +83,16 @@ function App() {
           const index = dishes.findIndex((elem) => elem.id === element.id);
           dishes[index] = element;
           setAllDishes(dishes);
+          if (filtersArray) {
+            const activeFilters = filtersArray.filter((item) => item.active);
+            console.log("przefiltruj");
 
-          setUserDishes(dishes);
-          setUserStorage(dishes);
+            // setUserDishes(dishes);
+            // setUserStorage(dishes);
+          } else {
+            setUserDishes(dishes);
+            setUserStorage(dishes);
+          }
         }
       });
     }
