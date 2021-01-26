@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 const DrawnDishList = ({ customedArr, banDish }) => {
   const [drawnDish, setDrawnDish] = useState("");
   const [currentDate, setCurrentDate] = useState("");
-  console.log(currentDate);
 
   useEffect(() => {
     getDate();

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/App.css";
 import FilterArr from "./FileterArr";
 import DrawnDishList from "./DrawnDishList";
+import AddDish from "./AddDish";
 let mainArr = [
   {
     nazwa: "Serowa petarda",
@@ -165,6 +166,7 @@ function App() {
 
   return (
     <>
+      <AddDish />
       <button onClick={reset}>usuń pamięć</button>
       <p>powiedz nam czego Ci nie pokazywać</p>
       {fileterSection}
