@@ -3,6 +3,12 @@ import "../styles/App.css";
 import FilterArr from "./FileterArr";
 import DrawnDishList from "./DrawnDishList";
 import AddDish from "./AddDish";
+import {
+  BrowserRouter as Router,
+  Link,
+  NavLink,
+  Route,
+} from "react-router-dom";
 let mainArr = [
   {
     nazwa: "Serowa petarda",
@@ -165,8 +171,10 @@ function App() {
   };
 
   return (
-    <>
-      <AddDish />
+    <Router>
+      <NavLink to="/addDish">hello</NavLink>
+      <Route path="/addDish" component={AddDish} />
+
       <button onClick={reset}>usuń pamięć</button>
       <p>powiedz nam czego Ci nie pokazywać</p>
       {fileterSection}
@@ -177,7 +185,7 @@ function App() {
         customedArr={userDishes ? userDishes : allDishes}
         banDish={banDish}
       />
-    </>
+    </Router>
   );
 }
 
