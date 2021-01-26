@@ -53,13 +53,19 @@ let mainArr = [
   },
 ];
 function App() {
+  const reset = () => {
+    localStorage.removeItem("userDishes");
+    localStorage.removeItem("allDishes");
+  };
+  reset();
+
   const [allDishes, setAllDishes] = useState(
     JSON.parse(localStorage.getItem("allDishes")) || [...mainArr]
   );
   const [userDishes, setUserDishes] = useState(
     JSON.parse(localStorage.getItem("userDishes")) || null
   );
-
+  // sprawdzaj dla wielu a nie tylko dla jednej potrawy
   const checkBanStatus = () => {
     const dishes = [...allDishes];
     const banDishes = dishes.filter(
@@ -69,14 +75,10 @@ function App() {
       let date = new Date().getTime();
 
       banDishes.forEach((element) => {
-        console.log(element);
-
         if (
           element.ban.howLong !== "permament" &&
           date - (element.ban.howLong + element.ban.sinceWhen) > 0
         ) {
-          console.log("jestem w ifie");
-
           element.ban.status = false;
           element.ban.sinceWhen = "";
           element.ban.howLong = "";
@@ -84,13 +86,14 @@ function App() {
           const index = dishes.findIndex((elem) => elem.id === element.id);
           dishes[index] = element;
           setAllDishes(dishes);
+          let userDishesArray = [];
           const filtersArray =
             JSON.parse(localStorage.getItem("filterArr")) || null;
           if (filtersArray) {
             const activeFilters = filtersArray.filter((item) => item.active);
             let flag = false;
             let showMe = element.skladniki.forEach((item) => {
-              filtersArray.forEach((elem) => {
+              activeFilters.forEach((elem) => {
                 if (elem.name === item.name) {
                   console.log("przefiltrowane");
                   flag = true;
@@ -98,12 +101,18 @@ function App() {
               });
             });
             if (!flag) {
-              setUserDishes(dishes);
-              setUserStorage(dishes);
+              setUserDishes((prevValue) => {
+                userDishesArray = [...prevValue, element];
+                return userDishesArray;
+              });
+              setUserStorage(userDishesArray);
             }
           } else {
-            setUserDishes(dishes);
-            setUserStorage(dishes);
+            setUserDishes((prevValue) => {
+              userDishesArray = [...prevValue, element];
+              return userDishesArray;
+            });
+            setUserStorage(userDishesArray);
           }
         }
       });
@@ -146,15 +155,14 @@ function App() {
     </p>
   );
   const setUserStorage = (arr) => {
+    console.log(arr);
+
     localStorage.setItem("userDishes", JSON.stringify(arr));
   };
   const setAllDishesStorage = (arr) => {
     localStorage.setItem("allDishes", JSON.stringify(arr));
   };
-  const reset = () => {
-    localStorage.removeItem("userDishes");
-    localStorage.removeItem("allDishes");
-  };
+
   return (
     <>
       <button onClick={reset}>usuń pamięć</button>
