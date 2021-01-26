@@ -1,0 +1,10 @@
+.addDish {
+  margin: 5% 3%;
+  font-size: 1.2rem;
+}
+
+.addDish input {
+  display: block;
+  margin: 2%;
+  font-size: 1.3rem;
+}
