@@ -36,8 +36,22 @@ const AddDish = () => {
   const changeStepInput = (e, index) => {
     const { name, value } = e.target;
     const dishObj = { ...dish };
-    const stepsArr = dishObj.steps;
-    stepsArr[index][name] = value;
+    dishObj.steps[index].number = index + 1;
+    dishObj.steps[index][name] = value;
+    setDish(dishObj);
+  };
+  const addStepsInput = () => {
+    const dishObj = { ...dish };
+    const stepsArr = [...dishObj.steps, { number: "", value: "" }];
+    dishObj.steps = stepsArr;
+    setDish(dishObj);
+  };
+  const removeStep = (index) => {
+    const dishObj = { ...dish };
+    const stepsArr = [...dishObj.steps];
+    stepsArr.splice(index, 1);
+    dishObj.steps = stepsArr;
+    setDish(dishObj);
   };
   const saveDish = (e) => {
     e.preventDefault();
@@ -46,10 +60,20 @@ const AddDish = () => {
     return (
       <div className="stepsBox">
         <span>{i + 1}.</span>
-        <input type="text" placeholder="opisz krok" />
+        <input
+          type="text"
+          placeholder="opisz krok"
+          onChange={(e) => changeStepInput(e, i)}
+          value={x.value}
+          name="value"
+        />
         <div className="stepsBtns">
-          {dish.steps.length - 1 === i && <button>dodaj kolejny krok</button>}
-          {dish.steps.length !== 1 && <button>Usuń</button>}
+          {dish.steps.length - 1 === i && (
+            <button onClick={addStepsInput}>dodaj kolejny krok</button>
+          )}
+          {dish.steps.length !== 1 && (
+            <button onClick={() => removeStep(i)}>Usuń</button>
+          )}
         </div>
       </div>
     );
