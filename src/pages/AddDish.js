@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/AddDish.css";
 
-const AddDish = () => {
+const AddDish = (props) => {
   const [dish, setDish] = useState({
     name: "",
     ingredient: [{ name: "", quantity: "" }],
@@ -14,6 +14,12 @@ const AddDish = () => {
       sinceWhen: "",
     },
   });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    let dishObj = { ...dish };
+    dishObj[name] = value;
+    setDish(dishObj);
+  };
 
   const changeIngredientInputs = (e, index) => {
     const { name, value } = e.target;
@@ -55,6 +61,19 @@ const AddDish = () => {
   };
   const saveDish = (e) => {
     e.preventDefault();
+    props.updateAllDishes(dish);
+    setDish({
+      name: "",
+      ingredient: [{ name: "", quantity: "" }],
+      description: "",
+      steps: [{ number: "", value: "" }],
+      id: 1,
+      ban: {
+        status: false,
+        howLong: "",
+        sinceWhen: "",
+      },
+    });
   };
   let stepsInputs = dish.steps.map((x, i) => {
     return (
@@ -109,12 +128,25 @@ const AddDish = () => {
   });
   return (
     <form action="" className="addDish" onSubmit={saveDish}>
-      <input type="text" placeholder="wpisz nazwę" />
-      <input type="text" placeholder="podaj opis" />
+      <input
+        type="text"
+        placeholder="wpisz nazwę"
+        onChange={handleInputChange}
+        value={dish.name}
+        name="name"
+      />
+      <input
+        type="text"
+        placeholder="podaj opis"
+        onChange={handleInputChange}
+        value={dish.description}
+        name="description"
+      />
       <p>Podaj składniki</p>
       {ingredientImputs}
       <p>Opisz sposób przyrządzenia</p>
       {stepsInputs}
+      <button onSubmit={saveDish}>Zapisz przepis</button>
     </form>
   );
 };

@@ -153,6 +153,12 @@ function App() {
       {userDishes ? userDishes.length : allDishes.length})
     </p>
   );
+  const updateAllDishes = (dish) => {
+    const allDishesArr = [...allDishes];
+    allDishesArr.push(dish);
+    setAllDishes(allDishesArr);
+    setAllDishesStorage(allDishesArr);
+  };
   const setUserStorage = (arr) => {
     console.log(arr);
 
@@ -165,7 +171,9 @@ function App() {
   return (
     <Router>
       <NavLink to="/addDish">hello</NavLink>
-      <Route path="/addDish" component={AddDish} />
+      <Route path="/addDish">
+        <AddDish updateAllDishes={updateAllDishes} />
+      </Route>
 
       <button onClick={reset}>usuń pamięć</button>
       <p>powiedz nam czego Ci nie pokazywać</p>
