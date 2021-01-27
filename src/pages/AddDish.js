@@ -4,9 +4,9 @@ import "../styles/AddDish.css";
 const AddDish = () => {
   const [dish, setDish] = useState({
     name: "",
-    skladniki: [{ name: "", quantity: "" }],
-    opis: "",
-    kroki: [{ number: "", value: "" }],
+    ingredient: [{ name: "", quantity: "" }],
+    description: "",
+    steps: [{ number: "", value: "" }],
     id: 1,
     ban: {
       status: false,
@@ -18,18 +18,18 @@ const AddDish = () => {
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const element = { ...dish };
-    element.skladniki[index][name] = value;
+    element.ingredient[index][name] = value;
     setDish(element);
   };
   const addNewInputs = (e) => {
     const element = { ...dish };
-    const arr = [...element.skladniki, { name: "", quantity: "" }];
-    element.skladniki = arr;
+    const arr = [...element.ingredient, { name: "", quantity: "" }];
+    element.ingredient = arr;
     setDish(element);
   };
   const removeIngredient = (index) => {
     const dishObj = { ...dish };
-    const ingredientArr = dishObj.skladniki;
+    const ingredientArr = dishObj.ingredient;
     ingredientArr.splice(index, 1);
     setDish(dishObj);
   };
@@ -37,7 +37,7 @@ const AddDish = () => {
     e.preventDefault();
   };
 
-  let imputs = dish.skladniki.map((x, i) => {
+  let imputs = dish.ingredient.map((x, i) => {
     return (
       <div className="skladnikibox">
         <input
@@ -55,10 +55,10 @@ const AddDish = () => {
           value={x.quantity}
         />
         <div className="buttons">
-          {dish.skladniki.length !== 1 && (
+          {dish.ingredient.length !== 1 && (
             <button onClick={() => removeIngredient(i)}>Usuń</button>
           )}
-          {dish.skladniki.length - 1 === i && (
+          {dish.ingredient.length - 1 === i && (
             <button onClick={addNewInputs}>Dodaj</button>
           )}
         </div>

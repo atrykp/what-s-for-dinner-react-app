@@ -3,26 +3,18 @@ import "../styles/App.css";
 import FilterArr from "./FileterArr";
 import DrawnDishList from "./DrawnDishList";
 import AddDish from "./AddDish";
-import {
-  BrowserRouter as Router,
-  Link,
-  NavLink,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
 let mainArr = [
   {
     nazwa: "Serowa petarda",
-    skladniki: [
+    ingredient: [
       { name: "ser", quantity: "250g" },
       { name: "szynka", quantity: "100g" },
       { name: "pieczarki", quantity: "400g" },
     ],
-    opis:
+    description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    kroki: [
-      { krok1: "Lorem ipsum dolor sit amet" },
-      { krok2: "Lorem ipsum dolor sit amet," },
-    ],
+    steps: [{ number: "", value: "" }],
     id: 1,
     ban: {
       status: false,
@@ -32,7 +24,7 @@ let mainArr = [
   },
   {
     nazwa: "Kotlet z ziemniakami",
-    skladniki: [
+    ingredient: [
       { name: "mieso", quantity: "300g" },
       { name: "ziemniaki", quantity: "100g" },
       { name: "surowka", quantity: "400g" },
@@ -46,7 +38,7 @@ let mainArr = [
   },
   {
     nazwa: "Pierogi",
-    skladniki: [
+    ingredient: [
       { name: "biały ser", quantity: "250g" },
       { name: "mąka", quantity: "100g" },
       { name: "ziemniaki", quantity: "400g" },
@@ -99,7 +91,7 @@ function App() {
           if (filtersArray) {
             const activeFilters = filtersArray.filter((item) => item.active);
             let flag = false;
-            let showMe = element.skladniki.forEach((item) => {
+            let showMe = element.ingredient.forEach((item) => {
               activeFilters.forEach((elem) => {
                 if (elem.name === item.name) {
                   console.log("przefiltrowane");

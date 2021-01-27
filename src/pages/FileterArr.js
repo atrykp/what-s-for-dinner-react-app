@@ -20,7 +20,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       let newArr = arr.filter(
         (item) =>
           !item.ban.status &&
-          !item.skladniki.find((elem) => elem.name === value)
+          !item.ingredient.find((elem) => elem.name === value)
       );
       updateUserDishes(newArr);
     } else if (!checked) {
@@ -28,7 +28,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       let dish = arr.filter(
         (element) =>
           !element.ban.status &&
-          element.skladniki.find((elem) => elem.name === value)
+          element.ingredient.find((elem) => elem.name === value)
       );
       let userArr = [...userDishes];
       updateUserDishes([...dish, ...userArr]);
