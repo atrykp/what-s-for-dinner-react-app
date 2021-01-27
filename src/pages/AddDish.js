@@ -17,7 +17,6 @@ const AddDish = () => {
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
-    console.log(index);
     const element = { ...dish };
     element.skladniki[index][name] = value;
     setDish(element);
@@ -33,6 +32,9 @@ const AddDish = () => {
     const ingredientArr = dishObj.skladniki;
     ingredientArr.splice(index, 1);
     setDish(dishObj);
+  };
+  const saveDish = (e) => {
+    e.preventDefault();
   };
 
   let imputs = dish.skladniki.map((x, i) => {
@@ -64,7 +66,7 @@ const AddDish = () => {
     );
   });
   return (
-    <form action="" className="addDish">
+    <form action="" className="addDish" onSubmit={saveDish}>
       <input type="text" placeholder="wpisz nazwę" />
       <input type="text" placeholder="podaj opis" />
       <p>Podaj składniki</p>
