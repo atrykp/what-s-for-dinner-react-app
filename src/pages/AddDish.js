@@ -28,6 +28,12 @@ const AddDish = () => {
     element.skladniki = arr;
     setDish(element);
   };
+  const removeIngredient = (index) => {
+    const dishObj = { ...dish };
+    const ingredientArr = dishObj.skladniki;
+    ingredientArr.splice(index, 1);
+    setDish(dishObj);
+  };
 
   let imputs = dish.skladniki.map((x, i) => {
     return (
@@ -40,14 +46,16 @@ const AddDish = () => {
           value={x.name}
         />
         <input
-          type="number"
+          type="text"
           placeholder="ilość"
           onChange={(e) => handleInputChange(e, i)}
           name="quantity"
           value={x.quantity}
         />
         <div className="buttons">
-          {dish.skladniki.length !== 1 && <button>Usuń</button>}
+          {dish.skladniki.length !== 1 && (
+            <button onClick={() => removeIngredient(i)}>Usuń</button>
+          )}
           {dish.skladniki.length - 1 === i && (
             <button onClick={addNewInputs}>Dodaj</button>
           )}
