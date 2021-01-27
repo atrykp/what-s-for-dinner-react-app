@@ -15,13 +15,13 @@ const AddDish = () => {
     },
   });
 
-  const handleInputChange = (e, index) => {
+  const changeIngredientInputs = (e, index) => {
     const { name, value } = e.target;
     const element = { ...dish };
     element.ingredient[index][name] = value;
     setDish(element);
   };
-  const addNewInputs = (e) => {
+  const addNewIngredientInputs = (e) => {
     const element = { ...dish };
     const arr = [...element.ingredient, { name: "", quantity: "" }];
     element.ingredient = arr;
@@ -33,24 +33,42 @@ const AddDish = () => {
     ingredientArr.splice(index, 1);
     setDish(dishObj);
   };
+  const changeStepInput = (e, index) => {
+    const { name, value } = e.target;
+    const dishObj = { ...dish };
+    const stepsArr = dishObj.steps;
+    stepsArr[index][name] = value;
+  };
   const saveDish = (e) => {
     e.preventDefault();
   };
+  let stepsInputs = dish.steps.map((x, i) => {
+    return (
+      <div className="stepsBox">
+        <span>{i + 1}.</span>
+        <input type="text" placeholder="opisz krok" />
+        <div className="stepsBtns">
+          {dish.steps.length - 1 === i && <button>dodaj kolejny krok</button>}
+          {dish.steps.length !== 1 && <button>Usuń</button>}
+        </div>
+      </div>
+    );
+  });
 
-  let imputs = dish.ingredient.map((x, i) => {
+  let ingredientImputs = dish.ingredient.map((x, i) => {
     return (
       <div className="skladnikibox">
         <input
           type="text"
           placeholder="składnik"
-          onChange={(e) => handleInputChange(e, i)}
+          onChange={(e) => changeIngredientInputs(e, i)}
           name="name"
           value={x.name}
         />
         <input
           type="text"
           placeholder="ilość"
-          onChange={(e) => handleInputChange(e, i)}
+          onChange={(e) => changeIngredientInputs(e, i)}
           name="quantity"
           value={x.quantity}
         />
@@ -59,7 +77,7 @@ const AddDish = () => {
             <button onClick={() => removeIngredient(i)}>Usuń</button>
           )}
           {dish.ingredient.length - 1 === i && (
-            <button onClick={addNewInputs}>Dodaj</button>
+            <button onClick={addNewIngredientInputs}>Dodaj</button>
           )}
         </div>
       </div>
@@ -70,10 +88,9 @@ const AddDish = () => {
       <input type="text" placeholder="wpisz nazwę" />
       <input type="text" placeholder="podaj opis" />
       <p>Podaj składniki</p>
-      {imputs}
+      {ingredientImputs}
       <p>Opisz sposób przyrządzenia</p>
-      <input type="text" placeholder="opisz krok pierwszy" />
-      <button>dodaj kolejny krok</button>
+      {stepsInputs}
     </form>
   );
 };
