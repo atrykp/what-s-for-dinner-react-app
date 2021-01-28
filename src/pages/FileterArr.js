@@ -7,7 +7,10 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   const [filters, setFileter] = useState(
     JSON.parse(localStorage.getItem("filterArr")) || []
   );
-  const [allFilters, setAllFilters] = useState("");
+  const [allFilters, setAllFilters] = useState([]);
+  const [usersFilters, setUserFilters] = useState(
+    JSON.parse(localStorage.getItem("userFilterArr")) || []
+  );
 
   const showFilterArr = () => {
     setFilterSection((prevValue) => !prevValue);
@@ -31,7 +34,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
           !element.ban.status &&
           element.ingredient.find((elem) => elem.name === value)
       );
-      let userArr = [...userDishes];
+      let userArr = userDishes ? [...userDishes] : [];
       updateUserDishes([...dish, ...userArr]);
     }
   };
@@ -45,8 +48,8 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     setFilterStorage(filtersArr);
   };
 
-  const setFilterStorage = (arr) => {
-    localStorage.setItem("filterArr", JSON.stringify(arr));
+  const setFilterStorage = (arr, name) => {
+    localStorage.setItem(name, JSON.stringify(arr));
   };
 
   const addNewFilter = (e) => {
@@ -58,8 +61,11 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     };
     filterDishes(newFilter);
     const allFilters = [newFilter, ...filters];
+    const userFiltersArr = [...usersFilters, newFilter];
     setFileter(allFilters);
-    setFilterStorage(allFilters);
+    setUserFilters(userFiltersArr);
+    setFilterStorage(allFilters, "filterArr");
+    setFilterStorage(userFiltersArr, "userFilterArr");
     setFilterName("");
   };
 
@@ -79,6 +85,14 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     const value = e.target.value;
     setFilterName(value);
   };
+  const removeDuplicates = (arr) => {
+    let dataArr = arr.map((item) => {
+      return [item.name, item];
+    }); // creates array of array
+    let maparr = new Map(dataArr); // create key value pair from array of array
+    let result = [...maparr.values()];
+    return result; //converting back to array from mapobject
+  };
   const showAllFilters = () => {
     const currentFilters = [...filters];
     const dishes = [...allDishes];
@@ -91,17 +105,10 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
         }))
       )
       .flat();
-
-    const removeDuplicates = (arr) => {
-      let dataArr = arr.map((item) => {
-        return [item.name, item];
-      }); // creates array of array
-      let maparr = new Map(dataArr); // create key value pair from array of array
-      let result = [...maparr.values()];
-      return result; //converting back to array from mapobject
-    };
     const allFiltersArr = [...dishesFiltersArr, ...currentFilters];
     const singleFiltersArr = removeDuplicates(allFiltersArr);
+    setAllFilters(singleFiltersArr);
+    setFileter(singleFiltersArr);
   };
   const filterForm = filterSection && (
     <>
@@ -126,6 +133,14 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       key={element.id}
     />
   ));
+  // const allFiltersArray = allFilters.map((element) => (
+  //   <Filter
+  //     filter={element}
+  //     changeFilterActivity={changeFilterActivity}
+  //     removeFilter={removeFilter}
+  //     key={element.id}
+  //   />
+  // ));
   const reset = () => {
     localStorage.removeItem("filterArr");
   };
@@ -137,6 +152,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       <button onClick={reset}>usuń pamięć</button>
       {filterForm}
       {filterSection && filterArr}
+      {/* {allFiltersArray.length > 0 && allFiltersArray} */}
     </>
   );
 };
