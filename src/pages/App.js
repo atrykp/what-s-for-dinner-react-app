@@ -6,7 +6,7 @@ import AddDish from "./AddDish";
 import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
 let mainArr = [
   {
-    nazwa: "Serowa petarda",
+    name: "Serowa petarda",
     ingredient: [
       { name: "ser", quantity: "250g" },
       { name: "szynka", quantity: "100g" },
@@ -23,7 +23,7 @@ let mainArr = [
     },
   },
   {
-    nazwa: "Kotlet z ziemniakami",
+    name: "Kotlet z ziemniakami",
     ingredient: [
       { name: "mieso", quantity: "300g" },
       { name: "ziemniaki", quantity: "100g" },
@@ -37,7 +37,7 @@ let mainArr = [
     },
   },
   {
-    nazwa: "Pierogi",
+    name: "Pierogi",
     ingredient: [
       { name: "biały ser", quantity: "250g" },
       { name: "mąka", quantity: "100g" },
@@ -56,7 +56,6 @@ function App() {
     localStorage.removeItem("userDishes");
     localStorage.removeItem("allDishes");
   };
-  reset();
 
   const [allDishes, setAllDishes] = useState(
     JSON.parse(localStorage.getItem("allDishes")) || [...mainArr]
@@ -170,7 +169,7 @@ function App() {
 
   return (
     <Router>
-      <NavLink to="/addDish">hello</NavLink>
+      <NavLink to="/addDish">Dodaj swój przepis</NavLink>
       <Route path="/addDish">
         <AddDish updateAllDishes={updateAllDishes} />
       </Route>

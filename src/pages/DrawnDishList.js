@@ -31,7 +31,7 @@ const DrawnDishList = ({ customedArr, banDish }) => {
 
   const showDish = drawnDish && (
     <div className="drawnDish">
-      <h1>{drawnDish.nazwa}</h1>
+      <h1>{drawnDish.name}</h1>
       <button onClick={() => ban(drawnDish.id, 15000)}>Ok</button>
       <button onClick={() => ban(drawnDish.id, 7000)}>Nie dzisiaj</button>
       <button onClick={() => ban(drawnDish.id)}>Nie lubię</button>

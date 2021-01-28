@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
 
 const validation = (dish) => {
@@ -142,28 +143,31 @@ const AddDish = (props) => {
     );
   });
   return (
-    <form action="" className="addDish" onSubmit={saveDish}>
-      <input
-        type="text"
-        placeholder="wpisz nazwę"
-        onChange={handleInputChange}
-        value={dish.name}
-        name="name"
-      />
-      {errorMsg && <p>{errorMsg}</p>}
-      <input
-        type="text"
-        placeholder="podaj opis"
-        onChange={handleInputChange}
-        value={dish.description}
-        name="description"
-      />
-      <p>Podaj składniki</p>
-      {ingredientImputs}
-      <p>Opisz sposób przyrządzenia</p>
-      {stepsInputs}
-      <button onSubmit={saveDish}>Zapisz przepis</button>
-    </form>
+    <>
+      <Link to="/">Ukryj</Link>
+      <form action="" className="addDish" onSubmit={saveDish}>
+        <input
+          type="text"
+          placeholder="wpisz nazwę"
+          onChange={handleInputChange}
+          value={dish.name}
+          name="name"
+        />
+        {errorMsg && <p>{errorMsg}</p>}
+        <input
+          type="text"
+          placeholder="podaj opis"
+          onChange={handleInputChange}
+          value={dish.description}
+          name="description"
+        />
+        <p>Podaj składniki</p>
+        {ingredientImputs}
+        <p>Opisz sposób przyrządzenia</p>
+        {stepsInputs}
+        <button onSubmit={saveDish}>Zapisz przepis</button>
+      </form>
+    </>
   );
 };
 export default AddDish;
