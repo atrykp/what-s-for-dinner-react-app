@@ -23,20 +23,6 @@ let mainArr = [
     },
   },
   {
-    name: "Kotlet z ziemniakami",
-    ingredient: [
-      { name: "mieso", quantity: "300g" },
-      { name: "ziemniaki", quantity: "100g" },
-      { name: "surowka", quantity: "400g" },
-    ],
-    id: 2,
-    ban: {
-      status: false,
-      howLong: "",
-      sinceWhen: "",
-    },
-  },
-  {
     name: "Pierogi",
     ingredient: [
       { name: "biały ser", quantity: "250g" },
@@ -44,6 +30,20 @@ let mainArr = [
       { name: "ziemniaki", quantity: "400g" },
     ],
     id: 3,
+    ban: {
+      status: false,
+      howLong: "",
+      sinceWhen: "",
+    },
+  },
+  {
+    name: "Kotlet z ziemniakami",
+    ingredient: [
+      { name: "mieso", quantity: "300g" },
+      { name: "ziemniaki", quantity: "100g" },
+      { name: "surowka", quantity: "400g" },
+    ],
+    id: 2,
     ban: {
       status: false,
       howLong: "",

@@ -19,6 +19,8 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   const filterDishes = (element) => {
     const checked = element.active;
     const value = element.name;
+    let dishes = [];
+
     if (checked) {
       let arr = userDishes ? [...userDishes] : [...allDishes];
       let newArr = arr.filter(
@@ -26,16 +28,52 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
           !item.ban.status &&
           !item.ingredient.find((elem) => elem.name === value)
       );
+
       updateUserDishes(newArr);
     } else if (!checked) {
-      let arr = [...allDishes];
-      let dish = arr.filter(
-        (element) =>
-          !element.ban.status &&
-          element.ingredient.find((elem) => elem.name === value)
-      );
-      let userArr = userDishes ? [...userDishes] : [];
-      updateUserDishes([...dish, ...userArr]);
+      let arr = [...allDishes].filter((item) => !item.ban.status);
+
+      arr.forEach((item) => {
+        let flag = false;
+
+        for (let i = 0; i < item.ingredient.length; i++) {
+          if (item.ingredient[i].name === value) {
+            flag = true;
+          }
+        }
+        if (flag) {
+          console.log("wrzucam do tablicy", item);
+          dishes.push(item);
+        }
+      });
+
+      const activeFilters = filters.filter((e) => e.active);
+
+      if (activeFilters.length === 0) {
+        let userArr = userDishes ? [...userDishes] : [];
+        updateUserDishes([...dishes, ...userArr]);
+      } else if (activeFilters.length > 0) {
+        const filterNames = [];
+
+        activeFilters.forEach((item) => filterNames.push(item.name));
+        const dishesArr = [];
+        for (let i = 0; i < dishes.length; i++) {
+          for (let j = 0; j < dishes[i].ingredient.length; j++) {
+            if (filterNames.indexOf(dishes[i].ingredient[j].name) !== -1) {
+              dishesArr.push(i);
+            }
+          }
+        }
+
+        if (dishesArr.length > 0) {
+          dishesArr.forEach((el) => dishes.splice(el, 1));
+          let userArr = userDishes ? [...userDishes] : [];
+          updateUserDishes([...dishes, ...userArr]);
+        } else {
+          let userArr = userDishes ? [...userDishes] : [];
+          updateUserDishes([...dishes, ...userArr]);
+        }
+      }
     }
   };
 
@@ -109,6 +147,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     const singleFiltersArr = removeDuplicates(allFiltersArr);
     setAllFilters(singleFiltersArr);
     setFileter(singleFiltersArr);
+    setFilterStorage(singleFiltersArr, "filterArr");
   };
   const filterForm = filterSection && (
     <>
@@ -130,7 +169,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       filter={element}
       changeFilterActivity={changeFilterActivity}
       removeFilter={removeFilter}
-      key={element.id}
+      key={Math.floor(Math.random() * 1233443252)}
     />
   ));
   // const allFiltersArray = allFilters.map((element) => (
