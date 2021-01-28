@@ -7,6 +7,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   const [filters, setFileter] = useState(
     JSON.parse(localStorage.getItem("filterArr")) || []
   );
+  const [allFilters, setAllFilters] = useState("");
 
   const showFilterArr = () => {
     setFilterSection((prevValue) => !prevValue);
@@ -78,16 +79,43 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     const value = e.target.value;
     setFilterName(value);
   };
+  const showAllFilters = () => {
+    const currentFilters = [...filters];
+    const dishes = [...allDishes];
+    const dishesFiltersArr = dishes
+      .map((dish) =>
+        dish.ingredient.map((elem) => ({
+          name: elem.name,
+          active: false,
+          id: Math.floor(Math.random() * 123),
+        }))
+      )
+      .flat();
+
+    const removeDuplicates = (arr) => {
+      let dataArr = arr.map((item) => {
+        return [item.name, item];
+      }); // creates array of array
+      let maparr = new Map(dataArr); // create key value pair from array of array
+      let result = [...maparr.values()];
+      return result; //converting back to array from mapobject
+    };
+    const allFiltersArr = [...dishesFiltersArr, ...currentFilters];
+    const singleFiltersArr = removeDuplicates(allFiltersArr);
+  };
   const filterForm = filterSection && (
-    <form action="" onSubmit={addNewFilter}>
-      <input
-        type="text"
-        placeholder={"wpisz swój filtr"}
-        onChange={handleInputValue}
-        value={filterName}
-      />
-      <button onSubmit={addNewFilter}>dodaj</button>
-    </form>
+    <>
+      <button onClick={showAllFilters}>pokaż wszystkie filtry</button>
+      <form action="" onSubmit={addNewFilter}>
+        <input
+          type="text"
+          placeholder={"wpisz swój filtr"}
+          onChange={handleInputValue}
+          value={filterName}
+        />
+        <button onSubmit={addNewFilter}>dodaj</button>
+      </form>
+    </>
   );
 
   const filterArr = filters.map((element) => (
