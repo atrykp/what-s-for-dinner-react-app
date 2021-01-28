@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import "../styles/AddDish.css";
 
+const validation = (dish) => {
+  if (dish.name.trim().length < 2) {
+    return "Nazwa jest obowiązkowa";
+  }
+  return null;
+};
+
 const AddDish = (props) => {
+  const [errorMsg, setErrorMsg] = useState("");
   const [dish, setDish] = useState({
     name: "",
     ingredient: [{ name: "", quantity: "" }],
@@ -61,6 +69,13 @@ const AddDish = (props) => {
   };
   const saveDish = (e) => {
     e.preventDefault();
+    const message = validation(dish);
+    if (message) {
+      setErrorMsg(message);
+      return;
+    } else {
+      setErrorMsg("");
+    }
     props.updateAllDishes(dish);
     setDish({
       name: "",
@@ -135,6 +150,7 @@ const AddDish = (props) => {
         value={dish.name}
         name="name"
       />
+      {errorMsg && <p>{errorMsg}</p>}
       <input
         type="text"
         placeholder="podaj opis"
