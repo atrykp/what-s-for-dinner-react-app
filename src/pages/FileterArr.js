@@ -159,6 +159,12 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     setFileter(activeFilters);
     setFilterStorage(activeFilters, "filterArr");
   };
+  const showUserFilters = () => {
+    const allFilters = [...usersFilters];
+    setAllFiltersSection(false);
+    setFileter(allFilters);
+    setFilterStorage(allFilters, "filterArr");
+  };
   const filterForm = filterSection && (
     <>
       {!allFiltersSection && (
@@ -167,6 +173,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       {allFiltersSection && (
         <button onClick={showActiveFilters}>Pokaż tylko aktywne</button>
       )}
+      <button onClick={showUserFilters}>pokaż moje filtry</button>
 
       <form action="" onSubmit={addNewFilter}>
         <input
