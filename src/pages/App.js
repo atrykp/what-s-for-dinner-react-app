@@ -65,6 +65,8 @@ function App() {
   );
   // sprawdzaj dla wielu a nie tylko dla jednej potrawy
   const checkBanStatus = () => {
+    console.log("sprawdzam");
+
     const dishes = [...allDishes];
     const banDishes = dishes.filter(
       (element) => element.ban.status && element.ban.howLong !== "permament"
@@ -86,7 +88,7 @@ function App() {
           setAllDishes(dishes);
           let userDishesArray = [];
           const filtersArray =
-            JSON.parse(localStorage.getItem("filterArr")) || null;
+            JSON.parse(localStorage.getItem("userFilterArr")) || null;
           if (filtersArray) {
             const activeFilters = filtersArray.filter((item) => item.active);
             let flag = false;

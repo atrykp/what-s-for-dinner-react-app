@@ -79,7 +79,6 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     }
   };
 
-  // ------------------------------dodać te funkcję do zmiany aktywności oraz wyszukać elementy w user filters------------------------
   const findElementInArr = (arr, id) => {
     const elementId = arr.findIndex((elem) => elem.id === id);
     const item = arr[elementId];
@@ -88,10 +87,24 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
 
   const changeFilterActivity = (id) => {
     let filtersArr = [...filters];
-    let userArr = [...usersFilters];
-    const elementId = filtersArr.findIndex((elem) => elem.id === id);
-    filtersArr[elementId].active = !filtersArr[elementId].active;
-    filterDishes(filtersArr[elementId]);
+    let userArr = usersFilters.length > 0 ? [...usersFilters] : [];
+    const element = findElementInArr(filtersArr, id);
+    element.item.active = !element.item.active;
+    const userElement = findElementInArr(userArr, id);
+    console.log(userElement);
+
+    if (userElement.elementId !== -1) {
+      console.log("aktualizuje filer user");
+      console.log(userArr);
+
+      setUserFilters(filtersArr);
+      setFilterStorage(filtersArr, "userFilterArr");
+    } else {
+      userArr.push(element.item);
+      setUserFilters(userArr);
+      setFilterStorage(userArr, "userFilterArr");
+    }
+    filterDishes(element.item);
     setFileter(filtersArr);
     setFilterStorage(filtersArr, "filterArr");
   };
@@ -119,16 +132,14 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
 
   const removeFilter = (id) => {
     let filtersArr = [...filters];
-    const user = [...usersFilters];
+    const user = usersFilters.length > 0 ? [...usersFilters] : [];
     const element = findElementInArr(filtersArr, id);
     const userElement = findElementInArr(user, id);
-    if (userElement.length !== 0) {
-      console.log("usuwam filtr");
+    console.log(userElement);
 
-      user.splice(userElement.elementId, 1);
-      setUserFilters(userElement);
-      setFilterStorage(user, "userFilterArr");
-    }
+    user.splice(userElement.elementId, 1);
+    setUserFilters(userElement);
+    setFilterStorage(user, "userFilterArr");
 
     if (element.item.active) {
       element.item.active = false;
@@ -176,7 +187,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     setFilterStorage(activeFilters, "filterArr");
   };
   const showUserFilters = () => {
-    const allFilters = [...usersFilters];
+    const allFilters = usersFilters.length > 0 ? [...usersFilters] : [];
     setAllFiltersSection(false);
     setFileter(allFilters);
     setFilterStorage(allFilters, "filterArr");
