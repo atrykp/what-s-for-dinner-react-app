@@ -1,13 +1,15 @@
+// ogarnąć opcje z zapisywaniem filtrów przez to że dodałem tyle stanów pomieszało się to z zapisywaniem w local storage
+
 import React, { useState } from "react";
 import Filter from "../components/Filter";
 
 const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   const [filterSection, setFilterSection] = useState(false);
+  const [allFiltersSection, setAllFiltersSection] = useState(false);
   const [filterName, setFilterName] = useState("");
   const [filters, setFileter] = useState(
     JSON.parse(localStorage.getItem("filterArr")) || []
   );
-  const [allFilters, setAllFilters] = useState([]);
   const [usersFilters, setUserFilters] = useState(
     JSON.parse(localStorage.getItem("userFilterArr")) || []
   );
@@ -83,7 +85,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     filtersArr[elementId].active = !filtersArr[elementId].active;
     filterDishes(filtersArr[elementId]);
     setFileter(filtersArr);
-    setFilterStorage(filtersArr);
+    setFilterStorage(filtersArr, "filterArr");
   };
 
   const setFilterStorage = (arr, name) => {
@@ -145,13 +147,27 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       .flat();
     const allFiltersArr = [...dishesFiltersArr, ...currentFilters];
     const singleFiltersArr = removeDuplicates(allFiltersArr);
-    setAllFilters(singleFiltersArr);
+    setAllFiltersSection(true);
     setFileter(singleFiltersArr);
     setFilterStorage(singleFiltersArr, "filterArr");
   };
+  const showActiveFilters = () => {
+    const allFilters = [...filters];
+    const activeFilters = allFilters.filter((item) => item.active);
+    setAllFiltersSection(false);
+    setUserFilters([...usersFilters, ...activeFilters]);
+    setFileter(activeFilters);
+    setFilterStorage(activeFilters, "filterArr");
+  };
   const filterForm = filterSection && (
     <>
-      <button onClick={showAllFilters}>pokaż wszystkie filtry</button>
+      {!allFiltersSection && (
+        <button onClick={showAllFilters}>pokaż wszystkie filtry</button>
+      )}
+      {allFiltersSection && (
+        <button onClick={showActiveFilters}>Pokaż tylko aktywne</button>
+      )}
+
       <form action="" onSubmit={addNewFilter}>
         <input
           type="text"
@@ -191,7 +207,6 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       <button onClick={reset}>usuń pamięć</button>
       {filterForm}
       {filterSection && filterArr}
-      {/* {allFiltersArray.length > 0 && allFiltersArray} */}
     </>
   );
 };
