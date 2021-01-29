@@ -78,6 +78,8 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       }
     }
   };
+
+  // ------------------------------dodać te funkcję do zmiany aktywności oraz wyszukać elementy w user filters------------------------
   const findElementInArr = (arr, id) => {
     const elementId = arr.findIndex((elem) => elem.id === id);
     const item = arr[elementId];
@@ -117,7 +119,16 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
 
   const removeFilter = (id) => {
     let filtersArr = [...filters];
+    const user = [...usersFilters];
     const element = findElementInArr(filtersArr, id);
+    const userElement = findElementInArr(user, id);
+    if (userElement.length !== 0) {
+      console.log("usuwam filtr");
+
+      user.splice(userElement.elementId, 1);
+      setUserFilters(userElement);
+      setFilterStorage(user, "userFilterArr");
+    }
 
     if (element.item.active) {
       element.item.active = false;
@@ -125,7 +136,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     }
     filtersArr.splice(element.elementId, 1);
     setFileter(filtersArr);
-    setFilterStorage(filtersArr);
+    setFilterStorage(filtersArr, "filterArr");
   };
   const handleInputValue = (e) => {
     const value = e.target.value;
@@ -200,14 +211,6 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       key={Math.floor(Math.random() * 1233443252)}
     />
   ));
-  // const allFiltersArray = allFilters.map((element) => (
-  //   <Filter
-  //     filter={element}
-  //     changeFilterActivity={changeFilterActivity}
-  //     removeFilter={removeFilter}
-  //     key={element.id}
-  //   />
-  // ));
   const reset = () => {
     localStorage.removeItem("filterArr");
     localStorage.removeItem("userFilterArr");
