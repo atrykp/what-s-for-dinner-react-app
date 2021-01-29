@@ -8,7 +8,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   const [allFiltersSection, setAllFiltersSection] = useState(false);
   const [filterName, setFilterName] = useState("");
   const [filters, setFileter] = useState(
-    JSON.parse(localStorage.getItem("filterArr")) || []
+    JSON.parse(localStorage.getItem("userFilterArr")) || []
   );
   const [usersFilters, setUserFilters] = useState(
     JSON.parse(localStorage.getItem("userFilterArr")) || []
@@ -78,9 +78,15 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       }
     }
   };
+  const findElementInArr = (arr, id) => {
+    const elementId = arr.findIndex((elem) => elem.id === id);
+    const item = arr[elementId];
+    return { item, elementId };
+  };
 
   const changeFilterActivity = (id) => {
     let filtersArr = [...filters];
+    let userArr = [...usersFilters];
     const elementId = filtersArr.findIndex((elem) => elem.id === id);
     filtersArr[elementId].active = !filtersArr[elementId].active;
     filterDishes(filtersArr[elementId]);
@@ -111,13 +117,13 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
 
   const removeFilter = (id) => {
     let filtersArr = [...filters];
-    const elementId = filtersArr.findIndex((elem) => elem.id === id);
-    const element = filtersArr[elementId];
-    if (element.active) {
-      element.active = false;
-      filterDishes(element);
+    const element = findElementInArr(filtersArr, id);
+
+    if (element.item.active) {
+      element.item.active = false;
+      filterDishes(element.item);
     }
-    filtersArr.splice(elementId, 1);
+    filtersArr.splice(element.elementId, 1);
     setFileter(filtersArr);
     setFilterStorage(filtersArr);
   };
@@ -155,7 +161,6 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     const allFilters = [...filters];
     const activeFilters = allFilters.filter((item) => item.active);
     setAllFiltersSection(false);
-    setUserFilters([...usersFilters, ...activeFilters]);
     setFileter(activeFilters);
     setFilterStorage(activeFilters, "filterArr");
   };
@@ -205,6 +210,7 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   // ));
   const reset = () => {
     localStorage.removeItem("filterArr");
+    localStorage.removeItem("userFilterArr");
   };
   return (
     <>
