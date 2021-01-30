@@ -5,14 +5,12 @@ import Ingredient from "../components/Ingredients";
 const DrawnDishList = ({ customedArr, banDish }) => {
   const [drawnDish, setDrawnDish] = useState("");
   const [ingredientsView, setIngredientView] = useState(false);
-  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
     getDate();
   }, []);
   const getDate = () => {
     let date = new Date();
-    setCurrentDate(date.getTime());
     return date.getTime();
   };
 
