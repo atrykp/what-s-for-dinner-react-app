@@ -64,6 +64,7 @@ function App() {
   const [userDishes, setUserDishes] = useState(
     JSON.parse(localStorage.getItem("userDishes")) || null
   );
+  const [selectedDish, setSelectedDish] = useState("");
   // sprawdzaj dla wielu a nie tylko dla jednej potrawy
   const checkBanStatus = () => {
     console.log("sprawdzam");
@@ -166,15 +167,13 @@ function App() {
   const setAllDishesStorage = (arr) => {
     localStorage.setItem("allDishes", JSON.stringify(arr));
   };
+  console.log(selectedDish);
 
   return (
     <Router>
       <NavLink to="/addDish">Dodaj swój przepis</NavLink>
       <Route path="/addDish">
         <AddDish updateAllDishes={updateAllDishes} />
-      </Route>
-      <Route path="/dish/:id">
-        <Dish />
       </Route>
 
       <button onClick={reset}>usuń pamięć</button>
@@ -184,9 +183,13 @@ function App() {
 
       <h1>wylosowana potrawa to:</h1>
       <DrawnDishList
+        setSelectedDish={setSelectedDish}
         customedArr={userDishes ? userDishes : allDishes}
         banDish={banDish}
       />
+      <Route path="/dish/:id">
+        <Dish selectedDish={selectedDish} />
+      </Route>
     </Router>
   );
 }

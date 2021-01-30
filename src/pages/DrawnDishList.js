@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Ingredient from "../components/Ingredients";
 // tutaj otrzymuje przefiltrowaną tablicę dostosowaną do użytkownika bez potraw których nie lubi.
 
-const DrawnDishList = ({ customedArr, banDish }) => {
+const DrawnDishList = ({ customedArr, banDish, setSelectedDish }) => {
   const [drawnDish, setDrawnDish] = useState("");
   const [ingredientsView, setIngredientView] = useState(false);
 
@@ -48,7 +48,10 @@ const DrawnDishList = ({ customedArr, banDish }) => {
       <h1>{drawnDish.name}</h1>
       <Link
         to={`dish/${drawnDish.name}${drawnDish.id}`}
-        onClick={() => ban(drawnDish.id, 15000)}
+        onClick={() => {
+          ban(drawnDish.id, 15000);
+          setSelectedDish(drawnDish);
+        }}
       >
         Ok
       </Link>
