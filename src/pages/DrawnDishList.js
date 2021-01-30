@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Ingredient from "../components/Ingredients";
 // tutaj otrzymuje przefiltrowaną tablicę dostosowaną do użytkownika bez potraw których nie lubi.
 
 const DrawnDishList = ({ customedArr, banDish }) => {
   const [drawnDish, setDrawnDish] = useState("");
+  const [ingredientsView, setIngredientView] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
@@ -28,9 +30,22 @@ const DrawnDishList = ({ customedArr, banDish }) => {
     banDish(id, sinceWhenDate, howLong);
     setDrawnDish("");
   };
+  const showIngredients = () => {
+    setIngredientView((prevValue) => !prevValue);
+    console.log(drawnDish);
+  };
+  const ingredientBtnTxt = ingredientsView
+    ? "ukryj składniki"
+    : "pokaż składniki";
+
+  const ingredientSection = ingredientsView ? (
+    <Ingredient drawnDish={drawnDish} />
+  ) : null;
 
   const showDish = drawnDish && (
     <div className="drawnDish">
+      <button onClick={showIngredients}>{ingredientBtnTxt}</button>
+      {ingredientSection}
       <h1>{drawnDish.name}</h1>
       <button onClick={() => ban(drawnDish.id, 15000)}>Ok</button>
       <button onClick={() => ban(drawnDish.id, 7000)}>Nie dzisiaj</button>
