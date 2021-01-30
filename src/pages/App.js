@@ -3,6 +3,7 @@ import "../styles/App.css";
 import FilterArr from "./FileterArr";
 import DrawnDishList from "./DrawnDishList";
 import AddDish from "./AddDish";
+import Dish from "./Dish";
 import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
 let mainArr = [
   {
@@ -171,6 +172,9 @@ function App() {
       <NavLink to="/addDish">Dodaj swój przepis</NavLink>
       <Route path="/addDish">
         <AddDish updateAllDishes={updateAllDishes} />
+      </Route>
+      <Route path="/dish/:id">
+        <Dish />
       </Route>
 
       <button onClick={reset}>usuń pamięć</button>
