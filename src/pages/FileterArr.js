@@ -179,12 +179,16 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
     setFileter(singleFiltersArr);
     setFilterStorage(singleFiltersArr, "filterArr");
   };
+  const activeFilters = () => {
+    const arr = [...filters];
+    const active = arr.filter((item) => item.active);
+    return active;
+  };
   const showActiveFilters = () => {
-    const allFilters = [...filters];
-    const activeFilters = allFilters.filter((item) => item.active);
+    const allFilters = activeFilters();
     setAllFiltersSection(false);
-    setFileter(activeFilters);
-    setFilterStorage(activeFilters, "filterArr");
+    setFileter(allFilters);
+    setFilterStorage(allFilters, "filterArr");
   };
   const showUserFilters = () => {
     const allFilters = usersFilters.length > 0 ? [...usersFilters] : [];
@@ -231,6 +235,9 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
       <button onClick={showFilterArr}>
         {filterSection ? "ukryj" : "rozwiń"}
       </button>
+      <p>
+        Liczba aktywnych filtrów <span>({activeFilters().length})</span>
+      </p>
       <button onClick={reset}>usuń pamięć</button>
       {filterForm}
       {filterSection && filterArr}

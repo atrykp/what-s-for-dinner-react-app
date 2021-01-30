@@ -75,10 +75,7 @@ function App() {
       let date = new Date().getTime();
 
       banDishes.forEach((element) => {
-        if (
-          element.ban.howLong !== "permament" &&
-          date - (element.ban.howLong + element.ban.sinceWhen) > 0
-        ) {
+        if (date - (element.ban.howLong + element.ban.sinceWhen) > 0) {
           element.ban.status = false;
           element.ban.sinceWhen = "";
           element.ban.howLong = "";
