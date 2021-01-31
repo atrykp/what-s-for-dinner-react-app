@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/App.css";
 
 const UserProducts = ({ allDishes, updateUserDishes }) => {
   const [dishesList, setDishesList] = useState([]);
@@ -32,13 +33,17 @@ const UserProducts = ({ allDishes, updateUserDishes }) => {
     const singleFiltersArr = removeDuplicates(dishesFiltersArr);
     setProductsFilters(singleFiltersArr);
   };
+  const getActiveFilters = (arr) => {
+    const activeFilters = arr.filter((element) => element.active);
+    return activeFilters;
+  };
   const changeActiveStatus = (id) => {
     const filtersArr = [...productsFilters];
     const index = filtersArr.findIndex((filter) => filter.id === id);
-    console.log(filtersArr[index].active);
 
     filtersArr[index].active = !filtersArr[index].active;
-    console.log(filtersArr[index].active);
+    setActiveFilters(getActiveFilters(filtersArr));
+    setProductsFilters(filtersArr);
   };
   const filters = productsFilters.map((item) => (
     <li>
@@ -58,10 +63,10 @@ const UserProducts = ({ allDishes, updateUserDishes }) => {
   );
 
   return (
-    <p>
+    <>
       <button onClick={showSection}>{isActive ? "ukryj" : "rozwiń"}</button>
       {section}
-    </p>
+    </>
   );
 };
 
