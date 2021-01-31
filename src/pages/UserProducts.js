@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 const UserProducts = ({ allDishes, updateUserDishes }) => {
+  const [dishesList, setDishesList] = useState([]);
   const [isActive, setIsActive] = useState(false);
   const [productsFilters, setProductsFilters] = useState([]);
+  const [activeFilters, setActiveFilters] = useState([]);
 
   const showSection = () => {
     setIsActive((prevValue) => !prevValue);
@@ -28,14 +30,30 @@ const UserProducts = ({ allDishes, updateUserDishes }) => {
       )
       .flat();
     const singleFiltersArr = removeDuplicates(dishesFiltersArr);
-    console.log(singleFiltersArr);
-
     setProductsFilters(singleFiltersArr);
   };
+  const changeActiveStatus = (id) => {
+    const filtersArr = [...productsFilters];
+    const index = filtersArr.findIndex((filter) => filter.id === id);
+    console.log(filtersArr[index].active);
+
+    filtersArr[index].active = !filtersArr[index].active;
+    console.log(filtersArr[index].active);
+  };
+  const filters = productsFilters.map((item) => (
+    <li>
+      <button
+        className={item.active ? "activeFilter" : ""}
+        onClick={() => changeActiveStatus(item.id)}
+      >
+        {item.name}
+      </button>
+    </li>
+  ));
   const section = isActive && (
     <div>
       <p>Zaznacz poniżej, które produkty już masz</p>
-      <div>{productsFilters}</div>
+      <ul>{filters}</ul>
     </div>
   );
 
