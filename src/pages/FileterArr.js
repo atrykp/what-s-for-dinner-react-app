@@ -1,5 +1,3 @@
-// ogarnąć opcje z zapisywaniem filtrów przez to że dodałem tyle stanów pomieszało się to z zapisywaniem w local storage
-
 import React, { useState } from "react";
 import Filter from "../components/Filter";
 

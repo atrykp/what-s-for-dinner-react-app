@@ -5,6 +5,7 @@ import DrawnDishList from "./DrawnDishList";
 import AddDish from "./AddDish";
 import Dish from "./Dish";
 import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
+import UserProducts from "./UserProducts";
 let mainArr = [
   {
     name: "Serowa petarda",
@@ -139,6 +140,13 @@ function App() {
     setUserStorage(dishes.filter((element) => !element.ban.status));
     setAllDishesStorage(dishes);
   };
+  const UserProductsSection = (
+    <UserProducts
+      userDishes={userDishes}
+      allDishes={allDishes}
+      updateUserDishes={updateUserDishes}
+    />
+  );
 
   const fileterSection = (
     <FilterArr
@@ -177,6 +185,9 @@ function App() {
       </Route>
 
       <button onClick={reset}>usuń pamięć</button>
+      <p>co masz w lodówce</p>
+      {UserProductsSection}
+
       <p>powiedz nam czego Ci nie pokazywać</p>
       {fileterSection}
       {dishesCounter}
