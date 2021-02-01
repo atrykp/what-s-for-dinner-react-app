@@ -42,8 +42,13 @@ const UserProducts = ({ allDishes, updateUserDishes }) => {
     const index = filtersArr.findIndex((filter) => filter.id === id);
 
     filtersArr[index].active = !filtersArr[index].active;
+    filterDishes(filtersArr[index]);
     setActiveFilters(getActiveFilters(filtersArr));
     setProductsFilters(filtersArr);
+  };
+  const filterDishes = (filterObj) => {
+    const { active, name } = filterObj;
+    console.log(name);
   };
   const filters = productsFilters.map((item) => (
     <li>

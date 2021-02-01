@@ -66,6 +66,7 @@ function App() {
     JSON.parse(localStorage.getItem("userDishes")) || null
   );
   const [selectedDish, setSelectedDish] = useState("");
+
   // sprawdzaj dla wielu a nie tylko dla jednej potrawy
   const checkBanStatus = () => {
     console.log("sprawdzam");
