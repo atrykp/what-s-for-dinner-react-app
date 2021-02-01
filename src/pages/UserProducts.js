@@ -48,7 +48,19 @@ const UserProducts = ({ allDishes, updateUserDishes }) => {
   };
   const filterDishes = (filterObj) => {
     const { active, name } = filterObj;
-    console.log(name);
+    const selectedDishesArr = [];
+    if (active) {
+      const dishesArr =
+        dishesList.length > 0 ? [...dishesList] : [...allDishes];
+      dishesArr.forEach((dish) => {
+        let isMatch = false;
+        for (let i = 0; i < dish.ingredient.length; i++) {
+          if (dish.ingredient[i].name === name) isMatch = true;
+        }
+        if (isMatch) selectedDishesArr.push(dish);
+      });
+    } else {
+    }
   };
   const filters = productsFilters.map((item) => (
     <li>
