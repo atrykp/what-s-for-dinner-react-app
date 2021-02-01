@@ -46,20 +46,27 @@ const UserProducts = ({ allDishes, updateUserDishes }) => {
     setActiveFilters(getActiveFilters(filtersArr));
     setProductsFilters(filtersArr);
   };
+  const getMatchedDishes = (arr, name) => {
+    const matchArr = [];
+    arr.forEach((dish) => {
+      let isMatch = false;
+      for (let i = 0; i < dish.ingredient.length; i++) {
+        if (dish.ingredient[i].name === name) isMatch = true;
+      }
+      if (isMatch) matchArr.push(dish);
+    });
+    return matchArr;
+  };
   const filterDishes = (filterObj) => {
     const { active, name } = filterObj;
-    const selectedDishesArr = [];
+
     if (active) {
       const dishesArr =
         dishesList.length > 0 ? [...dishesList] : [...allDishes];
-      dishesArr.forEach((dish) => {
-        let isMatch = false;
-        for (let i = 0; i < dish.ingredient.length; i++) {
-          if (dish.ingredient[i].name === name) isMatch = true;
-        }
-        if (isMatch) selectedDishesArr.push(dish);
-      });
+      const selectedDishesArr = getMatchedDishes(dishesArr, name);
+      setDishesList(selectedDishesArr);
     } else {
+      const allDishesArr = [...allDishes];
     }
   };
   const filters = productsFilters.map((item) => (
