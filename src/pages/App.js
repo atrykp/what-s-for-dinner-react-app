@@ -157,12 +157,7 @@ function App() {
       updateUserDishes={updateUserDishes}
     />
   );
-  const dishesCounter = (
-    <p>
-      Liczba potraw do wylosowania (
-      {userDishes ? userDishes.length : allDishes.length})
-    </p>
-  );
+
   const updateAllDishes = (dish) => {
     const allDishesArr = [...allDishes];
     allDishesArr.push(dish);
@@ -178,6 +173,19 @@ function App() {
     localStorage.setItem("allDishes", JSON.stringify(arr));
   };
   console.log(selectedDish);
+  const getDishesArray = () => {
+    if (isUserProductsActive) {
+      return matchDishes;
+    }
+    if (userDishes) {
+      return userDishes;
+    } else {
+      return allDishes;
+    }
+  };
+  const dishesCounter = (
+    <p>Liczba potraw do wylosowania ({getDishesArray().length})</p>
+  );
 
   return (
     <Router>
@@ -197,7 +205,7 @@ function App() {
       <h1>wylosowana potrawa to:</h1>
       <DrawnDishList
         setSelectedDish={setSelectedDish}
-        customedArr={userDishes ? userDishes : allDishes}
+        customedArr={getDishesArray()}
         banDish={banDish}
       />
       <Route path="/dish/:id">
