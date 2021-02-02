@@ -5,6 +5,7 @@ const UserProducts = ({
   allDishes,
   setMatchDishes,
   setIsUserProductsActive,
+  setSelectedDish,
 }) => {
   const [dishesList, setDishesList] = useState([]);
   const [isActive, setIsActive] = useState(false);
@@ -13,6 +14,11 @@ const UserProducts = ({
 
   const showSection = () => {
     setIsActive((prevValue) => {
+      if (prevValue) {
+        setDishesList([]);
+        setMatchDishes([]);
+      }
+      setSelectedDish("");
       setIsUserProductsActive(!prevValue);
       return !prevValue;
     });

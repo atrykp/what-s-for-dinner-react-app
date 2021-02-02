@@ -88,6 +88,7 @@ function App() {
           const index = dishes.findIndex((elem) => elem.id === element.id);
           dishes[index] = element;
           setAllDishes(dishes);
+          setAllDishesStorage(dishes);
           let userDishesArray = [];
           const filtersArray =
             JSON.parse(localStorage.getItem("userFilterArr")) || null;
@@ -144,6 +145,7 @@ function App() {
   };
   const UserProductsSection = (
     <UserProducts
+      setSelectedDish={setSelectedDish}
       userDishes={userDishes}
       allDishes={allDishes}
       setMatchDishes={setMatchDishes}
