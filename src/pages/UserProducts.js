@@ -100,7 +100,8 @@ const UserProducts = ({ allDishes, updateUserDishes }) => {
 
   return (
     <>
-      <button onClick={showSection}>{isActive ? "ukryj" : "rozwiń"}</button>
+      <p>czy chesz filtrować po produktach które masz?</p>
+      <button onClick={showSection}>{isActive ? "wyłącz" : "włącz"}</button>
       {section}
     </>
   );
