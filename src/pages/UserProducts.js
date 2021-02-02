@@ -71,22 +71,24 @@ const UserProducts = ({
       const dishesArr =
         dishesList.length > 0 ? [...dishesList] : [...allDishes];
       selectedDishesArr = getMatchedDishes(dishesArr, name);
-      setDishesList(selectedDishesArr);
     } else {
       let allDishesArr = [...allDishes];
       const currentFilters = activeFilters;
 
       const index = currentFilters.findIndex((item) => item.name === name);
       currentFilters.splice(index, 1);
+      if (currentFilters.length === 0) {
+        selectedDishesArr = [];
+      } else {
+        currentFilters.forEach((element) => {
+          allDishesArr = getMatchedDishes(allDishesArr, element.name);
+        });
 
-      currentFilters.forEach((element) => {
-        allDishesArr = getMatchedDishes(allDishesArr, element.name);
-      });
-
-      selectedDishesArr = allDishesArr;
-      setDishesList(selectedDishesArr);
+        selectedDishesArr = allDishesArr;
+      }
     }
-    console.log(selectedDishesArr);
+    setDishesList(selectedDishesArr);
+    setMatchDishes(selectedDishesArr);
   };
   const filters = productsFilters.map((item) => (
     <li>
