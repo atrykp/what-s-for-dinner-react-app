@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import "../styles/App.css";
 
-const UserProducts = ({ allDishes, updateUserDishes }) => {
+const UserProducts = ({
+  allDishes,
+  setMatchDishes,
+  setIsUserProductsActive,
+}) => {
   const [dishesList, setDishesList] = useState([]);
   const [isActive, setIsActive] = useState(false);
   const [productsFilters, setProductsFilters] = useState([]);
   const [activeFilters, setActiveFilters] = useState([]);
 
   const showSection = () => {
-    setIsActive((prevValue) => !prevValue);
+    setIsActive((prevValue) => {
+      setIsUserProductsActive(!prevValue);
+      return !prevValue;
+    });
     allFilters();
   };
   const removeDuplicates = (arr) => {

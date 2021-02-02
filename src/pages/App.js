@@ -146,7 +146,8 @@ function App() {
     <UserProducts
       userDishes={userDishes}
       allDishes={allDishes}
-      updateUserDishes={updateUserDishes}
+      setMatchDishes={setMatchDishes}
+      setIsUserProductsActive={setIsUserProductsActive}
     />
   );
 
