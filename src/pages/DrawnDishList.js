@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import Ingredient from "../components/Ingredients";
 // tutaj otrzymuje przefiltrowaną tablicę dostosowaną do użytkownika bez potraw których nie lubi.
 
-const DrawnDishList = ({ customedArr, banDish, setSelectedDish }) => {
-  const [drawnDish, setDrawnDish] = useState("");
+const DrawnDishList = ({
+  customedArr,
+  banDish,
+  setSelectedDish,
+  selectedDish,
+}) => {
+  // const [drawnDish, setDrawnDish] = useState("");
   const [ingredientsView, setIngredientView] = useState(false);
 
   useEffect(() => {
@@ -20,43 +25,43 @@ const DrawnDishList = ({ customedArr, banDish, setSelectedDish }) => {
   const handleDraw = () => {
     notYetArr = [...customedArr];
     let index = Math.floor(Math.random() * notYetArr.length);
-    setDrawnDish(notYetArr[index]);
+    setSelectedDish(notYetArr[index]);
     notYetArr.slice(index, 1);
   };
 
   const ban = (id, howLong = "permament") => {
     const sinceWhenDate = getDate();
     banDish(id, sinceWhenDate, howLong);
-    setDrawnDish("");
+    setSelectedDish("");
   };
   const showIngredients = () => {
     setIngredientView((prevValue) => !prevValue);
-    console.log(drawnDish);
+    console.log(selectedDish);
   };
   const ingredientBtnTxt = ingredientsView
     ? "ukryj składniki"
     : "pokaż składniki";
 
   const ingredientSection = ingredientsView ? (
-    <Ingredient drawnDish={drawnDish} />
+    <Ingredient drawnDish={selectedDish} />
   ) : null;
 
-  const showDish = drawnDish && (
+  const showDish = selectedDish && (
     <div className="drawnDish">
       <button onClick={showIngredients}>{ingredientBtnTxt}</button>
       {ingredientSection}
-      <h1>{drawnDish.name}</h1>
+      <h1>{selectedDish.name}</h1>
       <Link
-        to={`dish/${drawnDish.name}${drawnDish.id}`}
+        to={`dish/${selectedDish.name}${selectedDish.id}`}
         onClick={() => {
-          ban(drawnDish.id, 15000);
-          setSelectedDish(drawnDish);
+          ban(selectedDish.id, 15000);
+          setSelectedDish(selectedDish);
         }}
       >
         Ok
       </Link>
-      <button onClick={() => ban(drawnDish.id, 7000)}>Nie dzisiaj</button>
-      <button onClick={() => ban(drawnDish.id)}>Nie lubię</button>
+      <button onClick={() => ban(selectedDish.id, 7000)}>Nie dzisiaj</button>
+      <button onClick={() => ban(selectedDish.id)}>Nie lubię</button>
     </div>
   );
 

@@ -207,6 +207,7 @@ function App() {
 
       <h1>wylosowana potrawa to:</h1>
       <DrawnDishList
+        selectedDish={selectedDish}
         setSelectedDish={setSelectedDish}
         customedArr={getDishesArray()}
         banDish={banDish}
