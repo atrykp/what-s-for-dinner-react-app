@@ -1,11 +1,27 @@
 import React from "react";
 const Dish = (props) => {
-  const { name, description, ingredient, id, ban } = props.selectedDish;
+  const {
+    name,
+    description = null,
+    ingredient = [],
+    steps = [],
+  } = props.selectedDish;
+
   const ingredientArr = ingredient.map((item) => (
     <li>
       {item.name} - {item.quantity}
     </li>
   ));
+
+  const stepsList =
+    steps.length > 0
+      ? steps.map((item) => (
+          <li>
+            {item.number}: {item.value}
+          </li>
+        ))
+      : null;
+
   const shoppingList = ingredient.map((item) => (
     <label htmlFor={item.name}>
       {item.name}
@@ -26,8 +42,9 @@ const Dish = (props) => {
           <button>Zapisz</button>
         </form>
       </div>
-      <div className="Steps">
+      <div className="steps">
         <h2>Przepis</h2>
+        {stepsList}
       </div>
     </div>
   );
