@@ -18,8 +18,8 @@ const UserProducts = ({
       if (prevValue) {
         setDishesList([]);
         setMatchDishes([]);
-      }
-      setSelectedDish("");
+      } else setSelectedDish("");
+
       setIsUserProductsActive(!prevValue);
       return !prevValue;
     });

@@ -155,6 +155,7 @@ function App() {
 
   const fileterSection = (
     <FilterArr
+      setSelectedDish={setSelectedDish}
       userDishes={userDishes}
       allDishes={allDishes}
       updateUserDishes={updateUserDishes}

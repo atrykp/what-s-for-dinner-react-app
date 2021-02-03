@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Filter from "../components/Filter";
 
-const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
+const FileterArr = ({
+  allDishes,
+  updateUserDishes,
+  userDishes,
+  setSelectedDish,
+}) => {
   const [filterSection, setFilterSection] = useState(false);
   const [allFiltersSection, setAllFiltersSection] = useState(false);
   const [filterName, setFilterName] = useState("");
@@ -13,7 +18,12 @@ const FileterArr = ({ allDishes, updateUserDishes, userDishes }) => {
   );
 
   const showFilterArr = () => {
-    setFilterSection((prevValue) => !prevValue);
+    setFilterSection((prevValue) => {
+      if (!prevValue) {
+        setSelectedDish("");
+      }
+      return !prevValue;
+    });
   };
 
   const filterDishes = (element) => {
