@@ -4,7 +4,12 @@ import FilterArr from "./FileterArr";
 import DrawnDishList from "./DrawnDishList";
 import AddDish from "./AddDish";
 import Dish from "./Dish";
-import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  NavLink,
+  Route,
+  Switch,
+} from "react-router-dom";
 import UserProducts from "./UserProducts";
 let mainArr = [
   {
@@ -187,35 +192,39 @@ function App() {
       return allDishes;
     }
   };
+
   const dishesCounter = (
     <p>Liczba potraw do wylosowania ({getDishesArray().length})</p>
   );
 
   return (
     <Router>
-      <NavLink to="/addDish">Dodaj swój przepis</NavLink>
-      <Route path="/addDish">
-        <AddDish updateAllDishes={updateAllDishes} />
-      </Route>
+      <Switch>
+        <Route path="/" exact>
+          <NavLink to="/addDish">Dodaj swój przepis</NavLink>
+          <button onClick={reset}>usuń pamięć</button>
+          <p>co masz w lodówce</p>
+          {UserProductsSection}
 
-      <button onClick={reset}>usuń pamięć</button>
-      <p>co masz w lodówce</p>
-      {UserProductsSection}
+          <p>powiedz nam czego Ci nie pokazywać</p>
+          {fileterSection}
+          {dishesCounter}
 
-      <p>powiedz nam czego Ci nie pokazywać</p>
-      {fileterSection}
-      {dishesCounter}
-
-      <h1>wylosowana potrawa to:</h1>
-      <DrawnDishList
-        selectedDish={selectedDish}
-        setSelectedDish={setSelectedDish}
-        customedArr={getDishesArray()}
-        banDish={banDish}
-      />
-      <Route path="/dish/:id">
-        <Dish selectedDish={selectedDish} />
-      </Route>
+          <h1>wylosowana potrawa to:</h1>
+          <DrawnDishList
+            selectedDish={selectedDish}
+            setSelectedDish={setSelectedDish}
+            customedArr={getDishesArray()}
+            banDish={banDish}
+          />
+        </Route>
+        <Route path="/addDish">
+          <AddDish updateAllDishes={updateAllDishes} />
+        </Route>
+        <Route path="/dish/:id">
+          <Dish selectedDish={selectedDish} />
+        </Route>
+      </Switch>
     </Router>
   );
 }

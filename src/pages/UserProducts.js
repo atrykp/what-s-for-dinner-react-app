@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "../styles/App.css";
 
@@ -117,7 +118,9 @@ const UserProducts = ({
   return (
     <>
       <p>czy chesz filtrować po produktach które masz?</p>
+
       <button onClick={showSection}>{isActive ? "wyłącz" : "włącz"}</button>
+
       {section}
     </>
   );

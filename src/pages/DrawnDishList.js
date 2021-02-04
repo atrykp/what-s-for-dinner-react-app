@@ -9,7 +9,6 @@ const DrawnDishList = ({
   setSelectedDish,
   selectedDish,
 }) => {
-  // const [drawnDish, setDrawnDish] = useState("");
   const [ingredientsView, setIngredientView] = useState(false);
 
   useEffect(() => {
