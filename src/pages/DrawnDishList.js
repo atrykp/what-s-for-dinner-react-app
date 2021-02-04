@@ -10,7 +10,11 @@ const DrawnDishList = ({
   selectedDish,
 }) => {
   const [ingredientsView, setIngredientView] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(
+    localStorage.getItem("isSelected") === null
+      ? false
+      : localStorage.getItem("isSelected")
+  );
 
   useEffect(() => {
     getDate();
@@ -27,6 +31,8 @@ const DrawnDishList = ({
     let index = Math.floor(Math.random() * notYetArr.length);
     setSelectedDish(notYetArr[index]);
     notYetArr.slice(index, 1);
+    setIsSelected(false);
+    setIsSelectedStorage(false);
   };
 
   const ban = (id, howLong = "permament") => {
@@ -56,7 +62,7 @@ const DrawnDishList = ({
         onClick={() => {
           ban(selectedDish.id, 15000);
           setSelectedDish(selectedDish);
-          setIsSelected(true);
+          setIsSelectedStorage(!isSelected);
         }}
       >
         Ok
@@ -71,20 +77,15 @@ const DrawnDishList = ({
       <h1>{selectedDish.name}</h1>
       <button onClick={showIngredients}>{ingredientBtnTxt}</button>
       {ingredientSection}
-      <Link
-        to={`dish/${selectedDish.name}${selectedDish.id}`}
-        onClick={() => {
-          <Dish selectedDish={selectedDish} />;
-        }}
-      >
-        Ok
-      </Link>
+      <Link to={`dish/${selectedDish.name}${selectedDish.id}`}>Ok</Link>
     </>
   );
+  const dishView = isSelected ? selectedDishView : drawnDishView;
 
-  const showDish = selectedDish && (
-    <div className="drawnDish">{drawnDishView}</div>
-  );
+  const showDish = selectedDish && <div className="drawnDish">{dishView}</div>;
+  const setIsSelectedStorage = (value) => {
+    localStorage.setItem("isSelected", value);
+  };
 
   return (
     <>
