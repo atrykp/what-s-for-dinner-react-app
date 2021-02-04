@@ -10,6 +10,7 @@ const DrawnDishList = ({
   selectedDish,
 }) => {
   const [ingredientsView, setIngredientView] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
     getDate();
@@ -45,8 +46,8 @@ const DrawnDishList = ({
     <Ingredient drawnDish={selectedDish} />
   ) : null;
 
-  const showDish = selectedDish && (
-    <div className="drawnDish">
+  const drawnDishView = (
+    <>
       <button onClick={showIngredients}>{ingredientBtnTxt}</button>
       {ingredientSection}
       <h1>{selectedDish.name}</h1>
@@ -55,13 +56,34 @@ const DrawnDishList = ({
         onClick={() => {
           ban(selectedDish.id, 15000);
           setSelectedDish(selectedDish);
+          setIsSelected(true);
         }}
       >
         Ok
       </Link>
       <button onClick={() => ban(selectedDish.id, 7000)}>Nie dzisiaj</button>
       <button onClick={() => ban(selectedDish.id)}>Nie lubię</button>
-    </div>
+    </>
+  );
+
+  const selectedDishView = (
+    <>
+      <h1>{selectedDish.name}</h1>
+      <button onClick={showIngredients}>{ingredientBtnTxt}</button>
+      {ingredientSection}
+      <Link
+        to={`dish/${selectedDish.name}${selectedDish.id}`}
+        onClick={() => {
+          <Dish selectedDish={selectedDish} />;
+        }}
+      >
+        Ok
+      </Link>
+    </>
+  );
+
+  const showDish = selectedDish && (
+    <div className="drawnDish">{drawnDishView}</div>
   );
 
   return (

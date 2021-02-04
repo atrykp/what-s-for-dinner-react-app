@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const Dish = (props) => {
   const {
     name,
@@ -30,6 +31,7 @@ const Dish = (props) => {
   ));
   return (
     <div className="selected dish">
+      <Link to="/">Wróć do strony głównej</Link>
       <h1>{name}</h1>
       <p className="description">{description}</p>
       <div className="products">
