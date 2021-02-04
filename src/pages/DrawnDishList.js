@@ -15,6 +15,7 @@ const DrawnDishList = ({
       ? false
       : localStorage.getItem("isSelected")
   );
+  const [drawnDish, setDrawnDish] = useState([]);
 
   useEffect(() => {
     getDate();
@@ -33,6 +34,7 @@ const DrawnDishList = ({
     notYetArr.slice(index, 1);
     setIsSelected(false);
     setIsSelectedStorage(false);
+    localStorage.removeItem("selectedDish");
   };
 
   const ban = (id, howLong = "permament") => {
@@ -63,6 +65,7 @@ const DrawnDishList = ({
           ban(selectedDish.id, 15000);
           setSelectedDish(selectedDish);
           setIsSelectedStorage(!isSelected);
+          setSelectedDishStorage(selectedDish);
         }}
       >
         Ok
@@ -85,6 +88,9 @@ const DrawnDishList = ({
   const showDish = selectedDish && <div className="drawnDish">{dishView}</div>;
   const setIsSelectedStorage = (value) => {
     localStorage.setItem("isSelected", value);
+  };
+  const setSelectedDishStorage = (arr) => {
+    localStorage.setItem("selectedDish", JSON.stringify(arr));
   };
 
   return (

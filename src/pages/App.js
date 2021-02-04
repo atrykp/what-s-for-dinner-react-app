@@ -11,6 +11,7 @@ import {
   Switch,
 } from "react-router-dom";
 import UserProducts from "./UserProducts";
+
 let mainArr = [
   {
     name: "Serowa petarda",
@@ -61,6 +62,7 @@ let mainArr = [
 function App() {
   const reset = () => {
     localStorage.removeItem("userDishes");
+
     localStorage.removeItem("allDishes");
   };
 
@@ -72,7 +74,9 @@ function App() {
   );
   const [matchDishes, setMatchDishes] = useState([]);
   const [isUserProductsActive, setIsUserProductsActive] = useState(false);
-  const [selectedDish, setSelectedDish] = useState("");
+  const [selectedDish, setSelectedDish] = useState(
+    JSON.parse(localStorage.getItem("selectedDish")) || ""
+  );
 
   const checkBanStatus = () => {
     console.log("sprawdzam");
@@ -174,13 +178,12 @@ function App() {
     setAllDishesStorage(allDishesArr);
   };
   const setUserStorage = (arr) => {
-    console.log(arr);
-
     localStorage.setItem("userDishes", JSON.stringify(arr));
   };
   const setAllDishesStorage = (arr) => {
     localStorage.setItem("allDishes", JSON.stringify(arr));
   };
+
   console.log(selectedDish);
   const getDishesArray = () => {
     if (isUserProductsActive) {
