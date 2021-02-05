@@ -15,7 +15,6 @@ const DrawnDishList = ({
       ? false
       : localStorage.getItem("isSelected")
   );
-  const [drawnDish, setDrawnDish] = useState([]);
 
   useEffect(() => {
     getDate();
@@ -80,7 +79,11 @@ const DrawnDishList = ({
       <h1>{selectedDish.name}</h1>
       <button onClick={showIngredients}>{ingredientBtnTxt}</button>
       {ingredientSection}
-      <Link to={`dish/${selectedDish.name}${selectedDish.id}`}>Ok</Link>
+      <Link to={`dish/${selectedDish.name}${selectedDish.id}`}>
+        <button>OK</button>
+      </Link>
+      <button>Zrobione</button>
+      <button>co jeszcze kupić</button>
     </>
   );
   const dishView = isSelected ? selectedDishView : drawnDishView;
