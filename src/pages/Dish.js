@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Dish = (props) => {
+  const [products, setProducts] = useState([]);
   const {
     name,
     description = null,
@@ -8,6 +9,11 @@ const Dish = (props) => {
     steps = [],
   } = props.selectedDish;
 
+  const productsList = ingredient.map((item) => ({
+    name: item.name,
+    isChecked: false,
+  }));
+  useEffect(() => setProducts(productsList), []);
   const ingredientArr = ingredient.map((item) => (
     <li>
       {item.name} - {item.quantity}
@@ -23,12 +29,21 @@ const Dish = (props) => {
         ))
       : null;
 
-  const shoppingList = ingredient.map((item) => (
+  const shoppingList = products.map((item) => (
     <label htmlFor={item.name}>
       {item.name}
-      <input type="checkbox" id={item.name} />
+      <input
+        type="checkbox"
+        id={item.name}
+        checked={item.isChecked}
+        onClick={handleCheck}
+      />
     </label>
   ));
+  const handleSaveProducts = (e) => {
+    e.preventDefault();
+    console.log(shoppingList[0].props.checked);
+  };
   return (
     <div className="selected dish">
       <Link to="/">Wróć do strony głównej</Link>
@@ -39,7 +54,7 @@ const Dish = (props) => {
         <ul className="productsList">{ingredientArr}</ul>
         <h2>Lista zakupów</h2>
         <p>Zaznacz co musisz jeszcze kupić</p>
-        <form action="">
+        <form action="" onSubmit={(e) => handleSaveProducts(e)}>
           {shoppingList}
           <button>Zapisz</button>
         </form>
