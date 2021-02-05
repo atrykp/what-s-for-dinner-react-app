@@ -28,7 +28,12 @@ const Dish = (props) => {
           </li>
         ))
       : null;
-
+  const handleCheck = (e) => {
+    const arr = [...products];
+    const index = arr.findIndex((item) => item.name === e.target.id);
+    arr[index].isChecked = !arr[index].isChecked;
+    setProducts(arr);
+  };
   const shoppingList = products.map((item) => (
     <label htmlFor={item.name}>
       {item.name}
