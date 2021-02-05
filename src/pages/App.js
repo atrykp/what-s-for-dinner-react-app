@@ -77,6 +77,7 @@ function App() {
   const [selectedDish, setSelectedDish] = useState(
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
+  const [productsList, setProductsList] = useState([]);
 
   const checkBanStatus = () => {
     console.log("sprawdzam");
@@ -219,13 +220,14 @@ function App() {
             setSelectedDish={setSelectedDish}
             customedArr={getDishesArray()}
             banDish={banDish}
+            productsList={productsList}
           />
         </Route>
         <Route path="/addDish">
           <AddDish updateAllDishes={updateAllDishes} />
         </Route>
         <Route path="/dish/:id">
-          <Dish selectedDish={selectedDish} />
+          <Dish selectedDish={selectedDish} setProductsList={setProductsList} />
         </Route>
       </Switch>
     </Router>

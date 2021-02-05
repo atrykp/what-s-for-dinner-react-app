@@ -8,8 +8,10 @@ const DrawnDishList = ({
   banDish,
   setSelectedDish,
   selectedDish,
+  productsList,
 }) => {
   const [ingredientsView, setIngredientView] = useState(false);
+  const [productsView, setProductsView] = useState(false);
   const [isSelected, setIsSelected] = useState(
     localStorage.getItem("isSelected") === null
       ? false
@@ -73,6 +75,12 @@ const DrawnDishList = ({
       <button onClick={() => ban(selectedDish.id)}>Nie lubię</button>
     </>
   );
+  const showProductsList = () => {
+    setProductsView((prevValue) => !prevValue);
+  };
+  const productsListArr = productsView
+    ? productsList.map((item) => item.name)
+    : null;
 
   const selectedDishView = (
     <>
@@ -83,7 +91,10 @@ const DrawnDishList = ({
         <button>OK</button>
       </Link>
       <button>Zrobione</button>
-      <button>co jeszcze kupić</button>
+      <button onClick={showProductsList}>
+        {!productsView ? "co jeszcze kupić" : "ukryj"}
+      </button>
+      {productsListArr}
     </>
   );
   const dishView = isSelected ? selectedDishView : drawnDishView;

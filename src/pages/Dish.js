@@ -47,7 +47,8 @@ const Dish = (props) => {
   ));
   const handleSaveProducts = (e) => {
     e.preventDefault();
-    console.log(shoppingList[0].props.checked);
+    const activeProductsArr = products.filter((item) => item.isChecked);
+    props.setProductsList(activeProductsArr);
   };
   return (
     <div className="selected dish">
