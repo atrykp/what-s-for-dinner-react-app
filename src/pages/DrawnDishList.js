@@ -85,6 +85,13 @@ const DrawnDishList = ({
       } else return;
     } else return null;
   };
+  const markDishAsDone = () => {
+    setIsSelected(false);
+    setIsSelectedStorage(false);
+    localStorage.removeItem("selectedDish");
+    localStorage.removeItem("productsList");
+    setSelectedDish("");
+  };
 
   const selectedDishView = (
     <>
@@ -94,7 +101,7 @@ const DrawnDishList = ({
       <Link to={`dish/${selectedDish.name}${selectedDish.id}`}>
         <button>OK</button>
       </Link>
-      <button>Zrobione</button>
+      <button onClick={markDishAsDone}>Zrobione</button>
       <button onClick={showProductsList}>
         {!productsView ? "co jeszcze kupić" : "ukryj"}
       </button>
