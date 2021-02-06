@@ -19,7 +19,7 @@ const FileterArr = ({
 
   const showFilterArr = () => {
     setFilterSection((prevValue) => {
-      if (!prevValue) {
+      if (!prevValue && !localStorage.getItem("selectedDish")) {
         setSelectedDish("");
       }
       return !prevValue;

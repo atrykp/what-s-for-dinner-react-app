@@ -19,7 +19,9 @@ const UserProducts = ({
       if (prevValue) {
         setDishesList([]);
         setMatchDishes([]);
-      } else setSelectedDish("");
+      } else if (!localStorage.getItem("selectedDish")) {
+        setSelectedDish("");
+      }
 
       setIsUserProductsActive(!prevValue);
       return !prevValue;
