@@ -13,7 +13,14 @@ const Dish = (props) => {
     name: item.name,
     isChecked: false,
   }));
-  useEffect(() => setProducts(productsList), []);
+  useEffect(() => {
+    // lepiej jednak w local storage to zapisać bo w ten sposób co teraz przekazuje tylko aktywne!!
+    // plus dodać do listy ilość i usunąć przekazywanie z app.js tutaj propsa
+    const arr = JSON.parse(localStorage.getItem("productsList"));
+    if (arr) {
+      setProducts(arr);
+    } else setProducts(productsList);
+  }, []);
   const ingredientArr = ingredient.map((item) => (
     <li>
       {item.name} - {item.quantity}
@@ -41,14 +48,14 @@ const Dish = (props) => {
         type="checkbox"
         id={item.name}
         checked={item.isChecked}
-        onClick={handleCheck}
+        onChange={handleCheck}
       />
     </label>
   ));
   const handleSaveProducts = (e) => {
     e.preventDefault();
-    const activeProductsArr = products.filter((item) => item.isChecked);
-    props.setProductsList(activeProductsArr);
+    localStorage.setItem("productsList", JSON.stringify(products));
+    // zapisz do local storage cały obiekt
   };
   return (
     <div className="selected dish">

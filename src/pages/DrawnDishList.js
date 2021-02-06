@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Ingredient from "../components/Ingredients";
-// tutaj otrzymuje przefiltrowaną tablicę dostosowaną do użytkownika bez potraw których nie lubi.
-
 const DrawnDishList = ({
   customedArr,
   banDish,
   setSelectedDish,
   selectedDish,
-  productsList,
 }) => {
   const [ingredientsView, setIngredientView] = useState(false);
   const [productsView, setProductsView] = useState(false);
@@ -36,6 +33,8 @@ const DrawnDishList = ({
     setIsSelected(false);
     setIsSelectedStorage(false);
     localStorage.removeItem("selectedDish");
+    localStorage.removeItem("productsList");
+    // usuń z local storage zaznaczone wcześniej składniki
   };
 
   const ban = (id, howLong = "permament") => {
@@ -78,9 +77,14 @@ const DrawnDishList = ({
   const showProductsList = () => {
     setProductsView((prevValue) => !prevValue);
   };
-  const productsListArr = productsView
-    ? productsList.map((item) => item.name)
-    : null;
+  const productsListArr = () => {
+    if (productsView) {
+      const list = JSON.parse(localStorage.getItem("productsList"));
+      if (list) {
+        return list.filter((item) => item.isChecked).map((item) => item.name);
+      } else return;
+    } else return null;
+  };
 
   const selectedDishView = (
     <>
@@ -94,7 +98,7 @@ const DrawnDishList = ({
       <button onClick={showProductsList}>
         {!productsView ? "co jeszcze kupić" : "ukryj"}
       </button>
-      {productsListArr}
+      {productsListArr()}
     </>
   );
   const dishView = isSelected ? selectedDishView : drawnDishView;
