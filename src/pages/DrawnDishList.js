@@ -81,7 +81,16 @@ const DrawnDishList = ({
     if (productsView) {
       const list = JSON.parse(localStorage.getItem("productsList"));
       if (list) {
-        return list.filter((item) => item.isChecked).map((item) => item.name);
+        return list
+          .filter((item) => item.isChecked)
+          .map((item) => (
+            <>
+              <p>
+                nazwa: <strong>{item.name}</strong> ilość:{" "}
+                <strong>{item.quantity}</strong>
+              </p>
+            </>
+          ));
       } else return;
     } else return null;
   };

@@ -11,11 +11,10 @@ const Dish = (props) => {
 
   const productsList = ingredient.map((item) => ({
     name: item.name,
+    quantity: item.quantity,
     isChecked: false,
   }));
   useEffect(() => {
-    // lepiej jednak w local storage to zapisać bo w ten sposób co teraz przekazuje tylko aktywne!!
-    // plus dodać do listy ilość i usunąć przekazywanie z app.js tutaj propsa
     const arr = JSON.parse(localStorage.getItem("productsList"));
     if (arr) {
       setProducts(arr);
