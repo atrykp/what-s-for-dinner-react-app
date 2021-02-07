@@ -11,6 +11,7 @@ import {
   Switch,
 } from "react-router-dom";
 import UserProducts from "./UserProducts";
+import RemoveStorage from "./RemoveStorage";
 
 let mainArr = [
   {
@@ -205,6 +206,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact>
+          <RemoveStorage />
           <NavLink to="/addDish">Dodaj swój przepis</NavLink>
           <button onClick={reset}>usuń pamięć</button>
           <p>co masz w lodówce</p>
