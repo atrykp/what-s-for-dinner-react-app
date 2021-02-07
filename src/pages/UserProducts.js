@@ -21,6 +21,7 @@ const UserProducts = ({
       } else if (!localStorage.getItem("selectedDish")) {
         setSelectedDish("");
       }
+      console.log(prevValue);
 
       setIsUserProductsActive(!prevValue);
       return !prevValue;

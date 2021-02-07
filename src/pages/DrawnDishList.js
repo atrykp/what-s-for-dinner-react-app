@@ -6,6 +6,7 @@ const DrawnDishList = ({
   banDish,
   setSelectedDish,
   selectedDish,
+  setIsUserProductsActive,
 }) => {
   const [ingredientsView, setIngredientView] = useState(false);
   const [productsView, setProductsView] = useState(false);
@@ -66,6 +67,7 @@ const DrawnDishList = ({
           setSelectedDish(selectedDish);
           setIsSelectedStorage(!isSelected);
           setSelectedDishStorage(selectedDish);
+          setIsUserProductsActive(false);
         }}
       >
         Ok

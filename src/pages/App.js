@@ -61,13 +61,6 @@ let mainArr = [
   },
 ];
 function App() {
-  const reset = () => {
-    localStorage.removeItem("userDishes");
-    localStorage.removeItem("allDishes");
-    localStorage.removeItem("filterArr");
-    localStorage.removeItem("userFilterArr");
-  };
-
   const [allDishes, setAllDishes] = useState(
     JSON.parse(localStorage.getItem("allDishes")) || [...mainArr]
   );
@@ -208,7 +201,6 @@ function App() {
         <Route path="/" exact>
           <RemoveStorage />
           <NavLink to="/addDish">Dodaj swój przepis</NavLink>
-          <button onClick={reset}>usuń pamięć</button>
           <p>co masz w lodówce</p>
           {UserProductsSection}
 
@@ -222,6 +214,7 @@ function App() {
             setSelectedDish={setSelectedDish}
             customedArr={getDishesArray()}
             banDish={banDish}
+            setIsUserProductsActive={setIsUserProductsActive}
           />
         </Route>
         <Route path="/addDish">
