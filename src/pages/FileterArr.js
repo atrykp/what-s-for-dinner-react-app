@@ -234,10 +234,7 @@ const FileterArr = ({
       key={Math.floor(Math.random() * 1233443252)}
     />
   ));
-  const reset = () => {
-    localStorage.removeItem("filterArr");
-    localStorage.removeItem("userFilterArr");
-  };
+
   return (
     <>
       <button onClick={showFilterArr}>
@@ -246,7 +243,7 @@ const FileterArr = ({
       <p>
         Liczba aktywnych filtrów <span>({activeFilters().length})</span>
       </p>
-      <button onClick={reset}>usuń pamięć</button>
+
       {filterForm}
       {filterSection && filterArr}
     </>

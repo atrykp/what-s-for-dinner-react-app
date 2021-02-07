@@ -62,8 +62,9 @@ let mainArr = [
 function App() {
   const reset = () => {
     localStorage.removeItem("userDishes");
-
     localStorage.removeItem("allDishes");
+    localStorage.removeItem("filterArr");
+    localStorage.removeItem("userFilterArr");
   };
 
   const [allDishes, setAllDishes] = useState(
