@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import UserProducts from "./UserProducts";
 import RemoveStorage from "./RemoveStorage";
+import checkBanStatus from "../components/checkBanStatus";
 
 let mainArr = [
   {
@@ -73,72 +74,55 @@ function App() {
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
 
-  const checkBanStatus = () => {
-    console.log("sprawdzam");
-
-    const dishes = [...allDishes];
-    const banDishes = dishes.filter(
-      (element) => element.ban.status && element.ban.howLong !== "permament"
-    );
-    if (banDishes.length !== 0) {
-      //pobranie aktualnego czasu
-      let date = new Date().getTime();
-      // dla każdego zbanowanego ale nie permamentnie
-      banDishes.forEach((element) => {
-        // destrukturycja element!!
-        if (date - (element.ban.howLong + element.ban.sinceWhen) > 0) {
-          // przywrócenie wartości domyślnych dla dania
-          element.ban.status = false;
-          element.ban.sinceWhen = "";
-          element.ban.howLong = "";
-          // index sprawdzanego dania w tablicy
-          const index = dishes.findIndex((elem) => elem.id === element.id);
-          // nadpisanie dania poprzedniego teraźniejszym
-          dishes[index] = element;
-          // wszystkie dania zaktualizowane oraz pamięć wszystkich dań
-          setAllDishes(dishes);
-          setAllDishesStorage(dishes);
-          // dania uzytkownika nowa tablica pozniej w niej zapisuje dane do local storage
-          let userDishesArray = [];
-          // pobranie aktualnych filtrów użytkownika
-          const filtersArray =
-            JSON.parse(localStorage.getItem("userFilterArr")) || null;
-          // jeżeli jakieś są
-          if (filtersArray) {
-            // aktywne filtry
-            const activeFilters = filtersArray.filter((item) => item.active);
-            let flag = false;
-            // element czyli danie aktualnie sprawdzane jego składniki jeden po drugim
-            element.ingredient.forEach((item) => {
-              //porównanie każdego filtra aktywnego ze składnikiem jeżeli nazwa składnika będzie zgodna z nazwą aktywnego filtra flaga na true
-              activeFilters.forEach((elem) => {
-                if (elem.name === item.name) {
-                  console.log("przefiltrowane");
-                  flag = true;
-                }
-              });
-            });
-            // jeżeli żaden aktywny filtr nie wyklucza składnika sprawdzanego elemetnu dodajemy element do tablicy
-            if (!flag) {
-              setUserDishes((prevValue) => {
-                userDishesArray = [...prevValue, element];
-              });
-              setUserStorage(userDishesArray);
-            }
-          } else {
-            setUserDishes((prevValue) => {
-              userDishesArray = [...prevValue, element];
-              return userDishesArray;
-            });
-            setUserStorage(userDishesArray);
+  const compare = (element) => {
+    let userDishesArray = [];
+    // pobranie aktualnych filtrów użytkownika
+    const filtersArray =
+      JSON.parse(localStorage.getItem("userFilterArr")) || null;
+    // jeżeli jakieś są
+    if (filtersArray) {
+      // aktywne filtry
+      const activeFilters = filtersArray.filter((item) => item.active);
+      let flag = false;
+      // element czyli danie aktualnie sprawdzane jego składniki jeden po drugim
+      element.ingredient.forEach((item) => {
+        //porównanie każdego filtra aktywnego ze składnikiem jeżeli nazwa składnika będzie zgodna z nazwą aktywnego filtra flaga na true
+        activeFilters.forEach((elem) => {
+          if (elem.name === item.name) {
+            console.log("przefiltrowane");
+            flag = true;
           }
-        }
+        });
       });
+      // jeżeli żaden aktywny filtr nie wyklucza składnika sprawdzanego elemetnu dodajemy element do tablicy
+      if (!flag) {
+        setUserDishes((prevValue) => {
+          userDishesArray = [...prevValue, element];
+        });
+        setUserStorage(userDishesArray);
+      }
+    } else {
+      setUserDishes((prevValue) => {
+        userDishesArray = [...prevValue, element];
+        return userDishesArray;
+      });
+      setUserStorage(userDishesArray);
     }
   };
 
   useEffect(() => {
-    const banInterval = setInterval(checkBanStatus, 6000);
+    const banInterval = setInterval(
+      () =>
+        checkBanStatus(
+          allDishes,
+          setAllDishes,
+          setAllDishesStorage,
+          setUserDishes,
+          setUserStorage,
+          compare
+        ),
+      6000
+    );
     return () => clearInterval(banInterval);
   }, []);
 
