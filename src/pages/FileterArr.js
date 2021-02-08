@@ -120,9 +120,22 @@ const FileterArr = ({
   const setFilterStorage = (arr, name) => {
     localStorage.setItem(name, JSON.stringify(arr));
   };
+  const findFilter = (name, arr) => {
+    const newArr = arr.filter((item) => item.name === name);
+    return newArr.length > 0 ? true : false;
+  };
 
   const addNewFilter = (e) => {
     e.preventDefault();
+    if (
+      findFilter(filterName, filters) ||
+      findFilter(filterName, usersFilters)
+    ) {
+      setFilterName("");
+      alert("ten filtr już istnieje");
+      return;
+    }
+
     const newFilter = {
       name: filterName,
       active: true,
@@ -130,7 +143,6 @@ const FileterArr = ({
     };
     filterDishes(newFilter);
     const allFilters = [newFilter, ...filters];
-    console.log("tablica userFilters to", usersFilters);
 
     const userFiltersArr = [...usersFilters, newFilter];
     setFileter(allFilters);
@@ -221,7 +233,6 @@ const FileterArr = ({
       <button onClick={showUserFilters}>pokaż moje filtry</button>
 
       <form action="" onSubmit={addNewFilter}>
-        {/* ---------------------------------------------------------------- */}
         <TypeAheadDropDown
           filterName={filterName}
           allFiltersArr={allFiltersArr}
