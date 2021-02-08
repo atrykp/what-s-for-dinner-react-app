@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Filter from "../components/Filter";
+import TypeAheadDropDown from "./TypeAheadDropDown";
 
 const FileterArr = ({
   allDishes,
@@ -25,7 +26,6 @@ const FileterArr = ({
       return !prevValue;
     });
   };
-
   const filterDishes = (element) => {
     const checked = element.active;
     const value = element.name;
@@ -130,6 +130,8 @@ const FileterArr = ({
     };
     filterDishes(newFilter);
     const allFilters = [newFilter, ...filters];
+    console.log("tablica userFilters to", usersFilters);
+
     const userFiltersArr = [...usersFilters, newFilter];
     setFileter(allFilters);
     setUserFilters(userFiltersArr);
@@ -141,12 +143,16 @@ const FileterArr = ({
   const removeFilter = (id) => {
     let filtersArr = [...filters];
     const user = usersFilters.length > 0 ? [...usersFilters] : [];
+
     const element = findElementInArr(filtersArr, id);
+    console.log(element);
+
     const userElement = findElementInArr(user, id);
+
     console.log(userElement);
 
     user.splice(userElement.elementId, 1);
-    setUserFilters(userElement);
+    setUserFilters(user);
     setFilterStorage(user, "userFilterArr");
 
     if (element.item.active) {
@@ -157,10 +163,7 @@ const FileterArr = ({
     setFileter(filtersArr);
     setFilterStorage(filtersArr, "filterArr");
   };
-  const handleInputValue = (e) => {
-    const value = e.target.value;
-    setFilterName(value);
-  };
+
   const removeDuplicates = (arr) => {
     let dataArr = arr.map((item) => {
       return [item.name, item];
@@ -169,7 +172,7 @@ const FileterArr = ({
     let result = [...maparr.values()];
     return result; //converting back to array from mapobject
   };
-  const showAllFilters = () => {
+  const allFiltersArr = () => {
     const currentFilters = [...filters];
     const dishes = [...allDishes];
     const dishesFiltersArr = dishes
@@ -182,7 +185,10 @@ const FileterArr = ({
       )
       .flat();
     const allFiltersArr = [...dishesFiltersArr, ...currentFilters];
-    const singleFiltersArr = removeDuplicates(allFiltersArr);
+    return removeDuplicates(allFiltersArr);
+  };
+  const showAllFilters = () => {
+    const singleFiltersArr = allFiltersArr();
     setAllFiltersSection(true);
     setFileter(singleFiltersArr);
     setFilterStorage(singleFiltersArr, "filterArr");
@@ -215,13 +221,13 @@ const FileterArr = ({
       <button onClick={showUserFilters}>pokaż moje filtry</button>
 
       <form action="" onSubmit={addNewFilter}>
-        <input
-          type="text"
-          placeholder={"wpisz swój filtr"}
-          onChange={handleInputValue}
-          value={filterName}
+        {/* ---------------------------------------------------------------- */}
+        <TypeAheadDropDown
+          filterName={filterName}
+          allFiltersArr={allFiltersArr}
+          setFilterName={setFilterName}
         />
-        <button onSubmit={addNewFilter}>dodaj</button>
+        <button>dodaj</button>
       </form>
     </>
   );
