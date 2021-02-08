@@ -103,7 +103,11 @@ function App() {
       }
     } else {
       setUserDishes((prevValue) => {
-        userDishesArray = [...prevValue, element];
+        if (prevValue) {
+          userDishesArray = [...prevValue, element];
+        } else {
+          userDishesArray = [...allDishes, element];
+        }
         return userDishesArray;
       });
       setUserStorage(userDishesArray);
@@ -167,6 +171,7 @@ function App() {
     allDishesArr.push(dish);
     setAllDishes(allDishesArr);
     setAllDishesStorage(allDishesArr);
+    compare(dish);
   };
   const setUserStorage = (arr) => {
     localStorage.setItem("userDishes", JSON.stringify(arr));
