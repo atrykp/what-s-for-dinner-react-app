@@ -129,10 +129,11 @@ const FileterArr = ({
     e.preventDefault();
     if (
       findFilter(filterName, filters) ||
-      findFilter(filterName, usersFilters)
+      findFilter(filterName, usersFilters) ||
+      filterName.length < 2
     ) {
       setFilterName("");
-      alert("ten filtr już istnieje");
+      alert("ten filtr już istnieje lub nazwa jest za krótka (min 2 znaki)");
       return;
     }
 
