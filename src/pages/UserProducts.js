@@ -66,7 +66,7 @@ const UserProducts = ({
     setProductsFilters(filtersArr);
   };
   const getMatchedDishes = (arr, name) => {
-    const matchArr = [];
+    let matchArr = [];
     arr.forEach((dish) => {
       let isMatch = false;
       for (let i = 0; i < dish.ingredient.length; i++) {
@@ -74,6 +74,8 @@ const UserProducts = ({
       }
       if (isMatch) matchArr.push(dish);
     });
+    console.log("dopasowane dania", matchArr);
+    matchArr = matchArr.filter((dish) => !dish.ban.status);
     return matchArr;
   };
   const filterDishes = (filterObj) => {

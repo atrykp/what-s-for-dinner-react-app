@@ -180,7 +180,6 @@ function App() {
     localStorage.setItem("allDishes", JSON.stringify(arr));
   };
 
-  console.log(selectedDish);
   const getDishesArray = () => {
     if (isUserProductsActive) {
       return matchDishes;
