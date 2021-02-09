@@ -47,7 +47,9 @@ const UserProducts = ({
         }))
       )
       .flat();
-    const singleFiltersArr = removeDuplicates(dishesFiltersArr);
+    const singleFiltersArr = removeDuplicates(dishesFiltersArr).filter(
+      (item) => item.name.length > 1
+    );
     setProductsFilters(singleFiltersArr);
   };
   const getActiveFilters = (arr) => {

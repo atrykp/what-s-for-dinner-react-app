@@ -198,7 +198,9 @@ const FileterArr = ({
       )
       .flat();
     const allFiltersArr = [...dishesFiltersArr, ...currentFilters];
-    return removeDuplicates(allFiltersArr);
+    return removeDuplicates(allFiltersArr).filter(
+      (item) => item.name.length > 0
+    );
   };
   const showAllFilters = () => {
     const singleFiltersArr = allFiltersArr();
