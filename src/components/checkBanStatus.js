@@ -9,6 +9,8 @@ const checkBanStatus = (
   console.log("sprawdzam");
 
   const dishes = [...allDishes];
+  console.log(dishes);
+
   const banDishes = dishes.filter(
     (element) => element.ban.status && element.ban.howLong !== "permament"
   );
@@ -28,6 +30,8 @@ const checkBanStatus = (
         // nadpisanie dania poprzedniego teraźniejszym
         dishes[index] = element;
         // wszystkie dania zaktualizowane oraz pamięć wszystkich dań
+        console.log(dishes);
+
         setAllDishes(dishes);
         setAllDishesStorage(dishes);
         // dania uzytkownika nowa tablica pozniej w niej zapisuje dane do local storage

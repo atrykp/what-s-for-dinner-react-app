@@ -115,20 +115,20 @@ function App() {
   };
 
   useEffect(() => {
-    const banInterval = setInterval(
-      () =>
-        checkBanStatus(
-          allDishes,
-          setAllDishes,
-          setAllDishesStorage,
-          setUserDishes,
-          setUserStorage,
-          compare
-        ),
-      6000
-    );
-    return () => clearInterval(banInterval);
-  }, []);
+    const banInterval = setInterval(() => {
+      checkBanStatus(
+        allDishes,
+        setAllDishes,
+        setAllDishesStorage,
+        setUserDishes,
+        setUserStorage,
+        compare
+      );
+    }, 6000);
+    return () => {
+      clearInterval(banInterval);
+    };
+  }, [allDishes]);
 
   const updateUserDishes = (arr) => {
     setUserDishes(arr);
