@@ -74,6 +74,7 @@ function App() {
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
 
+  // checks if dish can be added
   const compare = (element) => {
     let userDishesArray = [];
     // pobranie aktualnych filtrów użytkownika
@@ -99,7 +100,7 @@ function App() {
         setUserDishes((prevValue) => {
           userDishesArray = [...prevValue, element];
         });
-        setUserStorage(userDishesArray);
+        setLocalStorage(userDishesArray, "userDishes");
       }
     } else {
       setUserDishes((prevValue) => {
@@ -110,20 +111,13 @@ function App() {
         }
         return userDishesArray;
       });
-      setUserStorage(userDishesArray);
+      setLocalStorage(userDishesArray, "userDishes");
     }
   };
 
   useEffect(() => {
     const banInterval = setInterval(() => {
-      checkBanStatus(
-        allDishes,
-        setAllDishes,
-        setAllDishesStorage,
-        setUserDishes,
-        setUserStorage,
-        compare
-      );
+      checkBanStatus(allDishes, setAllDishes, setLocalStorage, compare);
     }, 6000);
     return () => {
       clearInterval(banInterval);
@@ -132,7 +126,7 @@ function App() {
 
   const updateUserDishes = (arr) => {
     setUserDishes(arr);
-    setUserStorage(arr);
+    setLocalStorage(arr, "userDishes");
   };
   const banDish = (id, time, howLong) => {
     const dishes = userDishes ? [...userDishes] : [...allDishes];
@@ -144,8 +138,12 @@ function App() {
       howLong,
     };
     setUserDishes(dishes.filter((element) => !element.ban.status));
-    setUserStorage(dishes.filter((element) => !element.ban.status));
-    setAllDishesStorage(dishes);
+    setLocalStorage(
+      dishes.filter((element) => !element.ban.status),
+      "userDishes"
+    );
+
+    setLocalStorage(dishes, "allDishes");
   };
   const UserProductsSection = (
     <UserProducts
@@ -170,14 +168,11 @@ function App() {
     const allDishesArr = [...allDishes];
     allDishesArr.push(dish);
     setAllDishes(allDishesArr);
-    setAllDishesStorage(allDishesArr);
+    setLocalStorage(allDishesArr, "allDishes");
     compare(dish);
   };
-  const setUserStorage = (arr) => {
-    localStorage.setItem("userDishes", JSON.stringify(arr));
-  };
-  const setAllDishesStorage = (arr) => {
-    localStorage.setItem("allDishes", JSON.stringify(arr));
+  const setLocalStorage = (arr, name) => {
+    localStorage.setItem(name, JSON.stringify(arr));
   };
 
   const getDishesArray = () => {

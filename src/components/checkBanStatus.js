@@ -1,11 +1,4 @@
-const checkBanStatus = (
-  allDishes,
-  setAllDishes,
-  setAllDishesStorage,
-  setUserDishes,
-  setUserStorage,
-  compare
-) => {
+const checkBanStatus = (allDishes, setAllDishes, setLocalStorage, compare) => {
   console.log("sprawdzam");
 
   const dishes = [...allDishes];
@@ -33,7 +26,7 @@ const checkBanStatus = (
         console.log(dishes);
 
         setAllDishes(dishes);
-        setAllDishesStorage(dishes);
+        setLocalStorage(dishes, "allDishes");
         // dania uzytkownika nowa tablica pozniej w niej zapisuje dane do local storage
         compare(element);
       }
