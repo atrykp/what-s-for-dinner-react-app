@@ -13,6 +13,7 @@ import {
 import UserProducts from "./UserProducts";
 import RemoveStorage from "./RemoveStorage";
 import checkBanStatus from "../components/checkBanStatus";
+import BannedDishes from "./BannedDishes";
 
 let mainArr = [
   {
@@ -195,6 +196,7 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <RemoveStorage />
+          <NavLink to="/bannedDishes">Pokaż zbanowane</NavLink>
           <NavLink to="/addDish">Dodaj swój przepis</NavLink>
           <p>co masz w lodówce</p>
           {UserProductsSection}
@@ -211,6 +213,9 @@ function App() {
             banDish={banDish}
             setIsUserProductsActive={setIsUserProductsActive}
           />
+        </Route>
+        <Route path="/bannedDishes">
+          <BannedDishes allDishes={allDishes} />
         </Route>
         <Route path="/addDish">
           <AddDish updateAllDishes={updateAllDishes} />
