@@ -73,6 +73,7 @@ const AddDish = (props) => {
     const message = validation(dish);
     if (message) {
       setErrorMsg(message);
+
       return;
     } else {
       setErrorMsg("");
