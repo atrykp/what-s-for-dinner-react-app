@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
 
@@ -10,6 +10,7 @@ const validation = (dish) => {
 };
 
 const AddDish = (props) => {
+  const nameDishInput = createRef();
   const [errorMsg, setErrorMsg] = useState("");
   const [dish, setDish] = useState({
     name: "",
@@ -73,7 +74,7 @@ const AddDish = (props) => {
     const message = validation(dish);
     if (message) {
       setErrorMsg(message);
-
+      nameDishInput.current.focus();
       return;
     } else {
       setErrorMsg("");
@@ -148,6 +149,7 @@ const AddDish = (props) => {
       <Link to="/">Ukryj</Link>
       <form action="" className="addDish" onSubmit={saveDish}>
         <input
+          ref={nameDishInput}
           type="text"
           placeholder="wpisz nazwę"
           onChange={handleInputChange}
