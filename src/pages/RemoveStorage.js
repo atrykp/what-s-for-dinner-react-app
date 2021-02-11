@@ -21,6 +21,7 @@ const RemoveStorage = () => {
     setPopupActive(false);
     window.location.reload();
   };
+
   const cancel = () => {
     setPopupActive(false);
   };

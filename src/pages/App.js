@@ -62,6 +62,7 @@ let mainArr = [
     },
   },
 ];
+
 function App() {
   const [allDishes, setAllDishes] = useState(
     JSON.parse(localStorage.getItem("allDishes")) || [...mainArr]
@@ -215,7 +216,12 @@ function App() {
           />
         </Route>
         <Route path="/bannedDishes">
-          <BannedDishes allDishes={allDishes} />
+          <BannedDishes
+            allDishes={allDishes}
+            setAllDishes={setAllDishes}
+            setLocalStorage={setLocalStorage}
+            compare={compare}
+          />
         </Route>
         <Route path="/addDish">
           <AddDish updateAllDishes={updateAllDishes} />
