@@ -19,9 +19,13 @@ const BannedDishes = ({
 
   const dishesList = bannedDishes.map((dish) => {
     const dateObj = new Date(dish.ban.howLong + dish.ban.sinceWhen);
+
     return (
       <li>
-        nazwa: {dish.name} nieaktywna do: {dateObj.toLocaleString()}
+        nazwa: {dish.name} nieaktywna do:{" "}
+        {!isNaN(dateObj.getDate())
+          ? dateObj.toLocaleString()
+          : "oznaczone jako nie lubię"}
         <button onClick={() => removeFromBanned(dish.id)}>usuń</button>
       </li>
     );
