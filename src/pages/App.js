@@ -130,6 +130,7 @@ function App() {
     setUserDishes(arr);
     setLocalStorage(arr, "userDishes");
   };
+  // w tej funkcji obsługuję tylko opcję kiedy userDishes są puste--------------------------------
   const banDish = (id, time, howLong) => {
     const dishes = userDishes ? [...userDishes] : [...allDishes];
     const dishIndex = dishes.findIndex((elem) => elem.id === id);
@@ -144,9 +145,10 @@ function App() {
       dishes.filter((element) => !element.ban.status),
       "userDishes"
     );
-
+    setAllDishes(dishes);
     setLocalStorage(dishes, "allDishes");
   };
+  // -------------------------------------------------------------------
   const UserProductsSection = (
     <UserProducts
       setSelectedDish={setSelectedDish}
@@ -191,29 +193,34 @@ function App() {
   const dishesCounter = (
     <p>Liczba potraw do wylosowania ({getDishesArray().length})</p>
   );
+  const mainPageStructure = (
+    <>
+      <NavLink to="/bannedDishes">Pokaż zbanowane</NavLink>
+      <NavLink to="/addDish">Dodaj swój przepis</NavLink>
+      <p>co masz w lodówce</p>
+      {UserProductsSection}
+
+      <p>powiedz nam czego Ci nie pokazywać</p>
+      {fileterSection}
+      {dishesCounter}
+
+      <h1>wylosowana potrawa to:</h1>
+      <DrawnDishList
+        selectedDish={selectedDish}
+        setSelectedDish={setSelectedDish}
+        customedArr={getDishesArray()}
+        banDish={banDish}
+        setIsUserProductsActive={setIsUserProductsActive}
+      />
+    </>
+  );
 
   return (
     <Router>
       <Switch>
         <Route path="/" exact>
           <RemoveStorage />
-          <NavLink to="/bannedDishes">Pokaż zbanowane</NavLink>
-          <NavLink to="/addDish">Dodaj swój przepis</NavLink>
-          <p>co masz w lodówce</p>
-          {UserProductsSection}
-
-          <p>powiedz nam czego Ci nie pokazywać</p>
-          {fileterSection}
-          {dishesCounter}
-
-          <h1>wylosowana potrawa to:</h1>
-          <DrawnDishList
-            selectedDish={selectedDish}
-            setSelectedDish={setSelectedDish}
-            customedArr={getDishesArray()}
-            banDish={banDish}
-            setIsUserProductsActive={setIsUserProductsActive}
-          />
+          {mainPageStructure}
         </Route>
         <Route path="/bannedDishes">
           <BannedDishes
