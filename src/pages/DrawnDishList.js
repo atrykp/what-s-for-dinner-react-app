@@ -45,7 +45,6 @@ const DrawnDishList = ({
   };
   const showIngredients = () => {
     setIngredientView((prevValue) => !prevValue);
-    console.log(selectedDish);
   };
   const ingredientBtnTxt = ingredientsView
     ? "ukryj składniki"

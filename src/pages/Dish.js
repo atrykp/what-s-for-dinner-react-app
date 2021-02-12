@@ -1,3 +1,4 @@
+import { uuid } from "uuidv4";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Dish = (props) => {
@@ -29,7 +30,7 @@ const Dish = (props) => {
   const stepsList =
     steps.length > 0
       ? steps.map((item) => (
-          <li>
+          <li key={uuid()}>
             {item.number}: {item.value}
           </li>
         ))
