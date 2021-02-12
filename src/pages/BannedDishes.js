@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 
 const BannedDishes = ({
   allDishes,
@@ -21,7 +22,7 @@ const BannedDishes = ({
     const dateObj = new Date(dish.ban.howLong + dish.ban.sinceWhen);
 
     return (
-      <li>
+      <li key={v4()}>
         nazwa: {dish.name} nieaktywna do:{" "}
         {!isNaN(dateObj.getDate())
           ? dateObj.toLocaleString()

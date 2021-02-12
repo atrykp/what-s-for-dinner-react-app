@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
 
 import "../styles/App.css";
 
@@ -105,7 +106,7 @@ const UserProducts = ({
     setMatchDishes(selectedDishesArr);
   };
   const filters = productsFilters.map((item) => (
-    <li>
+    <li key={v4()}>
       <button
         className={item.active ? "activeFilter" : ""}
         onClick={() => changeActiveStatus(item.id)}

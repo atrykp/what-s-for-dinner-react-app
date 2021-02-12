@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Ingredient from "../components/Ingredients";
+import { v4 } from "uuid";
 const DrawnDishList = ({
   customedArr,
   banDish,
@@ -85,12 +86,10 @@ const DrawnDishList = ({
         return list
           .filter((item) => item.isChecked)
           .map((item) => (
-            <>
-              <p>
-                nazwa: <strong>{item.name}</strong> ilość:{" "}
-                <strong>{item.quantity}</strong>
-              </p>
-            </>
+            <p key={v4()}>
+              nazwa: <strong>{item.name}</strong> ilość:{" "}
+              <strong>{item.quantity}</strong>
+            </p>
           ));
       } else return;
     } else return null;

@@ -1,4 +1,4 @@
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Dish = (props) => {
@@ -22,7 +22,7 @@ const Dish = (props) => {
     } else setProducts(productsList);
   }, []);
   const ingredientArr = ingredient.map((item) => (
-    <li>
+    <li key={v4()}>
       {item.name} - {item.quantity}
     </li>
   ));
@@ -30,7 +30,7 @@ const Dish = (props) => {
   const stepsList =
     steps.length > 0
       ? steps.map((item) => (
-          <li key={uuid()}>
+          <li key={v4()}>
             {item.number}: {item.value}
           </li>
         ))
@@ -42,7 +42,7 @@ const Dish = (props) => {
     setProducts(arr);
   };
   const shoppingList = products.map((item) => (
-    <label htmlFor={item.name}>
+    <label htmlFor={item.name} key={v4()}>
       {item.name}
       <input
         type="checkbox"

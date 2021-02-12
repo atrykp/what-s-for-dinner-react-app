@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Filter from "../components/Filter";
 import TypeAheadDropDown from "./TypeAheadDropDown";
+import { v4 } from "uuid";
 
 const FileterArr = ({
   allDishes,
@@ -251,7 +252,7 @@ const FileterArr = ({
       filter={element}
       changeFilterActivity={changeFilterActivity}
       removeFilter={removeFilter}
-      key={Math.floor(Math.random() * 1233443252)}
+      key={v4()}
     />
   ));
 

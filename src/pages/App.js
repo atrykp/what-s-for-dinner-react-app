@@ -98,6 +98,7 @@ function App() {
         });
       });
       // jeżeli żaden aktywny filtr nie wyklucza składnika sprawdzanego elemetnu dodajemy element do tablicy
+      // jakiś błąd is not iterable w 104 linii jak się zbanuje dwa i czeka się na ich powrót
       if (!flag) {
         setUserDishes((prevValue) => {
           userDishesArray = [...prevValue, element];

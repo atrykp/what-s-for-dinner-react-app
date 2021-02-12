@@ -1,6 +1,7 @@
 import React, { createRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
+import { v4 } from "uuid";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -95,7 +96,7 @@ const AddDish = (props) => {
   };
   let stepsInputs = dish.steps.map((x, i) => {
     return (
-      <div className="stepsBox">
+      <div className="stepsBox" key={v4()}>
         <span>{i + 1}.</span>
         <input
           type="text"
@@ -118,7 +119,7 @@ const AddDish = (props) => {
 
   let ingredientImputs = dish.ingredient.map((x, i) => {
     return (
-      <div className="skladnikibox">
+      <div className="skladnikibox" key={v4()}>
         <input
           type="text"
           placeholder="składnik"
