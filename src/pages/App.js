@@ -130,9 +130,8 @@ function App() {
     setUserDishes(arr);
     setLocalStorage(arr, "userDishes");
   };
-  // w tej funkcji obsługuję tylko opcję kiedy userDishes są puste--------------------------------
   const banDish = (id, time, howLong) => {
-    const dishes = userDishes ? [...userDishes] : [...allDishes];
+    const dishes = [...allDishes];
     const dishIndex = dishes.findIndex((elem) => elem.id === id);
     const dish = dishes[dishIndex];
     dish.ban = {
@@ -140,15 +139,23 @@ function App() {
       sinceWhen: time,
       howLong,
     };
-    setUserDishes(dishes.filter((element) => !element.ban.status));
-    setLocalStorage(
-      dishes.filter((element) => !element.ban.status),
-      "userDishes"
-    );
     setAllDishes(dishes);
     setLocalStorage(dishes, "allDishes");
+
+    if (userDishes) {
+      let arr = [...userDishes];
+      const userDishIndex = arr.findIndex((element) => element.id === id);
+      if (userDishIndex !== -1) {
+        arr.splice(userDishIndex, 1);
+        setUserDishes(arr);
+        setLocalStorage(arr, "userDishes");
+      }
+    } else {
+      const arrWithActive = dishes.filter((element) => !element.ban.status);
+      setUserDishes(arrWithActive);
+      setLocalStorage(arrWithActive, "userDishes");
+    }
   };
-  // -------------------------------------------------------------------
   const UserProductsSection = (
     <UserProducts
       setSelectedDish={setSelectedDish}
