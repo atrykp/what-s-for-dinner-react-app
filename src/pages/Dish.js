@@ -1,6 +1,7 @@
 import { v4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../styles/Dish.css";
 const Dish = (props) => {
   const [products, setProducts] = useState([]);
   const {
@@ -58,7 +59,7 @@ const Dish = (props) => {
     // zapisz do local storage cały obiekt
   };
   return (
-    <div className="selected dish">
+    <div className="selectedDish">
       <Link to="/">Wróć do strony głównej</Link>
       <h1>{name}</h1>
       <p className="description">{description}</p>
