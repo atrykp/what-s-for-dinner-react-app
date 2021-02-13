@@ -23,15 +23,15 @@ const Dish = (props) => {
     } else setProducts(productsList);
   }, []);
   const ingredientArr = ingredient.map((item) => (
-    <li key={v4()}>
-      {item.name} - {item.quantity}
+    <li className="selectedDish__ingredient" key={v4()}>
+      {item.name}: <span>{item.quantity}</span>
     </li>
   ));
 
   const stepsList =
     steps.length > 0
       ? steps.map((item) => (
-          <li key={v4()}>
+          <li className="selectedDish__step" key={v4()}>
             {item.number}: {item.value}
           </li>
         ))
@@ -51,6 +51,7 @@ const Dish = (props) => {
         checked={item.isChecked}
         onChange={handleCheck}
       />
+      <span class="checkmark"></span>
     </label>
   ));
   const handleSaveProducts = (e) => {
@@ -60,20 +61,20 @@ const Dish = (props) => {
   };
   return (
     <div className="selectedDish">
-      <Link to="/">Wróć do strony głównej</Link>
-      <h1>{name}</h1>
-      <p className="description">{description}</p>
-      <div className="products">
+      <Link to="/">Wróć</Link>
+      <h1 className="selectedDish__name">{name}</h1>
+      <p className="selectedDish__description">{description}</p>
+      <div className="selectedDish__products">
         <h2>składniki</h2>
-        <ul className="productsList">{ingredientArr}</ul>
+        <ul className="selectedDish__ingredients">{ingredientArr}</ul>
         <h2>Lista zakupów</h2>
-        <p>Zaznacz co musisz jeszcze kupić</p>
+        <p>Zaznacz co musisz jeszcze kupić:</p>
         <form action="" onSubmit={(e) => handleSaveProducts(e)}>
           {shoppingList}
           <button>Zapisz</button>
         </form>
       </div>
-      <div className="steps">
+      <div className="selectedDish__steps">
         <h2>Przepis</h2>
         {stepsList}
       </div>

@@ -1,8 +1,109 @@
 .selectedDish {
   min-height: 100vh;
-  background-image: url(../images/ingredients.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(../images/ingre.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   color: white;
+  padding: 4% 0;
+}
+.selectedDish__name,
+.selectedDish__description,
+.selectedDish__products,
+.selectedDish__steps {
+  background-color: rgba(97, 97, 97, 0.6);
+  width: 95%;
+  text-align: center;
+  padding: 5% 2%;
+  font-size: 2.5rem;
+  margin: 5% auto;
+  color: rgb(255, 255, 255);
+  border-radius: 15px;
+  font-weight: 400;
+}
+.selectedDish__description {
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.selectedDish h2 {
+  font-size: 1.3rem;
+  margin: 4% 0;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+.selectedDish__products {
+  font-size: 1.5rem;
+}
+.selectedDish__ingredients {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 10%;
+  width: 100%;
+}
+.selectedDish__ingredient {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted gray;
+  padding: 2%;
+}
+.selectedDish__ingredient span {
+  display: inline-block;
+  text-align: right;
+}
+.selectedDish__products p {
+  font-size: 1rem;
+}
+.selectedDish__products form label {
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  padding: 2%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.selectedDish__products form input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.selectedDish__products form:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.selectedDish__products form input:checked ~ .checkmark {
+  background-color: #ff6600;
+}
+.selectedDish__products button {
+  text-transform: uppercase;
+  background-color: transparent;
+  color: white;
+  font-size: 1.6rem;
+  padding: 2% 5%;
+  margin: 5% 0 2%;
+  border: 1px solid white;
+  cursor: pointer;
+}
+.selectedDish__steps {
+  font-size: 1.5rem;
+  list-style: none;
+}
+
+.selectedDish a {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  padding: 2% 2% 2% 5%;
+  border: 1px solid white;
 }
