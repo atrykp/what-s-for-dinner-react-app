@@ -10,8 +10,9 @@
 .selectedDish__description,
 .selectedDish__products,
 .selectedDish__steps {
-  background-color: rgba(97, 97, 97, 0.6);
+  background-color: rgba(34, 39, 37, 0.849);
   width: 95%;
+  max-width: 1240px;
   text-align: center;
   padding: 5% 2%;
   font-size: 2.5rem;
@@ -52,6 +53,8 @@
 }
 .selectedDish__products p {
   font-size: 1rem;
+  margin-top: -1%;
+  margin-bottom: 2%;
 }
 .selectedDish__products form label {
   cursor: pointer;
@@ -93,6 +96,10 @@
   margin: 5% 0 2%;
   border: 1px solid white;
   cursor: pointer;
+  letter-spacing: 1.5px;
+}
+.selectedDish__products button:hover {
+  background-color: rgba(228, 228, 228, 0.123);
 }
 .selectedDish__steps {
   font-size: 1.5rem;
@@ -104,6 +111,69 @@
   text-transform: uppercase;
   color: white;
   text-decoration: none;
-  padding: 2% 2% 2% 5%;
+  padding: 1% 2%;
+  margin-left: 2.5%;
   border: 1px solid white;
+  letter-spacing: 2px;
+}
+.selectedDish a:hover {
+  background-color: rgba(228, 228, 228, 0.123);
+}
+
+@media (min-width: 760px) {
+  .selectedDish h2 {
+    font-size: 1.8rem;
+    margin: 0 0 2%;
+  }
+  .selectedDish__description {
+    font-size: 1.3rem;
+  }
+  .selectedDish__products button {
+    padding: 1% 5%;
+    margin: 3% 0% 0%;
+  }
+  .selectedDish__name {
+    font-size: 3rem;
+    padding: 2% 2%;
+    margin: 5% auto;
+  }
+  .selectedDish__name,
+  .selectedDish__description,
+  .selectedDish__products,
+  .selectedDish__steps {
+    margin: 2% auto;
+  }
+  .selectedDish__products form label {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .selectedDish__products p {
+    font-size: 1.2rem;
+    margin-top: -1%;
+    margin-bottom: 2%;
+  }
+}
+@media (min-width: 1400px) {
+  .selectedDish__name,
+  .selectedDish__description,
+  .selectedDish__products,
+  .selectedDish__steps {
+    font-size: 3rem;
+  }
+  .selectedDish h2 {
+    font-size: 2.5rem;
+  }
+
+  .selectedDish__products p {
+    font-size: 1.5rem;
+  }
+  .selectedDish__name {
+    font-size: 4rem;
+  }
+  .selectedDish__products button {
+    font-size: 2.5rem;
+  }
+  .selectedDish__description {
+    font-size: 2rem;
+  }
 }
