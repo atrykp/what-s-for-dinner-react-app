@@ -22,8 +22,6 @@ const UserProducts = ({
       } else if (!localStorage.getItem("selectedDish")) {
         setSelectedDish("");
       }
-      console.log(prevValue);
-
       setIsUserProductsActive(!prevValue);
       return !prevValue;
     });
@@ -44,7 +42,7 @@ const UserProducts = ({
         dish.ingredient.map((elem) => ({
           name: elem.name,
           active: false,
-          id: Math.floor(Math.random() * 123),
+          id: Math.floor(Math.random() * 12345),
         }))
       )
       .flat();

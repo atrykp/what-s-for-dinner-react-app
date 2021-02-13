@@ -29,6 +29,10 @@ const DrawnDishList = ({
 
   const handleDraw = () => {
     notYetArr = [...customedArr];
+
+    if (notYetArr.length < 1) {
+      return alert("Brak dań do losowania");
+    }
     let index = Math.floor(Math.random() * notYetArr.length);
     setSelectedDish(notYetArr[index]);
     notYetArr.slice(index, 1);

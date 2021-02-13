@@ -207,8 +207,8 @@ const FileterArr = ({
     const singleFiltersArr = allFiltersArr();
     setAllFiltersSection(true);
     setFileter(singleFiltersArr);
-    setFilterStorage(singleFiltersArr, "filterArr");
   };
+
   const activeFilters = () => {
     const arr = [...filters];
     const active = arr.filter((item) => item.active);
