@@ -8,6 +8,7 @@ const FileterArr = ({
   updateUserDishes,
   userDishes,
   setSelectedDish,
+  isUserProductsActive,
 }) => {
   const [filterSection, setFilterSection] = useState(false);
   const [allFiltersSection, setAllFiltersSection] = useState(false);
@@ -20,6 +21,7 @@ const FileterArr = ({
   );
 
   const showFilterArr = () => {
+    if (isUserProductsActive) return alert("wyłącz sortowanie po produktach");
     setFilterSection((prevValue) => {
       if (!prevValue && !localStorage.getItem("selectedDish")) {
         setSelectedDish("");

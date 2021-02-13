@@ -173,6 +173,7 @@ function App() {
       userDishes={userDishes}
       allDishes={allDishes}
       updateUserDishes={updateUserDishes}
+      isUserProductsActive={isUserProductsActive}
     />
   );
 
