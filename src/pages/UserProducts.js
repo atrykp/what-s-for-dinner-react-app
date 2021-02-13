@@ -122,7 +122,7 @@ const UserProducts = ({
 
   return (
     <>
-      <p>czy chesz filtrować po produktach które masz?</p>
+      <p>Produkty</p>
 
       <button onClick={showSection}>{isActive ? "wyłącz" : "włącz"}</button>
 

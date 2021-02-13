@@ -1,6 +1,6 @@
 .selectedDish {
   min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background: linear-gradient(rgba(37, 37, 37, 0.4), rgba(41, 41, 41, 0.4)),
     url(../images/ingre.jpg);
   background-size: cover;
   color: white;

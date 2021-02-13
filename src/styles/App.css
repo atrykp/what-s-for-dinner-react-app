@@ -1,3 +1,31 @@
+.upperNav {
+  display: grid;
+  position: relative;
+}
+.upperNav__userProducts {
+  background-color: burlywood;
+  border-bottom: 2px solid black;
+  padding: 2%;
+}
+.upperNav__filters {
+  border-top: 2px solid black;
+  background-color: cornflowerblue;
+  padding: 2%;
+}
+.upperNav__counter {
+  position: absolute;
+  right: 2%;
+  top: 30%;
+  width: 30%;
+  background-color: white;
+  text-align: center;
+  border-radius: 20px;
+}
+.upperNav__counter span {
+  font-size: 1.3rem;
+  display: block;
+}
+
 .activeFilter {
   background-color: green;
 }

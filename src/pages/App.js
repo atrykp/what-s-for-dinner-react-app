@@ -200,18 +200,19 @@ function App() {
   };
 
   const dishesCounter = (
-    <p>Liczba potraw do wylosowania ({getDishesArray().length})</p>
+    <p>
+      Liczba dań <span>{getDishesArray().length}</span>
+    </p>
   );
   const mainPageStructure = (
     <>
+      <div className="upperNav">
+        <div className="upperNav__userProducts">{UserProductsSection}</div>
+        <div className="upperNav__counter">{dishesCounter}</div>
+        <div className="upperNav__filters">{fileterSection}</div>
+      </div>
       <NavLink to="/bannedDishes">Pokaż zbanowane</NavLink>
       <NavLink to="/addDish">Dodaj swój przepis</NavLink>
-      <p>co masz w lodówce</p>
-      {UserProductsSection}
-
-      <p>powiedz nam czego Ci nie pokazywać</p>
-      {fileterSection}
-      {dishesCounter}
 
       <h1>wylosowana potrawa to:</h1>
       <DrawnDishList
@@ -228,8 +229,8 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact>
-          <RemoveStorage />
           {mainPageStructure}
+          <RemoveStorage />
         </Route>
         <Route path="/bannedDishes">
           <BannedDishes

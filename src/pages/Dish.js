@@ -51,7 +51,7 @@ const Dish = (props) => {
         checked={item.isChecked}
         onChange={handleCheck}
       />
-      <span class="checkmark"></span>
+      <span className="checkmark"></span>
     </label>
   ));
   const handleSaveProducts = (e) => {

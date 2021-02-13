@@ -260,11 +260,12 @@ const FileterArr = ({
 
   return (
     <>
+      <p>Filtry</p>
       <button onClick={showFilterArr}>
-        {filterSection ? "ukryj" : "rozwiń"}
+        {filterSection ? "ukryj" : "pokaż"}
       </button>
       <p>
-        Liczba aktywnych filtrów <span>({activeFilters().length})</span>
+        Aktywne filtry <span>({activeFilters().length})</span>
       </p>
 
       {filterForm}
