@@ -211,7 +211,7 @@ function App() {
         <div className="upperNav__counter">{dishesCounter}</div>
         <div className="upperNav__filters">{fileterSection}</div>
       </div>
-      <div className="drawnDish">
+      <div>
         <DrawnDishList
           selectedDish={selectedDish}
           setSelectedDish={setSelectedDish}

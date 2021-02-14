@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Ingredient from "../components/Ingredients";
 import { v4 } from "uuid";
+import "../styles/DrawnDishList.css";
 const DrawnDishList = ({
   customedArr,
   banDish,
@@ -61,23 +62,29 @@ const DrawnDishList = ({
 
   const drawnDishView = (
     <>
-      <button onClick={showIngredients}>{ingredientBtnTxt}</button>
+      <button onClick={showIngredients} className="drawnDish__ingredientsBtn">
+        {ingredientBtnTxt}
+      </button>
       {ingredientSection}
-      <h1>{selectedDish.name}</h1>
-      <Link
-        to={`dish/${selectedDish.name}${selectedDish.id}`}
-        onClick={() => {
-          ban(selectedDish.id, 15000);
-          setSelectedDish(selectedDish);
-          setIsSelectedStorage(!isSelected);
-          setSelectedDishStorage(selectedDish);
-          setIsUserProductsActive(false);
-        }}
-      >
-        Ok
-      </Link>
-      <button onClick={() => ban(selectedDish.id, 7000)}>Nie dzisiaj</button>
-      <button onClick={() => ban(selectedDish.id)}>Nie lubię</button>
+      <div className="drawnDish__name">
+        <h1>{selectedDish.name}</h1>
+      </div>
+      <div className="drawnDish__buttons">
+        <button onClick={() => ban(selectedDish.id, 7000)}>Nie dzisiaj</button>
+        <Link
+          to={`dish/${selectedDish.name}${selectedDish.id}`}
+          onClick={() => {
+            ban(selectedDish.id, 15000);
+            setSelectedDish(selectedDish);
+            setIsSelectedStorage(!isSelected);
+            setSelectedDishStorage(selectedDish);
+            setIsUserProductsActive(false);
+          }}
+        >
+          Ok
+        </Link>
+        <button onClick={() => ban(selectedDish.id)}>Nie lubię</button>
+      </div>
     </>
   );
   const showProductsList = () => {
@@ -108,16 +115,21 @@ const DrawnDishList = ({
 
   const selectedDishView = (
     <>
-      <h1>{selectedDish.name}</h1>
-      <button onClick={showIngredients}>{ingredientBtnTxt}</button>
-      {ingredientSection}
-      <Link to={`dish/${selectedDish.name}${selectedDish.id}`}>
-        <button>OK</button>
-      </Link>
-      <button onClick={markDishAsDone}>Zrobione</button>
-      <button onClick={showProductsList}>
-        {!productsView ? "co jeszcze kupić" : "ukryj"}
+      <button onClick={showIngredients} className="drawnDish__ingredientsBtn">
+        {ingredientBtnTxt}
       </button>
+      {ingredientSection}
+      <div className="drawnDish__name">
+        <h1>{selectedDish.name}</h1>
+      </div>
+
+      <div className="drawnDish__buttons">
+        <button onClick={markDishAsDone}>Zrobione</button>
+        <Link to={`dish/${selectedDish.name}${selectedDish.id}`}>pokaż</Link>
+        <button onClick={showProductsList}>
+          {!productsView ? "co jeszcze kupić" : "ukryj"}
+        </button>
+      </div>
       {productsListArr()}
     </>
   );
@@ -133,8 +145,19 @@ const DrawnDishList = ({
 
   return (
     <>
-      <button onClick={handleDraw}>Losuj</button>
-      {showDish}
+      <div className="drawnDishSection">
+        <button
+          onClick={handleDraw}
+          className={
+            selectedDish
+              ? "drawnDishSection__drawBtn--drawn"
+              : "drawnDishSection__drawBtn--empty"
+          }
+        >
+          Losuj
+        </button>
+        {showDish}
+      </div>
     </>
   );
 };
