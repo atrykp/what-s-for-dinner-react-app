@@ -1,6 +1,6 @@
 .filter {
-  border: 1px solid black;
-  width: 11%;
+  border: 1px solid white;
+  width: 90%;
   margin: 1%;
 }
 .filter button {
@@ -10,7 +10,9 @@
   width: 50%;
   text-align: center;
   cursor: pointer;
+  color: white;
 }
+
 .activeFilter {
   background-color: green;
 }
@@ -36,4 +38,6 @@
   color: black;
   border-style: none;
   text-align: center;
+}
+.filter .filter__removeBtn {
 }

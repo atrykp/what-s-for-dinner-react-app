@@ -231,21 +231,32 @@ const FileterArr = ({
   };
   const filterForm = filterSection && (
     <>
-      {!allFiltersSection && (
-        <button onClick={showAllFilters}>pokaż wszystkie filtry</button>
-      )}
-      {allFiltersSection && (
-        <button onClick={showActiveFilters}>Pokaż tylko aktywne</button>
-      )}
-      <button onClick={showUserFilters}>pokaż moje filtry</button>
+      <div className="filtersSectionButtons">
+        {!allFiltersSection && (
+          <button onClick={showAllFilters} className="filters__allFiltersBnt">
+            wszystkie filtry
+          </button>
+        )}
+        {allFiltersSection && (
+          <button
+            onClick={showActiveFilters}
+            className="filters__activeFiltersBnt"
+          >
+            tylko aktywne
+          </button>
+        )}
+        <button onClick={showUserFilters} className="filters__userFiltersBnt">
+          moje filtry
+        </button>
+      </div>
 
-      <form action="" onSubmit={addNewFilter}>
+      <form action="" onSubmit={addNewFilter} className="filters__addForm">
         <TypeAheadDropDown
           filterName={filterName}
           allFiltersArr={allFiltersArr}
           setFilterName={setFilterName}
         />
-        <button>dodaj</button>
+        <button className="filters__addFormBtn">dodaj</button>
       </form>
     </>
   );
@@ -272,7 +283,7 @@ const FileterArr = ({
       </div>
 
       {filterForm}
-      {filterSection && filterArr}
+      <div className="filterArr">{filterSection && filterArr}</div>
     </>
   );
 };

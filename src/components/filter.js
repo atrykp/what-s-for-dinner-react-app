@@ -7,7 +7,12 @@ const Filter = ({ filter, changeFilterActivity, removeFilter }) => {
       <button onClick={() => changeFilterActivity(filter.id)}>
         {filter.name}
       </button>
-      <button onClick={() => removeFilter(filter.id)}>x</button>
+      <button
+        onClick={() => removeFilter(filter.id)}
+        className="filter__removeBtn"
+      >
+        x
+      </button>
     </div>
   );
 };

@@ -7,3 +7,41 @@
   bottom: 2%;
   right: 2%;
 }
+.filtersSectionButtons {
+  display: flex;
+
+  justify-content: space-around;
+}
+.filters__allFiltersBnt,
+.filters__activeFiltersBnt,
+.filters__userFiltersBnt {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 1% 0%;
+  padding: 1% 2%;
+  background-color: teal;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+.filters__addForm {
+  display: flex;
+}
+.filters__addFormBtn {
+  display: block;
+  margin-top: 2%;
+  width: 18%;
+  height: 7vh;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  margin-left: 2%;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.filterArr {
+  padding: 2% 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+}
