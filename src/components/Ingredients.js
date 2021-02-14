@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 } from "uuid";
+import "../styles/Ingredients.css";
 
 const Ingredients = ({ drawnDish }) => {
   const ingredientsArr = [...drawnDish.ingredient];
@@ -9,7 +10,7 @@ const Ingredients = ({ drawnDish }) => {
       <span> {element.quantity}</span>
     </li>
   ));
-  return <ul>{ingredientsList}</ul>;
+  return <ul className="ingredientsList">{ingredientsList}</ul>;
 };
 
 export default Ingredients;

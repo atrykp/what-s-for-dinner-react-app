@@ -22,7 +22,7 @@
   margin-bottom: 5%;
 }
 .drawnDish {
-  background: linear-gradient(rgba(37, 37, 37, 0.4), rgba(41, 41, 41, 0.4)),
+  background: linear-gradient(rgba(37, 37, 37, 0.6), rgba(41, 41, 41, 0.6)),
     url(../images/spices.jpg);
   width: 95%;
   min-height: 35vh;
@@ -42,6 +42,7 @@
   border-style: none;
   background-color: transparent;
   color: white;
+  border-bottom: 1px solid white;
 }
 .drawnDish__name {
   color: white;
@@ -50,4 +51,27 @@
   justify-items: center;
   align-items: center;
   text-align: center;
+}
+.drawnDish__shortBanBtn,
+.drawnDish__banBtn {
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid white;
+}
+.drawnDish__choose {
+  text-align: center;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: white;
+  border: 1px solid white;
+  text-transform: uppercase;
+}
+
+.drawnDish__shortBanBtn {
+  border-bottom-left-radius: 10px;
+}
+.drawnDish__banBtn {
+  border-bottom-right-radius: 10px;
 }

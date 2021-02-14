@@ -70,7 +70,12 @@ const DrawnDishList = ({
         <h1>{selectedDish.name}</h1>
       </div>
       <div className="drawnDish__buttons">
-        <button onClick={() => ban(selectedDish.id, 7000)}>Nie dzisiaj</button>
+        <button
+          onClick={() => ban(selectedDish.id, 7000)}
+          className="drawnDish__shortBanBtn"
+        >
+          Nie dzisiaj
+        </button>
         <Link
           to={`dish/${selectedDish.name}${selectedDish.id}`}
           onClick={() => {
@@ -80,10 +85,16 @@ const DrawnDishList = ({
             setSelectedDishStorage(selectedDish);
             setIsUserProductsActive(false);
           }}
+          className="drawnDish__choose"
         >
           Ok
         </Link>
-        <button onClick={() => ban(selectedDish.id)}>Nie lubię</button>
+        <button
+          onClick={() => ban(selectedDish.id)}
+          className="drawnDish__banBtn"
+        >
+          Nie lubię
+        </button>
       </div>
     </>
   );

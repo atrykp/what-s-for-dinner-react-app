@@ -1,0 +1,9 @@
+.filters {
+  position: relative;
+  color: white;
+}
+.filters__counter {
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+}

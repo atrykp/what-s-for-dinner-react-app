@@ -103,9 +103,11 @@ const UserProducts = ({
     setMatchDishes(selectedDishesArr);
   };
   const filters = productsFilters.map((item) => (
-    <li key={v4()}>
+    <li key={v4()} className="userProducts__filter">
       <button
-        className={item.active ? "activeFilter" : ""}
+        className={`${
+          item.active ? "activeFilter" : ""
+        } userProducts__filterBtn`}
         onClick={() => changeActiveStatus(item.id)}
       >
         {item.name}
@@ -113,9 +115,9 @@ const UserProducts = ({
     </li>
   ));
   const section = isActive && (
-    <div>
+    <div className="userProducts__filters">
       <p>Zaznacz poniżej, które produkty już masz</p>
-      <ul>{filters}</ul>
+      <ul className="userProducts__filtersList">{filters}</ul>
     </div>
   );
 

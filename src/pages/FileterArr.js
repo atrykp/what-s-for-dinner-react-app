@@ -261,14 +261,15 @@ const FileterArr = ({
 
   return (
     <>
-      <div className="filters"></div>
-      <p className="filters__name">Filtry</p>
-      <button onClick={showFilterArr} className="filters__activeBtn">
-        {filterSection ? "ukryj" : "pokaż"}
-      </button>
-      <p className="filters__counter">
-        Aktywne <span>{activeFilters().length}</span>
-      </p>
+      <div className="filters">
+        <p className="filters__name">Filtry</p>
+        <button onClick={showFilterArr} className="filters__activeBtn">
+          {filterSection ? "ukryj" : "pokaż"}
+        </button>
+        <p className="filters__counter">
+          Aktywne <span>{activeFilters().length}</span>
+        </p>
+      </div>
 
       {filterForm}
       {filterSection && filterArr}
