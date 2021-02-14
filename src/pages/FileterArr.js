@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Filter from "../components/Filter";
 import TypeAheadDropDown from "./TypeAheadDropDown";
 import { v4 } from "uuid";
+import "../styles/FilterArr.css";
 
 const FileterArr = ({
   allDishes,
@@ -260,12 +261,13 @@ const FileterArr = ({
 
   return (
     <>
-      <p>Filtry</p>
-      <button onClick={showFilterArr}>
+      <div className="filters"></div>
+      <p className="filters__name">Filtry</p>
+      <button onClick={showFilterArr} className="filters__activeBtn">
         {filterSection ? "ukryj" : "pokaż"}
       </button>
-      <p>
-        Aktywne filtry <span>({activeFilters().length})</span>
+      <p className="filters__counter">
+        Aktywne <span>{activeFilters().length}</span>
       </p>
 
       {filterForm}

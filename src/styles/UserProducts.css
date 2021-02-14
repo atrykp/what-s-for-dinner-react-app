@@ -1,0 +1,25 @@
+.activeFilter {
+  background-color: green;
+}
+.userProducts {
+  min-height: 10vh;
+  align-items: center;
+  text-align: center;
+}
+.userProducts__name {
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  width: 30%;
+}
+.userProducts__activeBtn {
+  margin: 2% auto;
+  text-transform: uppercase;
+  width: 30%;
+  padding: 2% 10%;
+  background-color: transparent;
+  border-radius: 5px;
+  background-color: #ff7b1c;
+  color: white;
+  border-style: none;
+  text-align: center;
+}

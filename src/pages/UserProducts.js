@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
-
-import "../styles/App.css";
+import "../styles/UserProducts.css";
 
 const UserProducts = ({
   allDishes,
@@ -122,11 +121,14 @@ const UserProducts = ({
 
   return (
     <>
-      <p>Produkty</p>
+      <div className="userProducts">
+        <p className="userProducts__name">Produkty</p>
+        <button onClick={showSection} className="userProducts__activeBtn">
+          {isActive ? "wyłącz" : "włącz"}
+        </button>
 
-      <button onClick={showSection}>{isActive ? "wyłącz" : "włącz"}</button>
-
-      {section}
+        {section}
+      </div>
     </>
   );
 };
