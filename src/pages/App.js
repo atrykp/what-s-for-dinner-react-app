@@ -211,17 +211,25 @@ function App() {
         <div className="upperNav__counter">{dishesCounter}</div>
         <div className="upperNav__filters">{fileterSection}</div>
       </div>
-      <NavLink to="/bannedDishes">Pokaż zbanowane</NavLink>
-      <NavLink to="/addDish">Dodaj swój przepis</NavLink>
+      <div className="drawnDish">
+        <DrawnDishList
+          selectedDish={selectedDish}
+          setSelectedDish={setSelectedDish}
+          customedArr={getDishesArray()}
+          banDish={banDish}
+          setIsUserProductsActive={setIsUserProductsActive}
+        />
+      </div>
 
-      <h1>wylosowana potrawa to:</h1>
-      <DrawnDishList
-        selectedDish={selectedDish}
-        setSelectedDish={setSelectedDish}
-        customedArr={getDishesArray()}
-        banDish={banDish}
-        setIsUserProductsActive={setIsUserProductsActive}
-      />
+      <div className="lowerNav">
+        <NavLink to="/bannedDishes" className="lowerNav__banned">
+          Baned
+        </NavLink>
+        <NavLink to="/addDish" className="lowerNav__add">
+          Dodaj
+        </NavLink>
+        <RemoveStorage />
+      </div>
     </>
   );
 
@@ -230,7 +238,6 @@ function App() {
       <Switch>
         <Route path="/" exact>
           {mainPageStructure}
-          <RemoveStorage />
         </Route>
         <Route path="/bannedDishes">
           <BannedDishes
