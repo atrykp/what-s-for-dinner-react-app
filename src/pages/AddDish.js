@@ -168,7 +168,9 @@ const AddDish = (props) => {
   return (
     <>
       <div className="addDish">
-        <Link to="/">Ukryj</Link>
+        <Link className="backBtn" to="/">
+          Wróć
+        </Link>
         <form action="" className="addDishForm" onSubmit={saveDish}>
           <input
             className="addDishForm__txtInput"

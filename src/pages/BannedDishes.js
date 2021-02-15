@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
+import "../styles/BannedDishes.css";
 
 const BannedDishes = ({
   allDishes,
@@ -22,22 +23,32 @@ const BannedDishes = ({
     const dateObj = new Date(dish.ban.howLong + dish.ban.sinceWhen);
 
     return (
-      <li key={v4()}>
-        nazwa: {dish.name} nieaktywna do:{" "}
-        {!isNaN(dateObj.getDate())
-          ? dateObj.toLocaleString()
-          : "oznaczone jako nie lubię"}
-        <button onClick={() => removeFromBanned(dish.id)}>usuń</button>
+      <li key={v4()} className="bannedDishes_listElement">
+        <p className="bannedDishes_listName">{dish.name}</p>{" "}
+        <p>
+          nieaktywna do:{" "}
+          {!isNaN(dateObj.getDate()) ? dateObj.toLocaleString() : "nie lubię"}
+        </p>
+        <button
+          onClick={() => removeFromBanned(dish.id)}
+          className="bannedDishes_listElementBtn"
+        >
+          usuń
+        </button>
       </li>
     );
   });
 
   return (
     <>
-      <Link to="/">Wróć do strony głównej</Link>
-      <ul className="bannedDishes">
-        {bannedDishes.length > 0 ? dishesList : "brak"}
-      </ul>
+      <div className="bannedDishes">
+        <Link className="bannedDishes__backBtn" to="/">
+          Wróć
+        </Link>
+        <ul className="bannedDishes_list">
+          {bannedDishes.length > 0 ? dishesList : "brak"}
+        </ul>
+      </div>
     </>
   );
 };
