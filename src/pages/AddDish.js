@@ -167,34 +167,36 @@ const AddDish = (props) => {
   });
   return (
     <>
-      <Link to="/">Ukryj</Link>
-      <form action="" className="addDishForm" onSubmit={saveDish}>
-        <input
-          className="addDishForm__txtInput"
-          ref={nameDishInput}
-          type="text"
-          placeholder="wpisz nazwę"
-          onChange={handleInputChange}
-          value={dish.name}
-          name="name"
-        />
-        {errorMsg && <p>{errorMsg}</p>}
-        <textarea
-          className="addDishForm__txtArea"
-          type="text"
-          placeholder="podaj opis"
-          onChange={handleInputChange}
-          value={dish.description}
-          name="description"
-        />
-        <p className="addDishForm__txt">Podaj składniki</p>
-        {ingredientImputs}
-        <p className="addDishForm__txt">Opisz sposób przyrządzenia</p>
-        {stepsInputs}
-        <button className="addDishForm__submitBtn" onSubmit={saveDish}>
-          Zapisz przepis
-        </button>
-      </form>
+      <div className="addDish">
+        <Link to="/">Ukryj</Link>
+        <form action="" className="addDishForm" onSubmit={saveDish}>
+          <input
+            className="addDishForm__txtInput"
+            ref={nameDishInput}
+            type="text"
+            placeholder="Nazwa"
+            onChange={handleInputChange}
+            value={dish.name}
+            name="name"
+          />
+          {errorMsg && <p>{errorMsg}</p>}
+          <textarea
+            className="addDishForm__txtArea"
+            type="text"
+            placeholder="Opis"
+            onChange={handleInputChange}
+            value={dish.description}
+            name="description"
+          />
+          <p className="addDishForm__txt">Podaj składniki</p>
+          {ingredientImputs}
+          <p className="addDishForm__txt">Opisz sposób przyrządzenia</p>
+          {stepsInputs}
+          <button className="addDishForm__submitBtn" onSubmit={saveDish}>
+            Zapisz przepis
+          </button>
+        </form>
+      </div>
     </>
   );
 };
