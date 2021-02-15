@@ -96,21 +96,29 @@ const AddDish = (props) => {
   };
   let stepsInputs = dish.steps.map((x, i) => {
     return (
-      <div className="stepsBox" key={v4()}>
-        <span>{i + 1}.</span>
+      <div className="addDishForm__stepsBox" key={v4()}>
+        <span className="addDishForm__txt">{i + 1}.</span>
         <input
+          className="addDishForm__stepInput"
           type="text"
           placeholder="opisz krok"
           onChange={(e) => changeStepInput(e, i)}
           value={x.value}
           name="value"
         />
-        <div className="stepsBtns">
+        <div className="addDishForm__stepsBtns">
           {dish.steps.length - 1 === i && (
-            <button onClick={addStepsInput}>dodaj kolejny krok</button>
+            <button onClick={addStepsInput} className="addDishForm__stepsBtn">
+              dodaj krok
+            </button>
           )}
           {dish.steps.length !== 1 && (
-            <button onClick={() => removeStep(i)}>Usuń</button>
+            <button
+              onClick={() => removeStep(i)}
+              className="addDishForm__stepsBtn"
+            >
+              Usuń
+            </button>
           )}
         </div>
       </div>
@@ -119,8 +127,9 @@ const AddDish = (props) => {
 
   let ingredientImputs = dish.ingredient.map((x, i) => {
     return (
-      <div className="skladnikibox" key={v4()}>
+      <div className="addDishForm__ingredientsBox" key={v4()}>
         <input
+          className="addDishForm__ingredientsInput"
           type="text"
           placeholder="składnik"
           onChange={(e) => changeIngredientInputs(e, i)}
@@ -128,18 +137,29 @@ const AddDish = (props) => {
           value={x.name}
         />
         <input
+          className="addDishForm__ingredientsInput"
           type="text"
           placeholder="ilość"
           onChange={(e) => changeIngredientInputs(e, i)}
           name="quantity"
           value={x.quantity}
         />
-        <div className="buttons">
+        <div className="addDishForm__ingredientsBtns">
           {dish.ingredient.length !== 1 && (
-            <button onClick={() => removeIngredient(i)}>Usuń</button>
+            <button
+              onClick={() => removeIngredient(i)}
+              className="addDishForm__ingredientsBtn"
+            >
+              Usuń
+            </button>
           )}
           {dish.ingredient.length - 1 === i && (
-            <button onClick={addNewIngredientInputs}>Dodaj</button>
+            <button
+              onClick={addNewIngredientInputs}
+              className="addDishForm__ingredientsBtn"
+            >
+              Dodaj
+            </button>
           )}
         </div>
       </div>
@@ -148,8 +168,9 @@ const AddDish = (props) => {
   return (
     <>
       <Link to="/">Ukryj</Link>
-      <form action="" className="addDish" onSubmit={saveDish}>
+      <form action="" className="addDishForm" onSubmit={saveDish}>
         <input
+          className="addDishForm__txtInput"
           ref={nameDishInput}
           type="text"
           placeholder="wpisz nazwę"
@@ -158,18 +179,21 @@ const AddDish = (props) => {
           name="name"
         />
         {errorMsg && <p>{errorMsg}</p>}
-        <input
+        <textarea
+          className="addDishForm__txtArea"
           type="text"
           placeholder="podaj opis"
           onChange={handleInputChange}
           value={dish.description}
           name="description"
         />
-        <p>Podaj składniki</p>
+        <p className="addDishForm__txt">Podaj składniki</p>
         {ingredientImputs}
-        <p>Opisz sposób przyrządzenia</p>
+        <p className="addDishForm__txt">Opisz sposób przyrządzenia</p>
         {stepsInputs}
-        <button onSubmit={saveDish}>Zapisz przepis</button>
+        <button className="addDishForm__submitBtn" onSubmit={saveDish}>
+          Zapisz przepis
+        </button>
       </form>
     </>
   );
