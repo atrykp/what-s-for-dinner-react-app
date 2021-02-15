@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/RemoveStorage.css";
 
 const storageItems = [
   "userDishes",
@@ -28,14 +29,28 @@ const RemoveStorage = () => {
 
   const popup = (
     <>
-      <p>czy na pweno usunąć wszystkie dane aplikacji?</p>
-      <button onClick={reset}>tak</button>
-      <button onClick={cancel}>nie</button>
+      <div className="removeStorageFormat">
+        <p className="removeStorageFormat__warning">
+          Czy na pweno usunąć wszystkie dane aplikacji? Twoje dane zostaną
+          usunięte bezpowrotnie.
+        </p>
+        <button
+          onClick={reset}
+          className="removeStorageFormat__button removeStorageFormat__button--yes"
+        >
+          tak
+        </button>
+        <button onClick={cancel} className="removeStorageFormat__button">
+          nie
+        </button>
+      </div>
     </>
   );
   return (
     <>
-      <button onClick={confirm}>Usuń pamięć</button>
+      <button onClick={confirm} className="removeStorageBtn">
+        Formatuj
+      </button>
       {popupActive && popup}
     </>
   );
