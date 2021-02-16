@@ -1,7 +1,7 @@
 .bannedDishes {
-  background: linear-gradient(rgba(255, 0, 0, 0.4), rgba(255, 0, 0, 0.4)),
+  background: linear-gradient(rgba(122, 0, 0, 0.4), rgba(184, 0, 0, 0.4)),
     url(../images/tomatos.jpg);
-  height: 100vh;
+  min-height: 100vh;
   background-size: cover;
   padding: 5% 0;
 }
@@ -13,33 +13,46 @@
   color: white;
   text-decoration: none;
   padding: 1% 2%;
+  margin-bottom: 2%;
   margin-left: 3%;
   border: 1px solid white;
   letter-spacing: 2px;
-  margin: 0 0 3% 2%;
 }
 .bannedDishes_list {
+  display: grid;
+  align-content: flex-start;
+  justify-content: center;
+  grid-template-columns: 95%;
   background-color: rgba(39, 39, 39, 0.534);
+  width: 95%;
+  margin: 0 auto;
   min-height: 80vh;
   border-radius: 10px;
   padding: 5% 3%;
   font-size: 1.3rem;
   color: white;
+  list-style: none;
 }
 .bannedDishes_listElement {
   margin: 5% 0;
   border-bottom: 1px solid white;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 .bannedDishes_listElementBtn {
+  display: block;
+  width: 50%;
   font-size: 1.4rem;
   background-color: transparent;
-  padding: 1% 4%;
+  padding: 3% 4%;
   border: 1px solid white;
   text-transform: uppercase;
   color: white;
   margin: 3% auto;
 }
 .bannedDishes_listName {
+  width: 100%;
   font-size: 1.8rem;
   font-weight: bold;
 }
