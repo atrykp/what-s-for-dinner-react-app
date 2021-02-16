@@ -54,3 +54,8 @@
   text-decoration: none;
   padding: 3vh 15%;
 }
+@media (min-width: 500px) {
+  .lowerNav {
+    width: 80%;
+  }
+}

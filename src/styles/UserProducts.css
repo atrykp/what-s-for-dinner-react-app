@@ -20,18 +20,20 @@
   color: black;
   border-style: none;
   min-width: 110px;
+  max-width: 140px;
+  max-height: 40px;
 }
 
 .userProducts__filters {
   text-align: start;
   color: white;
+  width: 100%;
 }
 .userProducts__filtersList {
   margin-top: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   list-style: none;
-  width: 120%;
 }
 .userProducts__filter {
   margin: 1% 4%;
@@ -51,4 +53,12 @@
 }
 .activeFilter {
   background-color: darkgreen;
+}
+
+@media (min-width: 500px) {
+  .userProducts__activeBtn {
+    min-height: 40px;
+    padding: 0;
+    min-width: 140px;
+  }
 }
