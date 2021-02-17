@@ -30,14 +30,14 @@
   border: 1px solid white;
 }
 .drawnDish {
-  background: linear-gradient(rgba(37, 37, 37, 0.6), rgba(41, 41, 41, 0.6)),
-    url(../images/spices.jpg);
-  width: 95%;
+  background: linear-gradient(rgba(37, 37, 37, 0.6), rgba(31, 22, 22, 0.6));
+  width: 90%;
   min-height: 35vh;
   border-radius: 10px;
   display: grid;
   grid-template-rows: auto auto auto;
   margin-bottom: 20vh;
+  margin-top: 2vh;
 }
 .drawnDish__buttons {
   min-height: 5vh;
@@ -69,22 +69,40 @@
   border: 1px solid white;
 }
 .drawnDish__choose {
-  text-align: center;
+  display: grid;
+  align-items: center;
+  justify-items: center;
   font-size: 1.5rem;
   text-decoration: none;
   color: white;
   border: 1px solid white;
   text-transform: uppercase;
+  min-height: 40px;
+  max-height: 50px;
 }
 
 .drawnDish__shortBanBtn {
   border-bottom-left-radius: 10px;
+  min-height: 40px;
+  max-height: 50px;
 }
 .drawnDish__banBtn {
   border-bottom-right-radius: 10px;
+  min-height: 40px;
+  max-height: 50px;
 }
 @media (min-width: 500px) {
   .drawnDishSection__drawBtn--drawn {
     padding: 1% 7%;
+  }
+  .drawnDish {
+    width: 70%;
+    min-height: 250px;
+    max-height: 300px;
+    max-width: 400px;
+    margin-top: 0.1vh;
+  }
+  .drawnDish__name {
+    height: 150px;
   }
 }
