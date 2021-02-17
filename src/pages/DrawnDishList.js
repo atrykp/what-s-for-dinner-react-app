@@ -135,10 +135,17 @@ const DrawnDishList = ({
       </div>
 
       <div className="drawnDish__buttons">
-        <button onClick={markDishAsDone}>Zrobione</button>
-        <Link to={`dish/${selectedDish.name}${selectedDish.id}`}>pokaż</Link>
-        <button onClick={showProductsList}>
-          {!productsView ? "co jeszcze kupić" : "ukryj"}
+        <button onClick={markDishAsDone} className="drawnDish__doneBtn">
+          Zrobione
+        </button>
+        <Link
+          to={`dish/${selectedDish.name}${selectedDish.id}`}
+          className="drawnDish__choose"
+        >
+          pokaż
+        </Link>
+        <button onClick={showProductsList} className="drawnDish__productsBtn">
+          {!productsView ? "zakupy" : "ukryj"}
         </button>
       </div>
       {productsListArr()}
