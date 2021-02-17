@@ -57,5 +57,12 @@
 @media (min-width: 500px) {
   .lowerNav {
     width: 80%;
+    left: 10%;
+    right: 10%;
+    height: auto;
+  }
+  .lowerNav__banned,
+  .lowerNav__add {
+    padding: 0;
   }
 }

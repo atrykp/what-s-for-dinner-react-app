@@ -34,3 +34,9 @@
 .removeStorageFormat__button--yes {
   border-color: red;
 }
+@media (min-width: 500px) {
+  .lowerNav__banned,
+  .lowerNav__add {
+    padding: 0;
+  }
+}

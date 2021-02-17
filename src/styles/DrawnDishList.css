@@ -6,11 +6,16 @@
   grid-auto-rows: min-content;
 }
 .drawnDishSection__drawBtn--empty {
-  font-size: 2.5rem;
-  padding: 1.5% 15%;
+  font-size: 2rem;
+  padding: 1.5% 10%;
   border-radius: 8px;
   text-transform: uppercase;
   margin-top: 20vh;
+  background-color: rgba(49, 49, 49, 0.6);
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  letter-spacing: 1.5px;
 }
 .drawnDishSection__drawBtn--drawn {
   font-size: 1.5rem;
@@ -20,6 +25,9 @@
   align-self: flex-start;
   margin-top: 2%;
   margin-bottom: 5%;
+  background-color: rgba(126, 126, 126, 0.6);
+  color: white;
+  border: 1px solid white;
 }
 .drawnDish {
   background: linear-gradient(rgba(37, 37, 37, 0.6), rgba(41, 41, 41, 0.6)),
@@ -74,4 +82,9 @@
 }
 .drawnDish__banBtn {
   border-bottom-right-radius: 10px;
+}
+@media (min-width: 500px) {
+  .drawnDishSection__drawBtn--drawn {
+    padding: 1% 7%;
+  }
 }

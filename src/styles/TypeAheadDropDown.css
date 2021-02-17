@@ -47,3 +47,8 @@
   margin: 150px auto 0 auto;
   width: 600px;
 }
+@media (min-width: 500px) {
+  .TypeAheadDropDown {
+    margin-bottom: 2%;
+  }
+}

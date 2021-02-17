@@ -73,4 +73,7 @@ filters__name {
     min-height: 40px;
     padding: 0;
   }
+  .filterArr {
+    padding: 0;
+  }
 }
