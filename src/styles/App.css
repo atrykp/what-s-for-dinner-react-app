@@ -40,7 +40,6 @@
   bottom: 0;
   margin-bottom: 2%;
   width: 100%;
-  min-height: 10vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -52,7 +51,7 @@
   font-size: 1.2rem;
   color: white;
   text-decoration: none;
-  padding: 3vh 15%;
+  padding: 2vh 15%;
 }
 @media (min-width: 500px) {
   .lowerNav {
@@ -61,8 +60,9 @@
     right: 10%;
     height: auto;
   }
-  .lowerNav__banned,
-  .lowerNav__add {
-    padding: 0;
+}
+@media (min-width: 700px) {
+  .upperNav__counter {
+    font-size: 1.5rem;
   }
 }

@@ -133,7 +133,6 @@ const DrawnDishList = ({
       <div className="drawnDish__name">
         <h1>{selectedDish.name}</h1>
       </div>
-
       <div className="drawnDish__buttons">
         <button onClick={markDishAsDone} className="drawnDish__doneBtn">
           Zrobione
@@ -148,7 +147,7 @@ const DrawnDishList = ({
           {!productsView ? "zakupy" : "ukryj"}
         </button>
       </div>
-      {productsListArr()}
+      <div className="selectedDish__shoppingList"></div> {productsListArr()}
     </>
   );
   const dishView = isSelected ? selectedDishView : drawnDishView;

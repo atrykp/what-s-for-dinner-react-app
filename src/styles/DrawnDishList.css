@@ -38,6 +38,7 @@
   grid-template-rows: auto auto auto;
   margin-bottom: 20vh;
   margin-top: 2vh;
+  color: white;
 }
 .drawnDish__buttons {
   min-height: 5vh;
@@ -95,6 +96,8 @@
   min-height: 40px;
   max-height: 50px;
 }
+.selectedDish__shoppingList p {
+}
 @media (min-width: 500px) {
   .drawnDishSection__drawBtn--drawn {
     padding: 1% 7%;
@@ -102,11 +105,14 @@
   .drawnDish {
     width: 70%;
     min-height: 250px;
-    max-height: 300px;
+
     max-width: 400px;
     margin-top: 0.1vh;
   }
   .drawnDish__name {
     height: 150px;
+  }
+  .drawnDish__ingredientsBtn {
+    height: 50px;
   }
 }
