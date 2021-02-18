@@ -4,6 +4,7 @@
   display: flex;
   min-height: 10vh;
   align-items: center;
+  padding-left: 2%;
 }
 .filters__activeBtn {
   margin: 2%;
@@ -12,12 +13,13 @@
   padding: 2% 10%;
   background-color: transparent;
   border-radius: 5px;
-  background-color: white;
-  color: black;
+  background-color: rgba(116, 116, 116, 0.2);
+  color: white;
   border-style: none;
   min-width: 110px;
   max-width: 140px;
   max-height: 40px;
+  cursor: pointer;
 }
 .filters__name {
   text-transform: uppercase;
@@ -87,5 +89,10 @@
   }
   .filters__counter {
     font-size: 1.3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .filters__counter {
+    font-size: 1.4rem;
   }
 }
