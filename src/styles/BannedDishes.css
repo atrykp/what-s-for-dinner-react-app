@@ -17,8 +17,12 @@
   margin-left: 3%;
   border: 1px solid white;
   letter-spacing: 2px;
+  max-width: 150px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 .bannedDishes_list {
+  max-width: 1024px;
   display: grid;
   align-content: flex-start;
   justify-content: center;
@@ -50,9 +54,44 @@
   text-transform: uppercase;
   color: white;
   margin: 3% auto;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.bannedDishes_listElementBtn:hover {
+  background-color: rgba(219, 219, 219, 0.4);
+}
+p {
+  font-size: 14px;
 }
 .bannedDishes_listName {
   width: 100%;
   font-size: 1.8rem;
   font-weight: bold;
+}
+@media (min-width: 500px) {
+  .bannedDishes_list {
+    justify-items: center;
+  }
+
+  .bannedDishes_listElement {
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    align-items: center;
+    padding-bottom: 2%;
+    max-width: 800px;
+  }
+  .bannedDishes_listElementBtn {
+    min-width: 80px;
+  }
+}
+@media (min-width: 700px) {
+  p {
+    font-size: 1.2rem;
+  }
+}
+@media (min-width: 1024px) {
+  p {
+    font-size: 1.4rem;
+  }
 }
