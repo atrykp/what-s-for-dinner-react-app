@@ -62,3 +62,11 @@
     min-width: 140px;
   }
 }
+@media (min-width: 700px) {
+  .userProducts__name {
+    font-size: 1.5rem;
+  }
+  .userProducts__activeBtn {
+    font-size: 1.3rem;
+  }
+}

@@ -19,7 +19,7 @@
   max-width: 140px;
   max-height: 40px;
 }
-filters__name {
+.filters__name {
   text-transform: uppercase;
   font-size: 1.2rem;
   width: 30%;
@@ -52,6 +52,7 @@ filters__name {
   margin-top: 2%;
   width: 18%;
   height: 7vh;
+  max-height: 50px;
   background-color: transparent;
   border: 1px solid white;
   color: white;
@@ -75,5 +76,16 @@ filters__name {
   }
   .filterArr {
     padding: 0;
+  }
+}
+@media (min-width: 700px) {
+  .filters__name {
+    font-size: 1.5rem;
+  }
+  .filters__activeBtn {
+    font-size: 1.3rem;
+  }
+  .filters__counter {
+    font-size: 1.3rem;
   }
 }

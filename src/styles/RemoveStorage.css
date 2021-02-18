@@ -31,3 +31,8 @@
   border-radius: 10px;
   text-transform: uppercase;
 }
+@media (min-width: 700px) {
+  .removeStorageBtn {
+    font-size: 1.5rem;
+  }
+}

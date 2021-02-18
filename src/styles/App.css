@@ -3,14 +3,14 @@
   position: relative;
 }
 .upperNav__userProducts {
-  background-color: seagreen;
+  background-color: rgba(12, 12, 12, 0.726);
   border-radius: 0 0 10px 10px;
   z-index: 2;
   padding: 2%;
 }
 .upperNav__filters {
   margin-top: -3%;
-  background-color: teal;
+  background-color: rgba(12, 12, 12, 0.589);
   padding: 2%;
   padding-top: 4%;
   border-radius: 0 0 10px 10px;
@@ -34,7 +34,7 @@
 }
 
 .lowerNav {
-  background-color: teal;
+  background-color: rgba(0, 0, 0, 0.452);
   position: fixed;
   left: 0;
   bottom: 0;
@@ -63,6 +63,34 @@
 }
 @media (min-width: 700px) {
   .upperNav__counter {
+    font-size: 1.4rem;
+    padding: 2%;
+  }
+  .lowerNav__banned,
+  .lowerNav__add {
     font-size: 1.5rem;
+  }
+}
+@media (min-width: 770px) {
+  .upperNav {
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-start;
+  }
+  .upperNav__userProducts {
+    grid-column: 2/3;
+    grid-row: 1;
+    margin-top: 0;
+    padding: 1%;
+  }
+  .upperNav__filters {
+    grid-column: 1/2;
+    grid-row: 1;
+    margin-top: 0;
+    padding: 1%;
+  }
+  .upperNav__counter {
+    font-size: 1.2rem;
+
+    padding: 0.7%;
   }
 }
