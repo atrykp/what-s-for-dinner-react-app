@@ -2,15 +2,17 @@
   border: 1px solid white;
   width: 90%;
   margin: 1%;
+  display: grid;
+  grid-template-columns: 1fr 40px;
 }
 .filter button {
   background-color: transparent;
   font-size: 1.5rem;
   border: none;
-  width: 50%;
   text-align: center;
   cursor: pointer;
   color: white;
+  padding: 1% 0;
 }
 
 .activeFilter {

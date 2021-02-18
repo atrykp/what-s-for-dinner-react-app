@@ -14,6 +14,8 @@
   border: 1px solid white;
   letter-spacing: 2px;
   margin: 0 0 3% 2%;
+  border-radius: 10px;
+  max-width: 150px;
 }
 .addDish {
   background: linear-gradient(
@@ -26,6 +28,8 @@
   padding: 2% 0% 5%;
 }
 .addDishForm {
+  max-width: 1024px;
+  margin: 0 auto;
   color: white;
   min-height: 90vh;
   padding: 5% 3%;

@@ -51,7 +51,11 @@
   border-style: none;
   background-color: transparent;
   color: white;
-  border-bottom: 1px solid white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.drawnDish__ingredientsBtn:hover {
+  background-color: rgba(97, 97, 97, 0.918);
 }
 .drawnDish__name {
   color: white;
@@ -69,16 +73,17 @@
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-  border: 1px solid white;
+  border: 1px solid rgba(32, 32, 32, 0);
+  cursor: pointer;
 }
 .drawnDish__choose {
+  background-color: rgba(97, 97, 97, 0.041);
   display: grid;
   align-items: center;
   justify-items: center;
   font-size: 1.5rem;
   text-decoration: none;
   color: white;
-  border: 1px solid white;
   text-transform: uppercase;
   min-height: 40px;
   max-height: 50px;
@@ -96,8 +101,7 @@
   min-height: 40px;
   max-height: 50px;
 }
-.selectedDish__shoppingList p {
-}
+
 @media (min-width: 500px) {
   .drawnDishSection__drawBtn--drawn {
     padding: 1% 7%;
@@ -119,5 +123,19 @@
 @media (min-width: 700px) {
   .drawnDish__ingredientsBtn {
     font-size: 1.2rem;
+  }
+  .drawnDish__name {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .drawnDish__banBtn,
+  .drawnDish__productsBtn,
+  .drawnDish__shortBanBtn,
+  .drawnDish__doneBtn {
+    font-size: 1.2rem;
+  }
+  .drawnDish__choose {
+    font-size: 1.8rem;
   }
 }
