@@ -124,9 +124,10 @@ const UserProducts = ({
   return (
     <>
       <div className="userProducts">
-        <p className="userProducts__name">Produkty</p>
+        {/* <p className="userProducts__name">Produkty</p> */}
         <button onClick={showSection} className="userProducts__activeBtn">
-          {isActive ? "wyłącz" : "włącz"}
+          {/* {isActive ? "wyłącz" : "włącz"} */}
+          Produkty
         </button>
 
         {section}

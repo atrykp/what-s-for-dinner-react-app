@@ -41,8 +41,7 @@
   border-style: none;
   text-align: center;
 }
-.filter .filter__removeBtn {
-}
+
 @media (min-width: 1024px) {
   .filter button {
     font-size: 1.7rem;
