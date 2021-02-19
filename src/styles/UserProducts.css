@@ -67,6 +67,7 @@
 @media (min-width: 700px) {
   .userProducts__activeBtn {
     font-size: 1.3rem;
+    margin: 2% auto;
   }
 }
 @media (min-width: 1024px) {

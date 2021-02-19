@@ -86,6 +86,7 @@
   }
   .filters__activeBtn {
     font-size: 1.3rem;
+    margin: 2% auto;
   }
   .filters__counter {
     font-size: 1.3rem;

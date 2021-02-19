@@ -92,6 +92,14 @@ p {
 }
 @media (min-width: 1024px) {
   p {
+    font-size: 1.3rem;
+  }
+}
+@media (min-width: 1200px) {
+  p {
     font-size: 1.4rem;
+  }
+  span {
+    font-size: 1.6rem;
   }
 }

@@ -71,11 +71,11 @@
 }
 @media (min-width: 770px) {
   .upperNav {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 10% 1fr;
     align-items: flex-start;
   }
   .upperNav__userProducts {
-    grid-column: 2/3;
+    grid-column: 3/4;
     grid-row: 1;
     margin-top: 0;
     padding: 1%;
@@ -87,14 +87,17 @@
     padding: 1%;
   }
   .upperNav__counter {
-    font-size: 1.2rem;
-
+    position: relative;
+    grid-column: 2/3;
+    font-size: 1.1rem;
     padding: 0.7%;
+    border-radius: 10px;
+    background-color: transparent;
+    align-self: stretch;
   }
 }
 @media (min-width: 1024px) {
   .upperNav__counter {
-    font-size: 1.5rem;
     padding: 0.5%;
   }
   .lowerNav__banned,
