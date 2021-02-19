@@ -54,6 +54,7 @@ const AddDish = (props) => {
     const { name, value } = e.target;
     const dishObj = { ...dish };
     dishObj.steps[index].number = index + 1;
+
     dishObj.steps[index][name] = value;
     setDish(dishObj);
   };
@@ -96,7 +97,7 @@ const AddDish = (props) => {
   };
   let stepsInputs = dish.steps.map((x, i) => {
     return (
-      <div className="addDishForm__stepsBox" key={v4()}>
+      <div className="addDishForm__stepsBox" key={i}>
         <span className="addDishForm__txt">{i + 1}.</span>
         <input
           className="addDishForm__stepInput"
@@ -127,7 +128,7 @@ const AddDish = (props) => {
 
   let ingredientImputs = dish.ingredient.map((x, i) => {
     return (
-      <div className="addDishForm__ingredientsBox" key={v4()}>
+      <div className="addDishForm__ingredientsBox" key={`${x}${i}`}>
         <input
           className="addDishForm__ingredientsInput"
           type="text"
