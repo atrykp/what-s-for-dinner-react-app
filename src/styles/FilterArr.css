@@ -20,6 +20,13 @@
   max-width: 140px;
   max-height: 40px;
   cursor: pointer;
+  transition: 0.2s;
+}
+.filters__activeBtn--active {
+  border: 1px solid greenyellow;
+}
+.filters__activeBtn:hover {
+  background-color: rgba(160, 160, 160, 0.2);
 }
 .filters__name {
   text-transform: uppercase;

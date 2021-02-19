@@ -22,6 +22,9 @@
   cursor: pointer;
   transition: 0.2s;
 }
+.userProducts__activeBtn--active {
+  border: 1px solid greenyellow;
+}
 .userProducts__activeBtn:hover {
   background-color: rgba(160, 160, 160, 0.2);
 }
