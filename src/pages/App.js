@@ -17,49 +17,117 @@ import BannedDishes from "./BannedDishes";
 
 let mainArr = [
   {
-    name: "Serowa petarda",
+    name: "Klasyczna zapiekanka",
     ingredient: [
-      { name: "ser", quantity: "250g" },
-      { name: "szynka", quantity: "100g" },
-      { name: "pieczarki", quantity: "400g" },
+      { name: "bagietka długa", quantity: "1" },
+      { name: "pieczarki", quantity: "500g" },
+      { name: "ser żółty", quantity: "250g" },
+      { name: "cebula", quantity: "1" },
+      { name: "masło", quantity: "50g" },
+      { name: "czosnek", quantity: "2 ząbki" },
+      { name: "sól, pieprz, zioła prowansalskie, oregano", quantity: "" },
     ],
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    steps: [{ number: "1", value: "weź i pokrój petardę" }],
-    id: 1,
-    ban: {
-      status: false,
-      howLong: "",
-      sinceWhen: "",
-    },
-  },
-  {
-    name: "Pierogi",
-    ingredient: [
-      { name: "biały ser", quantity: "250g" },
-      { name: "mąka", quantity: "100g" },
-      { name: "ziemniaki", quantity: "400g" },
+      "Powrót do przeszłości- zapiekanka z budki jak za dawnych lat. Ja przygotowuję ją w wersji klasycznej, ale można ją wzbogacić o szynkę, salami czy inne pyszności z lodówki.",
+    steps: [
+      {
+        number: 1,
+        value:
+          "bagietkę przekrajamy na pół, następnie obie połówki dzielimy również na dwie części. Układamy je na blachę wyłożoną papierem do pieczenia.",
+      },
+      {
+        number: 2,
+        value:
+          "Pieczarki obieramy i trzemy na tarce o dużych oczkach. Cebulę kroimy w kostkę. Na łyżce masła podsmażamy cebulę następnie dodajemy pieczarki. Smażymy do odparowania wody, następnie doprawiamy solą, pieprzem i ziołami prowansalskimi.",
+      },
+      {
+        number: 3,
+        value:
+          "Pozostałe masło rozgniatamy, przyprawiamy solą, pieprzem i oregano. Dodajemy przeciśnięty przez praskę czosnek i mieszamy. Tak przygotowanym masłem smarujemy bagietki.",
+      },
+      {
+        number: 4,
+        value:
+          "Na bagietki układamy pieczarki i tak przygotowane zapiekanki wstawiamy do piekarnika nagrzanego do temp. 200 st. i pieczemy przez 5 min. Następnie wyjmujemy, posypujemy startym serem i wstawiamy na ok 12 min- do rozpuszczenia sera. ",
+      },
+      {
+        number: 5,
+        value:
+          "Tak przygotowane zapiekanki doskonale smakują polane keczupem i posypane rukolą.",
+      },
     ],
-    id: 3,
-    ban: {
-      status: false,
-      howLong: "",
-      sinceWhen: "",
-    },
+    id: 1,
+    ban: { status: false, howLong: "", sinceWhen: "" },
   },
   {
-    name: "Kotlet z ziemniakami",
+    name: "Tagliatelle z mascarpone",
     ingredient: [
-      { name: "mieso", quantity: "300g" },
-      { name: "ziemniaki", quantity: "100g" },
-      { name: "surowka", quantity: "400g" },
+      { name: "makaron tagliatelle", quantity: "200g" },
+      { name: "cukinia", quantity: "1" },
+      { name: "cebula", quantity: "1" },
+      { name: "mascarpone", quantity: "250g" },
+      { name: "pierś z kurczaka", quantity: "500g" },
+      { name: "sól, pieprz, kurkuma, przyprawa do kurczaka", quantity: "" },
+    ],
+    description:
+      "Uwielbiam makaron tagliatelle, a połączenie z kremowym sosem mascarpone tworzy idealną kompozycję smakową.",
+    steps: [
+      {
+        number: 1,
+        value: "Makaron gotujemy zgodnie z instrukcją na opakowaniu.",
+      },
+      {
+        number: 2,
+        value:
+          "Kurczka myjemy, kroimy w kostkę, doprawiamy przyprawą do kurczaka, solą, pieprzem i kurkumą. Cebulę i cukinię także kroimy w kostkę.",
+      },
+      {
+        number: 3,
+        value:
+          "Na patelni na łyżce oleju podsmażamy cebulkę, gdy się zarumieni dodajemy cukinię. Smażymy przez chwilę, następnie dodajemy kurczaka. Gdy wszystkie składniki są podsmażone dodajemy mascarpone. gotujemy do całkowitego rozpuszczenia mascarpone. ",
+      },
+      {
+        number: 4,
+        value: "Makaron łączymy z sosem i podajemy na głębokich talerzach.",
+      },
     ],
     id: 2,
-    ban: {
-      status: false,
-      howLong: "",
-      sinceWhen: "",
-    },
+    ban: { status: false, howLong: "", sinceWhen: "" },
+  },
+  {
+    name: "Schab pieczony w ziemniakach",
+    ingredient: [
+      { name: "schab", quantity: "1 kg" },
+      { name: "papryka czerwona", quantity: "1" },
+      { name: "cebula", quantity: "3" },
+      { name: "ziemniak", quantity: "6" },
+      { name: "sól, pieprz, papryka słodka", quantity: "" },
+    ],
+    description: "Świetna propozycja na jednogarnkowe i pyszne danie.",
+    steps: [
+      {
+        number: 1,
+        value:
+          "Schab myjemy osuszamy i kroimy w plastry. Lekko rozbijamy. Posypujemy solą, pieprzem i słodką papryką.",
+      },
+      {
+        number: 2,
+        value:
+          "Paprykę kroimy w paski, cebulę w półksiężyce. Ziemniaki na ćwiartki.",
+      },
+      {
+        number: 3,
+        value:
+          "Piekarnik nastawiamy na 200 st. W naczyniu żaroodpornym wysmarowanym masłem układamy schab na przemian z papyką i cebulą. Po bokach wokół schabu układamy ziemniaki.",
+      },
+      {
+        number: 4,
+        value:
+          "Schab do piekarnika wstawiamy pod przykryciem na 1h 40min, następnie odkrywamy i pieczemy przez kolejne 20 min.",
+      },
+    ],
+    id: 3,
+    ban: { status: false, howLong: "", sinceWhen: "" },
   },
 ];
 
@@ -223,7 +291,7 @@ function App() {
 
       <div className="lowerNav">
         <NavLink to="/bannedDishes" className="lowerNav__banned">
-          Baned
+          Wstrzymane
         </NavLink>
         <NavLink to="/addDish" className="lowerNav__add">
           Dodaj
