@@ -14,10 +14,11 @@ body {
 
   background-size: cover;
   background-repeat: no-repeat; */
-  background: linear-gradient(rgba(24, 75, 0, 0.4), rgba(26, 26, 26, 0.4)),
+  background: linear-gradient(rgba(0, 0, 0, 0.52), rgba(26, 26, 26, 0.4)),
     url(./images/pexels-toni-cuenca-594060.jpg);
+
   background-size: cover;
-  background-position: center;
+  /* backdrop-filter: grayscale(30%); */
   background-repeat: no-repeat;
 }
 

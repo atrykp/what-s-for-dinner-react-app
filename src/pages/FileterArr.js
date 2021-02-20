@@ -283,7 +283,6 @@ const FileterArr = ({
           {`filtry ${activeFilters().length}`}
         </button>
       </div>
-
       {filterForm}
       <div className="filterArr">{filterSection && filterArr}</div>
     </>

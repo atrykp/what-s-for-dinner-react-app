@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
 import "../styles/UserProducts.css";
+import { Transition } from "react-transition-group";
 
 const UserProducts = ({
   allDishes,

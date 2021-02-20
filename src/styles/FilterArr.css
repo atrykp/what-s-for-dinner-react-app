@@ -87,7 +87,7 @@
     padding: 0;
   }
 }
-@media (min-width: 700px) {
+@media (min-width: 770px) {
   .filters__name {
     font-size: 1.5rem;
   }
