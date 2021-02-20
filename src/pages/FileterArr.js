@@ -3,7 +3,6 @@ import Filter from "../components/filter";
 import TypeAheadDropDown from "./TypeAheadDropDown";
 import { v4 } from "uuid";
 import "../styles/FilterArr.css";
-
 const FileterArr = ({
   allDishes,
   updateUserDishes,

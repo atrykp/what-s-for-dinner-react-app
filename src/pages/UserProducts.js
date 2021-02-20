@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
 import "../styles/UserProducts.css";
-import { Transition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 const UserProducts = ({
   allDishes,
@@ -117,11 +117,19 @@ const UserProducts = ({
       </button>
     </li>
   ));
-  const section = isActive && (
-    <div className="userProducts__filters">
-      <p>Zaznacz poniżej, które produkty już masz</p>
-      <ul className="userProducts__filtersList">{filters}</ul>
-    </div>
+  const section = (
+    <CSSTransition
+      in={isActive}
+      timeout={300}
+      classNames="sample"
+      unmountOnExit
+      appear
+    >
+      <div className="userProducts__filters">
+        <p>Zaznacz poniżej, które produkty już masz</p>
+        <ul className="userProducts__filtersList">{filters}</ul>
+      </div>
+    </CSSTransition>
   );
 
   return (
@@ -135,7 +143,6 @@ const UserProducts = ({
         >
           Produkty
         </button>
-
         {section}
       </div>
     </>
