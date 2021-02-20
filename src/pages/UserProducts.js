@@ -46,7 +46,9 @@ const UserProducts = ({
       )
       .flat();
     const singleFiltersArr = removeDuplicates(dishesFiltersArr).filter(
-      (item) => item.name.length > 1
+      (item) => {
+        return item.name.length > 1 && !item.name.includes("sól", "przypraw");
+      }
     );
     setProductsFilters(singleFiltersArr);
   };
@@ -124,14 +126,12 @@ const UserProducts = ({
   return (
     <>
       <div className="userProducts">
-        {/* <p className="userProducts__name">Produkty</p> */}
         <button
           onClick={showSection}
           className={`userProducts__activeBtn ${
             isActive && "userProducts__activeBtn--active"
           }`}
         >
-          {/* {isActive ? "wyłącz" : "włącz"} */}
           Produkty
         </button>
 

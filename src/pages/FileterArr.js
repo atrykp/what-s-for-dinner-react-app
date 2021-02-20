@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Filter from "../components/Filter";
+import Filter from "../components/filter";
 import TypeAheadDropDown from "./TypeAheadDropDown";
 import { v4 } from "uuid";
 import "../styles/FilterArr.css";
@@ -203,7 +203,7 @@ const FileterArr = ({
       .flat();
     const allFiltersArr = [...dishesFiltersArr, ...currentFilters];
     return removeDuplicates(allFiltersArr).filter(
-      (item) => item.name.length > 0
+      (item) => item.name.length > 0 && !item.name.includes("sól")
     );
   };
   const showAllFilters = () => {
@@ -282,9 +282,6 @@ const FileterArr = ({
         >
           {`filtry ${activeFilters().length}`}
         </button>
-        {/* <p className="filters__counter">
-          Aktywne <span>{activeFilters().length}</span>
-        </p> */}
       </div>
 
       {filterForm}

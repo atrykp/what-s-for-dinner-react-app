@@ -1,7 +1,6 @@
 import React, { createRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
-import { v4 } from "uuid";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
