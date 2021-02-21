@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import RemoveStorage from "../pages/RemoveStorage";
 import { NavLink } from "react-router-dom";
+import "../styles/MoreMenu.css";
 const MoreMenu = () => {
   const [isActive, setIsActive] = useState(false);
   const sectionVisibility = () => {
@@ -17,7 +18,8 @@ const MoreMenu = () => {
   );
   return (
     <>
-      <button onClick={sectionVisibility}>.</button>
+      <i class="fas fa-ellipsis-v" onClick={sectionVisibility}></i>
+
       {section}
     </>
   );

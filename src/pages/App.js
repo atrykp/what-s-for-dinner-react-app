@@ -11,7 +11,6 @@ import {
   Switch,
 } from "react-router-dom";
 import UserProducts from "./UserProducts";
-import RemoveStorage from "./RemoveStorage";
 import checkBanStatus from "../components/checkBanStatus";
 import BannedDishes from "./BannedDishes";
 import MoreMenu from "../components/MoreMenu";
@@ -290,14 +289,10 @@ function App() {
       </div>
 
       <div className="lowerNav">
-        <NavLink to="/bannedDishes" className="lowerNav__banned">
-          Wstrzymane
-        </NavLink>
         <NavLink to="/addDish" className="lowerNav__add">
           Dodaj
         </NavLink>
         <MoreMenu />
-        <RemoveStorage />
       </div>
     </>
   );
