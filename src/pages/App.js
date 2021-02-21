@@ -14,7 +14,7 @@ import UserProducts from "./UserProducts";
 import RemoveStorage from "./RemoveStorage";
 import checkBanStatus from "../components/checkBanStatus";
 import BannedDishes from "./BannedDishes";
-
+import MoreMenu from "../components/MoreMenu";
 let mainArr = [
   {
     name: "Klasyczna zapiekanka",
@@ -296,6 +296,7 @@ function App() {
         <NavLink to="/addDish" className="lowerNav__add">
           Dodaj
         </NavLink>
+        <MoreMenu />
         <RemoveStorage />
       </div>
     </>
