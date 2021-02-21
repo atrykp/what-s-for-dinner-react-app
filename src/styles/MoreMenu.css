@@ -1,6 +1,10 @@
-.toggleActivBtn {
-  font-size: 3rem;
-  color: white;
+.moreMenu {
+  position: fixed;
+  bottom: 12%;
+  right: 1%;
+  background-color: rgba(0, 0, 0, 0.829);
+  padding: 1%;
+  border-radius: 10px;
 }
 i {
   color: rgba(71, 71, 71, 0.705);

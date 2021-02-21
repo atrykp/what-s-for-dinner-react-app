@@ -292,7 +292,9 @@ function App() {
         <NavLink to="/addDish" className="lowerNav__add">
           Dodaj
         </NavLink>
-        <MoreMenu />
+        <div className="menu">
+          <MoreMenu />
+        </div>
       </div>
     </>
   );

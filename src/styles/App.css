@@ -95,6 +95,9 @@
     background-color: transparent;
     align-self: stretch;
   }
+  .menu {
+    grid-column: 3/4;
+  }
 }
 @media (min-width: 1024px) {
   .upperNav__counter {
