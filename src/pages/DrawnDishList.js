@@ -66,8 +66,26 @@ const DrawnDishList = ({
         {ingredientBtnTxt}
       </button>
       {ingredientSection}
-      <div className="drawnDish__name">
-        <h1>{selectedDish.name}</h1>
+      <div
+        className={`drawnDish__name ${
+          selectedDish.name
+            ? selectedDish.name.length > 30
+              ? "drawnDish__name--small"
+              : ""
+            : null
+        }`}
+      >
+        <h1
+          className={` ${
+            selectedDish.name
+              ? selectedDish.name.length > 30
+                ? "drawnDish__name--small"
+                : ""
+              : null
+          }`}
+        >
+          {selectedDish.name}
+        </h1>
       </div>
       <div className="drawnDish__buttons">
         <button
