@@ -163,14 +163,7 @@ const DrawnDishList = ({
   return (
     <>
       <div className="drawnDishSection">
-        <button
-          onClick={handleDraw}
-          className={
-            selectedDish
-              ? "drawnDishSection__drawBtn--drawn"
-              : "drawnDishSection__drawBtn--empty"
-          }
-        >
+        <button onClick={handleDraw} className="drawnDishSection__drawBtn">
           Losuj
         </button>
         {showDish}

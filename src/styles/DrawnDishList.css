@@ -5,29 +5,20 @@
   justify-items: center;
   grid-auto-rows: min-content;
 }
-.drawnDishSection__drawBtn--empty {
-  font-size: 2rem;
-  padding: 1.5% 10%;
-  border-radius: 8px;
-  text-transform: uppercase;
-  margin-top: 20vh;
-  background-color: rgba(49, 49, 49, 0.6);
-  color: white;
-  border: 1px solid white;
-  cursor: pointer;
-  letter-spacing: 1.5px;
-}
-.drawnDishSection__drawBtn--drawn {
-  font-size: 1.5rem;
+
+.drawnDishSection__drawBtn {
+  position: fixed;
+  font-size: 1.3rem;
   padding: 1% 10%;
   border-radius: 8px;
   text-transform: uppercase;
-  align-self: flex-start;
-  margin-top: 2%;
-  margin-bottom: 5%;
-  background-color: rgba(126, 126, 126, 0.6);
+  background-color: transparent;
   color: white;
-  border: 1px solid white;
+  border: none;
+  left: 50%;
+  bottom: 2%;
+  transform: translate(-50%, -10%);
+  z-index: 1;
 }
 .drawnDish {
   background: linear-gradient(rgba(37, 37, 37, 0.6), rgba(31, 22, 22, 0.6));
@@ -102,8 +93,9 @@
 }
 
 @media (min-width: 500px) {
-  .drawnDishSection__drawBtn--drawn {
+  .drawnDishSection__drawBtn {
     padding: 1% 7%;
+    font-size: 1.7rem;
   }
   .drawnDish {
     width: 70%;
@@ -126,6 +118,9 @@
   .drawnDish__name {
     font-size: 1.5rem;
   }
+  .drawnDishSection__drawBtn {
+    transform: translate(-50%, -15%);
+  }
 }
 @media (min-width: 1024px) {
   .drawnDish__banBtn,
@@ -136,5 +131,8 @@
   }
   .drawnDish__choose {
     font-size: 1.8rem;
+  }
+  .drawnDishSection__drawBtn {
+    transform: translate(-50%, -25%);
   }
 }
