@@ -272,7 +272,7 @@ function App() {
     </p>
   );
   const mainPageStructure = (
-    <>
+    <div className="appWrapper">
       <div className="upperNav">
         <div className="upperNav__userProducts">{UserProductsSection}</div>
         <div className="upperNav__counter">{dishesCounter}</div>
@@ -290,13 +290,13 @@ function App() {
 
       <div className="lowerNav">
         <NavLink to="/addDish" className="lowerNav__add">
-          Dodaj
+          <i class="fas fa-plus-circle"></i>
         </NavLink>
         <div className="menu">
           <MoreMenu />
         </div>
       </div>
-    </>
+    </div>
   );
 
   return (

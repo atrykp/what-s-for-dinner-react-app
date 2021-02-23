@@ -118,6 +118,9 @@
   .drawnDish__ingredientsBtn {
     height: 50px;
   }
+  .drawnDishSection__drawBtn {
+    transform: translate(-50%, -15%);
+  }
 }
 @media (min-width: 700px) {
   .drawnDish__ingredientsBtn {
@@ -133,6 +136,11 @@
 @media (min-width: 770px) {
   .drawnDish {
     transform: translate(-50%, -50%);
+  }
+}
+@media (min-width: 770px) {
+  .drawnDish {
+    top: 45%;
   }
 }
 

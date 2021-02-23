@@ -17,8 +17,7 @@ body {
   background: linear-gradient(rgba(0, 0, 0, 0.52), rgba(26, 26, 26, 0.4)),
     url(./images/pexels-toni-cuenca-594060.jpg);
 
-  background-size: cover;
-  /* backdrop-filter: grayscale(30%); */
+  background-attachment: fixed;
   background-repeat: no-repeat;
   transition: all 0.2s ease-in-out;
 }
