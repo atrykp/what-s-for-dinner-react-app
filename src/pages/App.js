@@ -143,6 +143,7 @@ function App() {
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
   console.log(localStorage.getItem("userDishes"));
+  console.log(localStorage.getItem("allDishes"));
 
   // checks if dish can be added
   const compare = (element) => {

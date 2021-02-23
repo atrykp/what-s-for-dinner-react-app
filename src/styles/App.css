@@ -1,6 +1,12 @@
+.appWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
 .upperNav {
   display: grid;
   position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 .upperNav__userProducts {
   background-color: rgba(12, 12, 12, 0.589);

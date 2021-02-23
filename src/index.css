@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 body {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  background-color: blue;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -21,8 +25,6 @@ body {
   background-position-y: center;
   background-repeat: no-repeat;
   transition: all 0.2s ease-in-out;
-  max-width: 1400px;
-  background-color: black;
 }
 
 code {
