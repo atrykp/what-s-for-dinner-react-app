@@ -142,6 +142,7 @@ function App() {
   const [selectedDish, setSelectedDish] = useState(
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
+  console.log(localStorage.getItem("userDishes"));
 
   // checks if dish can be added
   const compare = (element) => {
@@ -290,7 +291,7 @@ function App() {
 
       <div className="lowerNav">
         <NavLink to="/addDish" className="lowerNav__add">
-          <i class="fas fa-plus-circle"></i>
+          <i className="fas fa-plus-circle"></i>
         </NavLink>
         <div className="menu">
           <MoreMenu />

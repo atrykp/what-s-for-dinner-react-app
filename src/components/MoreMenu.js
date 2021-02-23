@@ -18,7 +18,7 @@ const MoreMenu = () => {
   );
   return (
     <>
-      <i class="fas fa-ellipsis-v" onClick={sectionVisibility}></i>
+      <i className="fas fa-ellipsis-v" onClick={sectionVisibility}></i>
 
       {section}
     </>
