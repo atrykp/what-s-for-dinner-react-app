@@ -2,6 +2,7 @@ import React, { createRef, useState } from "react";
 import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
+import { v4 } from "uuid";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -81,7 +82,12 @@ const AddDish = (props) => {
     } else {
       setErrorMsg("");
     }
-    props.updateAllDishes(dish);
+    const completeDish = dish;
+
+    completeDish.id = v4();
+    console.log(completeDish);
+
+    props.updateAllDishes(completeDish);
     setDish({
       name: "",
       ingredient: [{ name: "", quantity: "" }],

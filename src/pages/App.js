@@ -165,7 +165,7 @@ let mainArr = [
           "Jeżeli chcesz wzbogacić swoje danie możesz dodać do sosu oliwki i pokrojoną w kostkę czerwoną paprykę.",
       },
     ],
-    id: 1,
+    id: 4,
     ban: { status: false, howLong: "", sinceWhen: "" },
   },
   {
@@ -211,7 +211,7 @@ let mainArr = [
           "Schab przepysznie smakuje z gotowanymi ziemniakami i ulubioną surówką.",
       },
     ],
-    id: 1,
+    id: 5,
     ban: { status: false, howLong: "", sinceWhen: "" },
   },
   {
@@ -265,7 +265,7 @@ let mainArr = [
           "Zapiekankę wstawiamy do nagrzanego do 180 st. piekarnika i pieczemy przez ok 30 min. Do całkowitej miękkości ziemniaków. Pod koniec pieczenia można włączyć termoobieg, żeby przypiec sos z wierzchu.",
       },
     ],
-    id: 1,
+    id: 6,
     ban: { status: false, howLong: "", sinceWhen: "" },
   },
 ];
