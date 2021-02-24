@@ -1,4 +1,11 @@
-const checkBanStatus = (allDishes, setAllDishes, setLocalStorage, compare) => {
+import { compare } from "../components/compare";
+
+const checkBanStatus = (
+  allDishes,
+  setAllDishes,
+  setLocalStorage,
+  setUserDishes
+) => {
   const dishes = [...allDishes];
 
   const banDishes = dishes.filter(
@@ -25,7 +32,7 @@ const checkBanStatus = (allDishes, setAllDishes, setLocalStorage, compare) => {
         setAllDishes(dishes);
         setLocalStorage(dishes, "allDishes");
         // dania uzytkownika nowa tablica pozniej w niej zapisuje dane do local storage
-        compare(element);
+        compare(element, setUserDishes, allDishes);
       }
     });
   }

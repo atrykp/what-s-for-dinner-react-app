@@ -14,6 +14,7 @@ import UserProducts from "./UserProducts";
 import checkBanStatus from "../components/checkBanStatus";
 import BannedDishes from "./BannedDishes";
 import MoreMenu from "../components/MoreMenu";
+import { compare } from "../components/compare";
 
 let mainArr = [
   {
@@ -269,6 +270,9 @@ let mainArr = [
     ban: { status: false, howLong: "", sinceWhen: "" },
   },
 ];
+export const setLocalStorage = (arr, name) => {
+  localStorage.setItem(name, JSON.stringify(arr));
+};
 
 function App() {
   const [allDishes, setAllDishes] = useState(
@@ -283,50 +287,15 @@ function App() {
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
 
-  // checks if dish can be added
-  const compare = (element) => {
-    let userDishesArray = [];
-    // pobranie aktualnych filtrów użytkownika
-    const filtersArray =
-      JSON.parse(localStorage.getItem("userFilterArr")) || null;
-    // jeżeli jakieś są
-    if (filtersArray) {
-      // aktywne filtry
-      const activeFilters = filtersArray.filter((item) => item.active);
-      let flag = false;
-      // element czyli danie aktualnie sprawdzane jego składniki jeden po drugim
-      element.ingredient.forEach((item) => {
-        //porównanie każdego filtra aktywnego ze składnikiem jeżeli nazwa składnika będzie zgodna z nazwą aktywnego filtra flaga na true
-        activeFilters.forEach((elem) => {
-          if (elem.name === item.name) {
-            console.log("przefiltrowane");
-            flag = true;
-          }
-        });
-      });
-
-      if (!flag) {
-        setUserDishes((prevValue) => {
-          userDishesArray = [...prevValue, element];
-        });
-        setLocalStorage(userDishesArray, "userDishes");
-      }
-    } else {
-      setUserDishes((prevValue) => {
-        if (prevValue) {
-          userDishesArray = [...prevValue, element];
-        } else {
-          userDishesArray = [...allDishes, element];
-        }
-        return userDishesArray;
-      });
-      setLocalStorage(userDishesArray, "userDishes");
-    }
-  };
-
   useEffect(() => {
     const banInterval = setInterval(() => {
-      checkBanStatus(allDishes, setAllDishes, setLocalStorage, compare);
+      checkBanStatus(
+        allDishes,
+        setAllDishes,
+        setLocalStorage,
+
+        setUserDishes
+      );
     }, 6000);
     return () => {
       clearInterval(banInterval);
@@ -388,10 +357,7 @@ function App() {
     allDishesArr.push(dish);
     setAllDishes(allDishesArr);
     setLocalStorage(allDishesArr, "allDishes");
-    compare(dish);
-  };
-  const setLocalStorage = (arr, name) => {
-    localStorage.setItem(name, JSON.stringify(arr));
+    compare(dish, setUserDishes, allDishes);
   };
 
   const getDishesArray = () => {
@@ -449,7 +415,7 @@ function App() {
             allDishes={allDishes}
             setAllDishes={setAllDishes}
             setLocalStorage={setLocalStorage}
-            compare={compare}
+            setUserDishes={setUserDishes}
           />
         </Route>
         <Route path="/addDish">

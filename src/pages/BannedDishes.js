@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import "../styles/BannedDishes.css";
+import { compare } from "../components/compare";
 
 const BannedDishes = ({
   allDishes,
   setAllDishes,
   setLocalStorage,
-  compare,
+  setUserDishes,
 }) => {
   const bannedDishes = allDishes.filter((dish) => dish.ban.status);
   const removeFromBanned = (id) => {
@@ -16,7 +17,7 @@ const BannedDishes = ({
     dishesArr[index].ban = { status: false, sinceWhen: "", howLong: "" };
     setAllDishes(dishesArr);
     setLocalStorage(dishesArr, "allDishes");
-    compare(dishesArr[index]);
+    compare(dishesArr[index], setUserDishes, allDishes);
   };
 
   const dishesList = bannedDishes.map((dish) => {
