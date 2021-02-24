@@ -1,4 +1,5 @@
 import React, { createRef, useState } from "react";
+import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
 
@@ -94,6 +95,7 @@ const AddDish = (props) => {
       },
     });
   };
+
   let stepsInputs = dish.steps.map((x, i) => {
     return (
       <div className="addDishForm__stepsBox" key={i}>
@@ -168,6 +170,15 @@ const AddDish = (props) => {
   return (
     <>
       <div className="addDish">
+        <Prompt
+          when={
+            dish.name ||
+            dish.description ||
+            dish.ingredient[0].name ||
+            dish.steps[0].value
+          }
+          message="Czy na pewno chcesz opuścić stronę?"
+        />
         <Link className="backBtn" to="/">
           Wróć
         </Link>
