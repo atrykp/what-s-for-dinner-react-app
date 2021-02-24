@@ -14,6 +14,7 @@ import UserProducts from "./UserProducts";
 import checkBanStatus from "../components/checkBanStatus";
 import BannedDishes from "./BannedDishes";
 import MoreMenu from "../components/MoreMenu";
+
 let mainArr = [
   {
     name: "Klasyczna zapiekanka",
@@ -281,8 +282,6 @@ function App() {
   const [selectedDish, setSelectedDish] = useState(
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
-  console.log(localStorage.getItem("userDishes"));
-  console.log(localStorage.getItem("allDishes"));
 
   // checks if dish can be added
   const compare = (element) => {
@@ -305,8 +304,7 @@ function App() {
           }
         });
       });
-      // jeżeli żaden aktywny filtr nie wyklucza składnika sprawdzanego elemetnu dodajemy element do tablicy
-      // jakiś błąd is not iterable w 104 linii jak się zbanuje dwa i czeka się na ich powrót
+
       if (!flag) {
         setUserDishes((prevValue) => {
           userDishesArray = [...prevValue, element];

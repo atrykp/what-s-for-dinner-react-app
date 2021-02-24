@@ -1,8 +1,5 @@
 const checkBanStatus = (allDishes, setAllDishes, setLocalStorage, compare) => {
-  console.log("sprawdzam");
-
   const dishes = [...allDishes];
-  console.log(dishes);
 
   const banDishes = dishes.filter(
     (element) => element.ban.status && element.ban.howLong !== "permament"

@@ -10,7 +10,7 @@
 .drawnDishSection__drawBtn {
   position: fixed;
   font-size: 1.3rem;
-  padding: 1% 10%;
+  padding: 1% 5%;
   border-radius: 8px;
   text-transform: uppercase;
   background-color: transparent;
@@ -20,6 +20,7 @@
   bottom: 2%;
   transform: translate(-50%, -10%);
   z-index: 1;
+  cursor: pointer;
 }
 .drawnDish {
   position: absolute;
@@ -102,7 +103,7 @@
 
 @media (min-width: 500px) {
   .drawnDishSection__drawBtn {
-    padding: 1% 7%;
+    padding: 1% 5%;
     font-size: 1.7rem;
   }
   .drawnDish {

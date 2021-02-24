@@ -102,14 +102,11 @@ const FileterArr = ({
     const element = findElementInArr(filtersArr, id);
     element.item.active = !element.item.active;
     const userElement = findElementInArr(userArr, id);
-    console.log(userElement);
 
     if (userElement.elementId !== -1) {
-      console.log("aktualizuje filer user");
-      console.log(userArr);
-
-      setUserFilters(filtersArr);
-      setFilterStorage(filtersArr, "userFilterArr");
+      userArr.splice(userElement.elementId, 1);
+      setUserFilters(userArr);
+      setFilterStorage(userArr, "userFilterArr");
     } else {
       userArr.push(element.item);
       setUserFilters(userArr);
