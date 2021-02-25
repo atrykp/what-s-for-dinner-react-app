@@ -1,8 +1,8 @@
 // checks if dish can be added
 import { setLocalStorage } from "../pages/App";
 
-export const compare = (element, setUserDishes, allDishes) => {
-  let userDishesArray = [];
+export const compare = (element, setUserMeals, allMeals) => {
+  let userMealsArray = [];
   // pobranie aktualnych filtrów użytkownika
   const filtersArray =
     JSON.parse(localStorage.getItem("userFilterArr")) || null;
@@ -23,20 +23,20 @@ export const compare = (element, setUserDishes, allDishes) => {
     });
 
     if (!flag) {
-      setUserDishes((prevValue) => {
-        userDishesArray = [...prevValue, element];
+      setUserMeals((prevValue) => {
+        userMealsArray = [...prevValue, element];
       });
-      setLocalStorage(userDishesArray, "userDishes");
+      setLocalStorage(userMealsArray, "userMeals");
     }
   } else {
-    setUserDishes((prevValue) => {
+    setUserMeals((prevValue) => {
       if (prevValue) {
-        userDishesArray = [...prevValue, element];
+        userMealsArray = [...prevValue, element];
       } else {
-        userDishesArray = [...allDishes, element];
+        userMealsArray = [...allMeals, element];
       }
-      return userDishesArray;
+      return userMealsArray;
     });
-    setLocalStorage(userDishesArray, "userDishes");
+    setLocalStorage(userMealsArray, "userMeals");
   }
 };
