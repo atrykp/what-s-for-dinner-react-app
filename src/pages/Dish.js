@@ -2,6 +2,7 @@ import { v4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Dish.css";
+import Ingredients from "../components/Ingredients.js";
 const Dish = (props) => {
   const [products, setProducts] = useState([]);
   const {
@@ -22,11 +23,13 @@ const Dish = (props) => {
       setProducts(arr);
     } else setProducts(productsList);
   }, []);
-  const ingredientArr = ingredient.map((item) => (
-    <li className="selectedDish__ingredient" key={v4()}>
-      {item.name}: <span>{item.quantity}</span>
-    </li>
-  ));
+
+  const ingredientArr = (
+    <Ingredients
+      drawnDish={props.selectedDish}
+      className={"selectedDish__ingredient"}
+    />
+  );
 
   const stepsList =
     steps.length > 0
