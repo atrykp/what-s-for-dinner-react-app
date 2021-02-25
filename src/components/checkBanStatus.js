@@ -1,21 +1,21 @@
 import { compare } from "../components/compare";
 
 const checkBanStatus = (
-  allDishes,
-  setAllDishes,
+  allMeals,
+  setAllMeals,
   setLocalStorage,
-  setUserDishes
+  setUserMeals
 ) => {
-  const dishes = [...allDishes];
+  const meals = [...allMeals];
 
-  const banDishes = dishes.filter(
+  const banMeals = meals.filter(
     (element) => element.ban.status && element.ban.howLong !== "permament"
   );
-  if (banDishes.length !== 0) {
+  if (banMeals.length !== 0) {
     //pobranie aktualnego czasu
     let date = new Date().getTime();
     // dla każdego zbanowanego ale nie permamentnie
-    banDishes.forEach((element) => {
+    banMeals.forEach((element) => {
       // destrukturycja element!!
       if (date - (element.ban.howLong + element.ban.sinceWhen) > 0) {
         // przywrócenie wartości domyślnych dla dania
@@ -23,16 +23,16 @@ const checkBanStatus = (
         element.ban.sinceWhen = "";
         element.ban.howLong = "";
         // index sprawdzanego dania w tablicy
-        const index = dishes.findIndex((elem) => elem.id === element.id);
+        const index = meals.findIndex((elem) => elem.id === element.id);
         // nadpisanie dania poprzedniego teraźniejszym
-        dishes[index] = element;
+        meals[index] = element;
         // wszystkie dania zaktualizowane oraz pamięć wszystkich dań
-        console.log(dishes);
+        console.log(meals);
 
-        setAllDishes(dishes);
-        setLocalStorage(dishes, "allDishes");
+        setAllMeals(meals);
+        setLocalStorage(meals, "allMeals");
         // dania uzytkownika nowa tablica pozniej w niej zapisuje dane do local storage
-        compare(element, setUserDishes, allDishes);
+        compare(element, setUserMeals, allMeals);
       }
     });
   }

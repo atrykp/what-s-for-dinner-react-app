@@ -4,12 +4,12 @@ import "../styles/UserProducts.css";
 import { CSSTransition } from "react-transition-group";
 
 const UserProducts = ({
-  allDishes,
-  setMatchDishes,
+  allMeals,
+  setMatchMeals,
   setIsUserProductsActive,
   setSelectedDish,
 }) => {
-  const [dishesList, setDishesList] = useState([]);
+  const [mealsList, setMealsList] = useState([]);
   const [isActive, setIsActive] = useState(false);
   const [productsFilters, setProductsFilters] = useState([]);
   const [activeFilters, setActiveFilters] = useState([]);
@@ -17,8 +17,8 @@ const UserProducts = ({
   const showSection = () => {
     setIsActive((prevValue) => {
       if (prevValue) {
-        setDishesList([]);
-        setMatchDishes([]);
+        setMealsList([]);
+        setMatchMeals([]);
       } else if (!localStorage.getItem("selectedDish")) {
         setSelectedDish("");
       }
@@ -36,8 +36,8 @@ const UserProducts = ({
     return result; //converting back to array from mapobject
   };
   const allFilters = () => {
-    const dishes = [...allDishes];
-    const dishesFiltersArr = dishes
+    const meals = [...allMeals];
+    const mealsFiltersArr = meals
       .map((dish) =>
         dish.ingredient.map((elem) => ({
           name: elem.name,
@@ -46,7 +46,7 @@ const UserProducts = ({
         }))
       )
       .flat();
-    const singleFiltersArr = removeDuplicates(dishesFiltersArr).filter(
+    const singleFiltersArr = removeDuplicates(mealsFiltersArr).filter(
       (item) => {
         return item.name.length > 1 && !item.name.includes("sól", "przypraw");
       }
@@ -62,11 +62,11 @@ const UserProducts = ({
     const index = filtersArr.findIndex((filter) => filter.id === id);
 
     filtersArr[index].active = !filtersArr[index].active;
-    filterDishes(filtersArr[index]);
+    filterMeals(filtersArr[index]);
     setActiveFilters(getActiveFilters(filtersArr));
     setProductsFilters(filtersArr);
   };
-  const getMatchedDishes = (arr, name) => {
+  const getMatchedMeals = (arr, name) => {
     let matchArr = [];
     arr.forEach((dish) => {
       let isMatch = false;
@@ -79,31 +79,30 @@ const UserProducts = ({
     matchArr = matchArr.filter((dish) => !dish.ban.status);
     return matchArr;
   };
-  const filterDishes = (filterObj) => {
+  const filterMeals = (filterObj) => {
     const { active, name } = filterObj;
-    let selectedDishesArr = [];
+    let selectedMealsArr = [];
     if (active) {
-      const dishesArr =
-        dishesList.length > 0 ? [...dishesList] : [...allDishes];
-      selectedDishesArr = getMatchedDishes(dishesArr, name);
+      const mealsArr = mealsList.length > 0 ? [...mealsList] : [...allMeals];
+      selectedMealsArr = getMatchedMeals(mealsArr, name);
     } else {
-      let allDishesArr = [...allDishes];
+      let allMealsArr = [...allMeals];
       const currentFilters = activeFilters;
 
       const index = currentFilters.findIndex((item) => item.name === name);
       currentFilters.splice(index, 1);
       if (currentFilters.length === 0) {
-        selectedDishesArr = [];
+        selectedMealsArr = [];
       } else {
         currentFilters.forEach((element) => {
-          allDishesArr = getMatchedDishes(allDishesArr, element.name);
+          allMealsArr = getMatchedMeals(allMealsArr, element.name);
         });
 
-        selectedDishesArr = allDishesArr;
+        selectedMealsArr = allMealsArr;
       }
     }
-    setDishesList(selectedDishesArr);
-    setMatchDishes(selectedDishesArr);
+    setMealsList(selectedMealsArr);
+    setMatchMeals(selectedMealsArr);
   };
   const filters = productsFilters.map((item) => (
     <li key={v4()} className="userProducts__filter">

@@ -87,7 +87,7 @@ const AddDish = (props) => {
     completeDish.id = v4();
     console.log(completeDish);
 
-    props.updateAllDishes(completeDish);
+    props.updateAllMeals(completeDish);
     setDish({
       name: "",
       ingredient: [{ name: "", quantity: "" }],

@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import UserProducts from "./UserProducts";
 import checkBanStatus from "../components/checkBanStatus";
-import BannedDishes from "./BannedDishes";
+import BannedMeals from "./BannedMeals";
 import MoreMenu from "../components/MoreMenu";
 import { compare } from "../components/compare";
 
@@ -275,13 +275,13 @@ export const setLocalStorage = (arr, name) => {
 };
 
 function App() {
-  const [allDishes, setAllDishes] = useState(
-    JSON.parse(localStorage.getItem("allDishes")) || [...mainArr]
+  const [allMeals, setAllMeals] = useState(
+    JSON.parse(localStorage.getItem("allMeals")) || [...mainArr]
   );
-  const [userDishes, setUserDishes] = useState(
-    JSON.parse(localStorage.getItem("userDishes")) || null
+  const [userMeals, setUserMeals] = useState(
+    JSON.parse(localStorage.getItem("userMeals")) || null
   );
-  const [matchDishes, setMatchDishes] = useState([]);
+  const [matchMeals, setMatchMeals] = useState([]);
   const [isUserProductsActive, setIsUserProductsActive] = useState(false);
   const [selectedDish, setSelectedDish] = useState(
     JSON.parse(localStorage.getItem("selectedDish")) || ""
@@ -290,54 +290,54 @@ function App() {
   useEffect(() => {
     const banInterval = setInterval(() => {
       checkBanStatus(
-        allDishes,
-        setAllDishes,
+        allMeals,
+        setAllMeals,
         setLocalStorage,
 
-        setUserDishes
+        setUserMeals
       );
     }, 6000);
     return () => {
       clearInterval(banInterval);
     };
-  }, [allDishes]);
+  }, [allMeals]);
 
-  const updateUserDishes = (arr) => {
-    setUserDishes(arr);
-    setLocalStorage(arr, "userDishes");
+  const updateUserMeals = (arr) => {
+    setUserMeals(arr);
+    setLocalStorage(arr, "userMeals");
   };
   const banDish = (id, time, howLong) => {
-    const dishes = [...allDishes];
-    const dishIndex = dishes.findIndex((elem) => elem.id === id);
-    const dish = dishes[dishIndex];
+    const meals = [...allMeals];
+    const dishIndex = meals.findIndex((elem) => elem.id === id);
+    const dish = meals[dishIndex];
     dish.ban = {
       status: true,
       sinceWhen: time,
       howLong,
     };
-    setAllDishes(dishes);
-    setLocalStorage(dishes, "allDishes");
+    setAllMeals(meals);
+    setLocalStorage(meals, "allMeals");
 
-    if (userDishes) {
-      let arr = [...userDishes];
+    if (userMeals) {
+      let arr = [...userMeals];
       const userDishIndex = arr.findIndex((element) => element.id === id);
       if (userDishIndex !== -1) {
         arr.splice(userDishIndex, 1);
-        setUserDishes(arr);
-        setLocalStorage(arr, "userDishes");
+        setUserMeals(arr);
+        setLocalStorage(arr, "userMeals");
       }
     } else {
-      const arrWithActive = dishes.filter((element) => !element.ban.status);
-      setUserDishes(arrWithActive);
-      setLocalStorage(arrWithActive, "userDishes");
+      const arrWithActive = meals.filter((element) => !element.ban.status);
+      setUserMeals(arrWithActive);
+      setLocalStorage(arrWithActive, "userMeals");
     }
   };
   const UserProductsSection = (
     <UserProducts
       setSelectedDish={setSelectedDish}
-      userDishes={userDishes}
-      allDishes={allDishes}
-      setMatchDishes={setMatchDishes}
+      userMeals={userMeals}
+      allMeals={allMeals}
+      setMatchMeals={setMatchMeals}
       setIsUserProductsActive={setIsUserProductsActive}
     />
   );
@@ -345,49 +345,49 @@ function App() {
   const fileterSection = (
     <FilterArr
       setSelectedDish={setSelectedDish}
-      userDishes={userDishes}
-      allDishes={allDishes}
-      updateUserDishes={updateUserDishes}
+      userMeals={userMeals}
+      allMeals={allMeals}
+      updateUserMeals={updateUserMeals}
       isUserProductsActive={isUserProductsActive}
     />
   );
 
-  const updateAllDishes = (dish) => {
-    const allDishesArr = [...allDishes];
-    allDishesArr.push(dish);
-    setAllDishes(allDishesArr);
-    setLocalStorage(allDishesArr, "allDishes");
-    compare(dish, setUserDishes, allDishes);
+  const updateAllMeals = (dish) => {
+    const allMealsArr = [...allMeals];
+    allMealsArr.push(dish);
+    setAllMeals(allMealsArr);
+    setLocalStorage(allMealsArr, "allMeals");
+    compare(dish, setUserMeals, allMeals);
   };
 
-  const getDishesArray = () => {
+  const getMealsArray = () => {
     if (isUserProductsActive) {
-      return matchDishes;
+      return matchMeals;
     }
-    if (userDishes) {
-      return userDishes;
+    if (userMeals) {
+      return userMeals;
     } else {
-      return allDishes;
+      return allMeals;
     }
   };
 
-  const dishesCounter = (
+  const mealsCounter = (
     <p>
-      Liczba dań <span>{getDishesArray().length}</span>
+      Liczba dań <span>{getMealsArray().length}</span>
     </p>
   );
   const mainPageStructure = (
     <div className="appWrapper">
       <div className="upperNav">
         <div className="upperNav__userProducts">{UserProductsSection}</div>
-        <div className="upperNav__counter">{dishesCounter}</div>
+        <div className="upperNav__counter">{mealsCounter}</div>
         <div className="upperNav__filters">{fileterSection}</div>
       </div>
       <div>
         <DrawnDishList
           selectedDish={selectedDish}
           setSelectedDish={setSelectedDish}
-          customedArr={getDishesArray()}
+          customedArr={getMealsArray()}
           banDish={banDish}
           setIsUserProductsActive={setIsUserProductsActive}
         />
@@ -410,16 +410,16 @@ function App() {
         <Route path="/" exact>
           {mainPageStructure}
         </Route>
-        <Route path="/bannedDishes">
-          <BannedDishes
-            allDishes={allDishes}
-            setAllDishes={setAllDishes}
+        <Route path="/bannedMeals">
+          <BannedMeals
+            allMeals={allMeals}
+            setAllMeals={setAllMeals}
             setLocalStorage={setLocalStorage}
-            setUserDishes={setUserDishes}
+            setUserMeals={setUserMeals}
           />
         </Route>
         <Route path="/addDish">
-          <AddDish updateAllDishes={updateAllDishes} />
+          <AddDish updateAllMeals={updateAllMeals} />
         </Route>
         <Route path="/dish/:id">
           <Dish selectedDish={selectedDish} />

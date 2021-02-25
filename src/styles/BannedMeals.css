@@ -1,11 +1,11 @@
-.bannedDishes {
+.bannedMeals {
   background: linear-gradient(rgba(122, 0, 0, 0.4), rgba(184, 0, 0, 0.4)),
     url(../images/tomatos.jpg);
   min-height: 100vh;
   background-size: cover;
   padding: 5% 0;
 }
-.bannedDishes__backBtn {
+.bannedMeals__backBtn {
   display: block;
   width: 25%;
   font-size: 1.2rem;
@@ -21,7 +21,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.bannedDishes_list {
+.bannedMeals_list {
   max-width: 1024px;
   display: grid;
   align-content: flex-start;
@@ -37,14 +37,14 @@
   color: white;
   list-style: none;
 }
-.bannedDishes_listElement {
+.bannedMeals_listElement {
   margin: 5% 0;
   border-bottom: 1px solid white;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
-.bannedDishes_listElementBtn {
+.bannedMeals_listElementBtn {
   display: block;
   width: 50%;
   font-size: 1.4rem;
@@ -58,30 +58,30 @@
   cursor: pointer;
   transition: 0.2s;
 }
-.bannedDishes_listElementBtn:hover {
+.bannedMeals_listElementBtn:hover {
   background-color: rgba(219, 219, 219, 0.4);
 }
 p {
   font-size: 14px;
 }
-.bannedDishes_listName {
+.bannedMeals_listName {
   width: 100%;
   font-size: 1.8rem;
   font-weight: bold;
 }
 @media (min-width: 500px) {
-  .bannedDishes_list {
+  .bannedMeals_list {
     justify-items: center;
   }
 
-  .bannedDishes_listElement {
+  .bannedMeals_listElement {
     display: grid;
     grid-template-columns: 40% 30% 30%;
     align-items: center;
     padding-bottom: 2%;
     max-width: 800px;
   }
-  .bannedDishes_listElementBtn {
+  .bannedMeals_listElementBtn {
     min-width: 80px;
   }
 }

@@ -9,7 +9,7 @@ const MoreMenu = () => {
   };
   const section = isActive && (
     <div className="moreMenu">
-      <NavLink to="/bannedDishes" className="lowerNav__banned">
+      <NavLink to="/bannedMeals" className="lowerNav__banned">
         {" "}
         Wstrzymane{" "}
       </NavLink>{" "}

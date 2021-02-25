@@ -4,9 +4,9 @@ import TypeAheadDropDown from "./TypeAheadDropDown";
 import { v4 } from "uuid";
 import "../styles/FilterArr.css";
 const FileterArr = ({
-  allDishes,
-  updateUserDishes,
-  userDishes,
+  allMeals,
+  updateUserMeals,
+  userMeals,
   setSelectedDish,
   isUserProductsActive,
 }) => {
@@ -29,22 +29,22 @@ const FileterArr = ({
       return !prevValue;
     });
   };
-  const filterDishes = (element) => {
+  const filterMeals = (element) => {
     const checked = element.active;
     const value = element.name;
-    let dishes = [];
+    let meals = [];
 
     if (checked) {
-      let arr = userDishes ? [...userDishes] : [...allDishes];
+      let arr = userMeals ? [...userMeals] : [...allMeals];
       let newArr = arr.filter(
         (item) =>
           !item.ban.status &&
           !item.ingredient.find((elem) => elem.name === value)
       );
 
-      updateUserDishes(newArr);
+      updateUserMeals(newArr);
     } else if (!checked) {
-      let arr = [...allDishes].filter((item) => !item.ban.status);
+      let arr = [...allMeals].filter((item) => !item.ban.status);
 
       arr.forEach((item) => {
         let flag = false;
@@ -56,35 +56,35 @@ const FileterArr = ({
         }
         if (flag) {
           console.log("wrzucam do tablicy", item);
-          dishes.push(item);
+          meals.push(item);
         }
       });
 
       const activeFilters = filters.filter((e) => e.active);
 
       if (activeFilters.length === 0) {
-        let userArr = userDishes ? [...userDishes] : [];
-        updateUserDishes([...dishes, ...userArr]);
+        let userArr = userMeals ? [...userMeals] : [];
+        updateUserMeals([...meals, ...userArr]);
       } else if (activeFilters.length > 0) {
         const filterNames = [];
 
         activeFilters.forEach((item) => filterNames.push(item.name));
-        const dishesArr = [];
-        for (let i = 0; i < dishes.length; i++) {
-          for (let j = 0; j < dishes[i].ingredient.length; j++) {
-            if (filterNames.indexOf(dishes[i].ingredient[j].name) !== -1) {
-              dishesArr.push(i);
+        const mealsArr = [];
+        for (let i = 0; i < meals.length; i++) {
+          for (let j = 0; j < meals[i].ingredient.length; j++) {
+            if (filterNames.indexOf(meals[i].ingredient[j].name) !== -1) {
+              mealsArr.push(i);
             }
           }
         }
 
-        if (dishesArr.length > 0) {
-          dishesArr.forEach((el) => dishes.splice(el, 1));
-          let userArr = userDishes ? [...userDishes] : [];
-          updateUserDishes([...dishes, ...userArr]);
+        if (mealsArr.length > 0) {
+          mealsArr.forEach((el) => meals.splice(el, 1));
+          let userArr = userMeals ? [...userMeals] : [];
+          updateUserMeals([...meals, ...userArr]);
         } else {
-          let userArr = userDishes ? [...userDishes] : [];
-          updateUserDishes([...dishes, ...userArr]);
+          let userArr = userMeals ? [...userMeals] : [];
+          updateUserMeals([...meals, ...userArr]);
         }
       }
     }
@@ -112,7 +112,7 @@ const FileterArr = ({
       setUserFilters(userArr);
       setFilterStorage(userArr, "userFilterArr");
     }
-    filterDishes(element.item);
+    filterMeals(element.item);
     setFileter(filtersArr);
     setFilterStorage(filtersArr, "filterArr");
   };
@@ -142,7 +142,7 @@ const FileterArr = ({
       active: true,
       id: Math.floor(Math.random() * 123),
     };
-    filterDishes(newFilter);
+    filterMeals(newFilter);
     const allFilters = [newFilter, ...filters];
 
     const userFiltersArr = [...usersFilters, newFilter];
@@ -170,7 +170,7 @@ const FileterArr = ({
 
     if (element.item.active) {
       element.item.active = false;
-      filterDishes(element.item);
+      filterMeals(element.item);
     }
     filtersArr.splice(element.elementId, 1);
     setFileter(filtersArr);
@@ -187,8 +187,8 @@ const FileterArr = ({
   };
   const allFiltersArr = () => {
     const currentFilters = [...filters];
-    const dishes = [...allDishes];
-    const dishesFiltersArr = dishes
+    const meals = [...allMeals];
+    const mealsFiltersArr = meals
       .map((dish) =>
         dish.ingredient.map((elem) => ({
           name: elem.name,
@@ -197,7 +197,7 @@ const FileterArr = ({
         }))
       )
       .flat();
-    const allFiltersArr = [...dishesFiltersArr, ...currentFilters];
+    const allFiltersArr = [...mealsFiltersArr, ...currentFilters];
     return removeDuplicates(allFiltersArr).filter(
       (item) => item.name.length > 0 && !item.name.includes("sól")
     );
