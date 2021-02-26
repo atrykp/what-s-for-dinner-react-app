@@ -2,8 +2,8 @@ import { useState } from "react";
 import "../styles/RemoveStorage.css";
 
 const storageItems = [
-  "userDishes",
-  "allDishes",
+  "userMeals",
+  "allMeals",
   "filterArr",
   "userFilterArr",
   "selectedDish",

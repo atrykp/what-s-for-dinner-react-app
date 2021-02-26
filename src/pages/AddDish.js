@@ -1,6 +1,11 @@
 import React, { createRef, useState } from "react";
+import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
+import { v4 } from "uuid";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addDish } from "../actions/actions";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -24,6 +29,13 @@ const AddDish = (props) => {
       sinceWhen: "",
     },
   });
+  // ---------------------------------------------------------
+  const letsee = useSelector((state) => state.mealsReducer);
+  console.log(letsee);
+  const dispatch = useDispatch();
+
+  // -----------------------------------------------------------
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let dishObj = { ...dish };
@@ -80,7 +92,14 @@ const AddDish = (props) => {
     } else {
       setErrorMsg("");
     }
-    props.updateAllDishes(dish);
+    const completeDish = dish;
+
+    completeDish.id = v4();
+    console.log(completeDish);
+    // -----------------------------------------------
+    dispatch(addDish(completeDish));
+    // ------------------------------------------------
+    props.updateAllMeals(completeDish);
     setDish({
       name: "",
       ingredient: [{ name: "", quantity: "" }],
@@ -94,6 +113,7 @@ const AddDish = (props) => {
       },
     });
   };
+
   let stepsInputs = dish.steps.map((x, i) => {
     return (
       <div className="addDishForm__stepsBox" key={i}>
@@ -168,6 +188,15 @@ const AddDish = (props) => {
   return (
     <>
       <div className="addDish">
+        <Prompt
+          when={
+            dish.name ||
+            dish.description ||
+            dish.ingredient[0].name ||
+            dish.steps[0].value
+          }
+          message="Czy na pewno chcesz opuścić stronę?"
+        />
         <Link className="backBtn" to="/">
           Wróć
         </Link>

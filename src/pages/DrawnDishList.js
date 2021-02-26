@@ -66,8 +66,26 @@ const DrawnDishList = ({
         {ingredientBtnTxt}
       </button>
       {ingredientSection}
-      <div className="drawnDish__name">
-        <h1>{selectedDish.name}</h1>
+      <div
+        className={`drawnDish__name ${
+          selectedDish.name
+            ? selectedDish.name.length > 30
+              ? "drawnDish__name--small"
+              : ""
+            : null
+        }`}
+      >
+        <h1
+          className={` ${
+            selectedDish.name
+              ? selectedDish.name.length > 30
+                ? "drawnDish__name--small"
+                : ""
+              : null
+          }`}
+        >
+          {selectedDish.name}
+        </h1>
       </div>
       <div className="drawnDish__buttons">
         <button
@@ -163,14 +181,7 @@ const DrawnDishList = ({
   return (
     <>
       <div className="drawnDishSection">
-        <button
-          onClick={handleDraw}
-          className={
-            selectedDish
-              ? "drawnDishSection__drawBtn--drawn"
-              : "drawnDishSection__drawBtn--empty"
-          }
-        >
+        <button onClick={handleDraw} className="drawnDishSection__drawBtn">
           Losuj
         </button>
         {showDish}

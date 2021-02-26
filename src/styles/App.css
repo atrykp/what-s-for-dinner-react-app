@@ -1,6 +1,12 @@
+.appWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
 .upperNav {
   display: grid;
   position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 .upperNav__userProducts {
   background-color: rgba(12, 12, 12, 0.589);
@@ -43,6 +49,8 @@
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
+  padding: 2.5%;
+  max-height: 65px;
 }
 .lowerNav__banned,
 .lowerNav__add {
@@ -50,6 +58,17 @@
   color: white;
   text-decoration: none;
   padding: 2vh 15%;
+}
+
+.lowerNav__add {
+  font-size: 1.2rem;
+  color: white;
+  text-decoration: none;
+  padding: 1%;
+  margin: 0%;
+}
+.menu {
+  grid-column: 3/4;
 }
 @media (min-width: 500px) {
   .lowerNav {
@@ -67,6 +86,9 @@
   .lowerNav__banned,
   .lowerNav__add {
     font-size: 1.5rem;
+  }
+  .lowerNav {
+    padding: 1.5%;
   }
 }
 @media (min-width: 770px) {
@@ -95,6 +117,12 @@
     background-color: transparent;
     align-self: stretch;
   }
+  .lowerNav {
+    padding: 1%;
+    width: 60%;
+    left: 20%;
+    right: 20%;
+  }
 }
 @media (min-width: 1024px) {
   .upperNav__counter {
@@ -103,5 +131,13 @@
   .lowerNav__banned,
   .lowerNav__add {
     font-size: 1.8rem;
+  }
+}
+@media (min-width: 1200px) {
+  .lowerNav {
+    padding: 0.5%;
+    width: 40%;
+    left: 30%;
+    right: 30%;
   }
 }

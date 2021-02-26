@@ -1,35 +1,32 @@
 .drawnDishSection {
-  min-height: 55vh;
+  position: relative;
+  min-height: 70vh;
   display: grid;
   align-items: center;
   justify-items: center;
   grid-auto-rows: min-content;
 }
-.drawnDishSection__drawBtn--empty {
-  font-size: 2rem;
-  padding: 1.5% 10%;
+
+.drawnDishSection__drawBtn {
+  position: fixed;
+  font-size: 1.3rem;
+  padding: 1% 5%;
   border-radius: 8px;
   text-transform: uppercase;
-  margin-top: 20vh;
-  background-color: rgba(49, 49, 49, 0.6);
+  background-color: transparent;
   color: white;
-  border: 1px solid white;
+  border: none;
+  left: 50%;
+  bottom: 2%;
+  transform: translate(-50%, -10%);
+  z-index: 1;
   cursor: pointer;
-  letter-spacing: 1.5px;
-}
-.drawnDishSection__drawBtn--drawn {
-  font-size: 1.5rem;
-  padding: 1% 10%;
-  border-radius: 8px;
-  text-transform: uppercase;
-  align-self: flex-start;
-  margin-top: 2%;
-  margin-bottom: 5%;
-  background-color: rgba(126, 126, 126, 0.6);
-  color: white;
-  border: 1px solid white;
 }
 .drawnDish {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -77%);
   background: linear-gradient(rgba(37, 37, 37, 0.6), rgba(31, 22, 22, 0.6));
   width: 90%;
   min-height: 35vh;
@@ -100,10 +97,14 @@
   min-height: 40px;
   max-height: 50px;
 }
+.drawnDish__name--small {
+  font-size: 1.6rem;
+}
 
 @media (min-width: 500px) {
-  .drawnDishSection__drawBtn--drawn {
-    padding: 1% 7%;
+  .drawnDishSection__drawBtn {
+    padding: 1% 5%;
+    font-size: 1.7rem;
   }
   .drawnDish {
     width: 70%;
@@ -118,6 +119,9 @@
   .drawnDish__ingredientsBtn {
     height: 50px;
   }
+  .drawnDishSection__drawBtn {
+    transform: translate(-50%, -15%);
+  }
 }
 @media (min-width: 700px) {
   .drawnDish__ingredientsBtn {
@@ -126,7 +130,21 @@
   .drawnDish__name {
     font-size: 1.5rem;
   }
+  .drawnDishSection__drawBtn {
+    transform: translate(-50%, -15%);
+  }
 }
+@media (min-width: 770px) {
+  .drawnDish {
+    transform: translate(-50%, -50%);
+  }
+}
+@media (min-width: 770px) {
+  .drawnDish {
+    top: 45%;
+  }
+}
+
 @media (min-width: 1024px) {
   .drawnDish__banBtn,
   .drawnDish__productsBtn,
@@ -136,5 +154,8 @@
   }
   .drawnDish__choose {
     font-size: 1.8rem;
+  }
+  .drawnDishSection__drawBtn {
+    transform: translate(-50%, -25%);
   }
 }

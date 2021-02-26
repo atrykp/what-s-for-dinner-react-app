@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import RemoveStorage from "../pages/RemoveStorage";
 import { NavLink } from "react-router-dom";
+import "../styles/MoreMenu.css";
 const MoreMenu = () => {
   const [isActive, setIsActive] = useState(false);
   const sectionVisibility = () => {
@@ -8,7 +9,7 @@ const MoreMenu = () => {
   };
   const section = isActive && (
     <div className="moreMenu">
-      <NavLink to="/bannedDishes" className="lowerNav__banned">
+      <NavLink to="/bannedMeals" className="lowerNav__banned">
         {" "}
         Wstrzymane{" "}
       </NavLink>{" "}
@@ -17,7 +18,8 @@ const MoreMenu = () => {
   );
   return (
     <>
-      <button onClick={sectionVisibility}>.</button>
+      <i className="fas fa-ellipsis-v" onClick={sectionVisibility}></i>
+
       {section}
     </>
   );
