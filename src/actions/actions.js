@@ -1,13 +1,13 @@
 export const ADD_DISH = "ADD_DISH";
 export const CHANGE_BAN_DISH = "CHANGE_BAN_DISH";
 
-export const addDish = (
+export const addDish = ({
   name,
   ingredient = [],
   description = "",
   steps = [],
-  ban = {}
-) => {
+  ban = {},
+}) => {
   return {
     type: ADD_DISH,
     payload: {

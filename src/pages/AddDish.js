@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
 import { v4 } from "uuid";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addDish } from "../actions/actions";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -27,8 +29,13 @@ const AddDish = (props) => {
       sinceWhen: "",
     },
   });
+  // ---------------------------------------------------------
   const letsee = useSelector((state) => state.mealsReducer);
   console.log(letsee);
+  const dispatch = useDispatch();
+
+  // -----------------------------------------------------------
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let dishObj = { ...dish };
@@ -89,8 +96,10 @@ const AddDish = (props) => {
 
     completeDish.id = v4();
     console.log(completeDish);
-
-    props.updateAllMeals(completeDish);
+    // -----------------------------------------------
+    dispatch(addDish(completeDish));
+    // ------------------------------------------------
+    props.updateAllMeals({ completeDish });
     setDish({
       name: "",
       ingredient: [{ name: "", quantity: "" }],
