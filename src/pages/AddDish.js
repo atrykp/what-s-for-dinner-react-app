@@ -3,6 +3,7 @@ import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
 import { v4 } from "uuid";
+import { useSelector } from "react-redux";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -26,6 +27,8 @@ const AddDish = (props) => {
       sinceWhen: "",
     },
   });
+  const letsee = useSelector((state) => state.mealsReducer);
+  console.log(letsee);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let dishObj = { ...dish };
