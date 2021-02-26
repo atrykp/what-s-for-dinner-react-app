@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 export const ADD_DISH = "ADD_DISH";
 export const CHANGE_BAN_DISH = "CHANGE_BAN_DISH";
 
@@ -15,7 +16,7 @@ export const addDish = ({
       ingredient,
       description,
       steps,
-      id: 1,
+      id: v4(),
       ban,
     },
   };

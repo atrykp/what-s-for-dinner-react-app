@@ -15,8 +15,9 @@ import checkBanStatus from "../components/checkBanStatus";
 import BannedMeals from "./BannedMeals";
 import MoreMenu from "../components/MoreMenu";
 import { compare } from "../components/compare";
-import { Provider } from "react-redux";
-import store from "../store/store";
+
+import { useDispatch, useSelector } from "react-redux";
+import { changeBanStatus } from "../actions/actions";
 
 let mainArr = [
   {
@@ -308,10 +309,18 @@ function App() {
     setUserMeals(arr);
     setLocalStorage(arr, "userMeals");
   };
+  const dispatch = useDispatch(changeBanStatus);
+  const mealsStore = useSelector((state) => state.mealsReducer);
+  console.log(mealsStore);
   const banDish = (id, time, howLong) => {
     const meals = [...allMeals];
     const dishIndex = meals.findIndex((elem) => elem.id === id);
     const dish = meals[dishIndex];
+    // ---------------------------------------
+    dispatch(changeBanStatus(id, { status: true, howLong, sinceWhen: time }));
+
+    //------------------------------------------
+
     dish.ban = {
       status: true,
       sinceWhen: time,
@@ -407,29 +416,27 @@ function App() {
   );
 
   return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            {mainPageStructure}
-          </Route>
-          <Route path="/bannedMeals">
-            <BannedMeals
-              allMeals={allMeals}
-              setAllMeals={setAllMeals}
-              setLocalStorage={setLocalStorage}
-              setUserMeals={setUserMeals}
-            />
-          </Route>
-          <Route path="/addDish">
-            <AddDish updateAllMeals={updateAllMeals} />
-          </Route>
-          <Route path="/dish/:id">
-            <Dish selectedDish={selectedDish} />
-          </Route>
-        </Switch>
-      </Router>
-    </Provider>
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          {mainPageStructure}
+        </Route>
+        <Route path="/bannedMeals">
+          <BannedMeals
+            allMeals={allMeals}
+            setAllMeals={setAllMeals}
+            setLocalStorage={setLocalStorage}
+            setUserMeals={setUserMeals}
+          />
+        </Route>
+        <Route path="/addDish">
+          <AddDish updateAllMeals={updateAllMeals} />
+        </Route>
+        <Route path="/dish/:id">
+          <Dish selectedDish={selectedDish} />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

@@ -99,7 +99,7 @@ const AddDish = (props) => {
     // -----------------------------------------------
     dispatch(addDish(completeDish));
     // ------------------------------------------------
-    props.updateAllMeals({ completeDish });
+    props.updateAllMeals(completeDish);
     setDish({
       name: "",
       ingredient: [{ name: "", quantity: "" }],
