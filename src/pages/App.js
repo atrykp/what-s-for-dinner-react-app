@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/App.css";
-import FilterArr from "./FileterArr";
+
 import DrawnDishList from "./DrawnDishList";
 import AddDish from "./AddDish";
 import Dish from "./Dish";
@@ -18,6 +18,7 @@ import { compare } from "../components/compare";
 
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
+import NewFilterArr from "../pages/NewFilterArr";
 
 export const setLocalStorage = (arr, name) => {
   localStorage.setItem(name, JSON.stringify(arr));
@@ -26,7 +27,6 @@ export const setLocalStorage = (arr, name) => {
 function App() {
   const dispatch = useDispatch(changeBanStatus);
   const mealsStore = useSelector((state) => state.mealsReducer);
-
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
   );
@@ -61,20 +61,15 @@ function App() {
     />
   );
 
-  const fileterSection = (
-    <FilterArr
-      setSelectedDish={setSelectedDish}
-      allMeals={allMeals}
-      isUserProductsActive={isUserProductsActive}
-    />
-  );
+  const fileterSection = <NewFilterArr />;
 
   const getMealsArray = () => {
     if (isUserProductsActive) {
       return matchMeals;
     }
+    let arr = mealsStore.filter((element) => !element.ban.status);
 
-    return mealsStore.filter((element) => !element.ban.status);
+    return arr;
   };
 
   const mealsCounter = (

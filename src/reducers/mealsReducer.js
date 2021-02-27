@@ -1,6 +1,6 @@
 import { ADD_DISH, CHANGE_BAN_DISH } from "../actions/actions";
 import { mealsArr } from "../store/mealsArr";
-const store = JSON.parse(localStorage.getItem("allMeals")) || mealsArr;
+const store = JSON.parse(localStorage.getItem("userFilterArr")) || mealsArr;
 
 export const mealsReducer = (state = store, action) => {
   switch (action.type) {

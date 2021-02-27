@@ -3,7 +3,13 @@ import Filter from "../components/filter";
 import TypeAheadDropDown from "./TypeAheadDropDown";
 import { v4 } from "uuid";
 import "../styles/FilterArr.css";
-const FileterArr = ({ allMeals, setSelectedDish, isUserProductsActive }) => {
+const FileterArr = ({
+  allMeals,
+  updateUserMeals,
+  userMeals,
+  setSelectedDish,
+  isUserProductsActive,
+}) => {
   const [filterSection, setFilterSection] = useState(false);
   const [allFiltersSection, setAllFiltersSection] = useState(false);
   const [filterName, setFilterName] = useState("");
@@ -13,7 +19,7 @@ const FileterArr = ({ allMeals, setSelectedDish, isUserProductsActive }) => {
   const [usersFilters, setUserFilters] = useState(
     JSON.parse(localStorage.getItem("userFilterArr")) || []
   );
-  // pokaz ukryj sekcje filtrów
+
   const showFilterArr = () => {
     if (isUserProductsActive) return alert("wyłącz sortowanie po produktach");
     setFilterSection((prevValue) => {
@@ -23,19 +29,20 @@ const FileterArr = ({ allMeals, setSelectedDish, isUserProductsActive }) => {
       return !prevValue;
     });
   };
-
   const filterMeals = (element) => {
     const checked = element.active;
     const value = element.name;
     let meals = [];
 
     if (checked) {
-      let arr = [...allMeals];
+      let arr = userMeals ? [...userMeals] : [...allMeals];
       let newArr = arr.filter(
         (item) =>
           !item.ban.status &&
           !item.ingredient.find((elem) => elem.name === value)
       );
+
+      updateUserMeals(newArr);
     } else if (!checked) {
       let arr = [...allMeals].filter((item) => !item.ban.status);
 
@@ -56,6 +63,8 @@ const FileterArr = ({ allMeals, setSelectedDish, isUserProductsActive }) => {
       const activeFilters = filters.filter((e) => e.active);
 
       if (activeFilters.length === 0) {
+        let userArr = userMeals ? [...userMeals] : [];
+        updateUserMeals([...meals, ...userArr]);
       } else if (activeFilters.length > 0) {
         const filterNames = [];
 
@@ -71,8 +80,11 @@ const FileterArr = ({ allMeals, setSelectedDish, isUserProductsActive }) => {
 
         if (mealsArr.length > 0) {
           mealsArr.forEach((el) => meals.splice(el, 1));
-          let userArr = [];
+          let userArr = userMeals ? [...userMeals] : [];
+          updateUserMeals([...meals, ...userArr]);
         } else {
+          let userArr = userMeals ? [...userMeals] : [];
+          updateUserMeals([...meals, ...userArr]);
         }
       }
     }
