@@ -437,7 +437,14 @@ function App() {
           <Dish selectedDish={selectedDish} />
         </Route>
         <Route path="/edit/:id">
-          <EditDish />
+          <EditDish
+            selectedDish={selectedDish}
+            allMeals={allMeals}
+            setAllMeals={setAllMeals}
+            setSelectedDish={setSelectedDish}
+            userMeals={userMeals}
+            setUserMeals={setUserMeals}
+          />
         </Route>
       </Switch>
     </Router>
