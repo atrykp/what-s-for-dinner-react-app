@@ -18,6 +18,7 @@ import { compare } from "../components/compare";
 
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
+import EditDish from "../components/EditDish";
 
 let mainArr = [
   {
@@ -434,6 +435,9 @@ function App() {
         </Route>
         <Route path="/dish/:id">
           <Dish selectedDish={selectedDish} />
+        </Route>
+        <Route path="/edit/:id">
+          <EditDish />
         </Route>
       </Switch>
     </Router>

@@ -68,6 +68,7 @@ const Dish = (props) => {
   return (
     <div className="selectedDish">
       <Link to="/">Wróć</Link>
+      <Link to={`/edit/${name}`}>Edytuj</Link>
       <h1 className="selectedDish__name">{name}</h1>
       <p className="selectedDish__description">{description}</p>
       <div className="selectedDish__products">
