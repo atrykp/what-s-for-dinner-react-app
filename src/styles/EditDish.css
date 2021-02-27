@@ -1,3 +1,19 @@
 .editDish {
   color: white;
 }
+.editDish__name {
+  width: 90%;
+  margin: 10% auto;
+  text-align: center;
+  font-size: 2rem;
+}
+.editDish__name input {
+  font-size: 1.3rem;
+  padding: 1%;
+  margin-top: 2%;
+}
+.editDish__name button {
+  font-size: 1.3rem;
+  padding: 1%;
+  margin-top: 2%;
+}
