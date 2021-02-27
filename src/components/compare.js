@@ -1,6 +1,6 @@
 import { setLocalStorage } from "../pages/App";
 
-export const compare = (element, setUserMeals, allMeals) => {
+export const compare = (element, allMeals) => {
   let userMealsArray = [];
 
   const filtersArray =
@@ -19,21 +19,21 @@ export const compare = (element, setUserMeals, allMeals) => {
       });
     });
 
-    if (!flag) {
-      setUserMeals((prevValue) => {
-        userMealsArray = [...prevValue, element];
-      });
-      setLocalStorage(userMealsArray, "userMeals");
-    }
-  } else {
-    setUserMeals((prevValue) => {
-      if (prevValue) {
-        userMealsArray = [...prevValue, element];
-      } else {
-        userMealsArray = [...allMeals, element];
-      }
-      return userMealsArray;
-    });
-    setLocalStorage(userMealsArray, "userMeals");
+    //   if (!flag) {
+    //     setUserMeals((prevValue) => {
+    //       userMealsArray = [...prevValue, element];
+    //     });
+    //     setLocalStorage(userMealsArray, "userMeals");
+    //   }
+    // } else {
+    //   setUserMeals((prevValue) => {
+    //     if (prevValue) {
+    //       userMealsArray = [...prevValue, element];
+    //     } else {
+    //       userMealsArray = [...allMeals, element];
+    //     }
+    //     return userMealsArray;
+    //   });
+    //   setLocalStorage(userMealsArray, "userMeals");
   }
 };

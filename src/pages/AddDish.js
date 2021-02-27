@@ -3,7 +3,6 @@ import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
 import { v4 } from "uuid";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addDish } from "../actions/actions";
 
@@ -29,12 +28,7 @@ const AddDish = (props) => {
       sinceWhen: "",
     },
   });
-  // ---------------------------------------------------------
-  const letsee = useSelector((state) => state.mealsReducer);
-  console.log(letsee);
   const dispatch = useDispatch();
-
-  // -----------------------------------------------------------
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,32 +43,36 @@ const AddDish = (props) => {
     element.ingredient[index][name] = value;
     setDish(element);
   };
+
   const addNewIngredientInputs = (e) => {
     const element = { ...dish };
     const arr = [...element.ingredient, { name: "", quantity: "" }];
     element.ingredient = arr;
     setDish(element);
   };
+
   const removeIngredient = (index) => {
     const dishObj = { ...dish };
     const ingredientArr = dishObj.ingredient;
     ingredientArr.splice(index, 1);
     setDish(dishObj);
   };
+
   const changeStepInput = (e, index) => {
     const { name, value } = e.target;
     const dishObj = { ...dish };
     dishObj.steps[index].number = index + 1;
-
     dishObj.steps[index][name] = value;
     setDish(dishObj);
   };
+
   const addStepsInput = () => {
     const dishObj = { ...dish };
     const stepsArr = [...dishObj.steps, { number: "", value: "" }];
     dishObj.steps = stepsArr;
     setDish(dishObj);
   };
+
   const removeStep = (index) => {
     const dishObj = { ...dish };
     const stepsArr = [...dishObj.steps];
@@ -82,6 +80,7 @@ const AddDish = (props) => {
     dishObj.steps = stepsArr;
     setDish(dishObj);
   };
+
   const saveDish = (e) => {
     e.preventDefault();
     const message = validation(dish);
@@ -93,13 +92,11 @@ const AddDish = (props) => {
       setErrorMsg("");
     }
     const completeDish = dish;
-
     completeDish.id = v4();
-    console.log(completeDish);
-    // -----------------------------------------------
+
     dispatch(addDish(completeDish));
     // ------------------------------------------------
-    props.updateAllMeals(completeDish);
+
     setDish({
       name: "",
       ingredient: [{ name: "", quantity: "" }],

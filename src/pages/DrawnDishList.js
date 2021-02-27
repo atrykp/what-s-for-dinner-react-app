@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Ingredient from "../components/Ingredients";
 import { v4 } from "uuid";
 import "../styles/DrawnDishList.css";
+import { useDispatch, useSelector } from "react-redux";
+import { changeBanStatus } from "../actions/actions";
+import { setLocalStorage } from "./App";
 const DrawnDishList = ({
   customedArr,
-  banDish,
   setSelectedDish,
   selectedDish,
   setIsUserProductsActive,
 }) => {
+  const dispatch = useDispatch(changeBanStatus);
+  const mealsStore = useSelector((state) => state.mealsReducer);
   const [ingredientsView, setIngredientView] = useState(false);
   const [productsView, setProductsView] = useState(false);
   const [isSelected, setIsSelected] = useState(
@@ -18,25 +22,26 @@ const DrawnDishList = ({
       : localStorage.getItem("isSelected")
   );
 
-  useEffect(() => {
-    getDate();
-  }, []);
   const getDate = () => {
     let date = new Date();
     return date.getTime();
   };
 
-  let notYetArr;
+  const banDish = (id, time, howLong) => {
+    dispatch(changeBanStatus(id, { status: true, howLong, sinceWhen: time }));
+    setLocalStorage(mealsStore, "allMeals");
+  };
 
   const handleDraw = () => {
-    notYetArr = [...customedArr];
+    let notYetArr = [...customedArr];
 
     if (notYetArr.length < 1) {
       return alert("Brak dań do losowania");
     }
+
     let index = Math.floor(Math.random() * notYetArr.length);
+    // ustaw wylosowane danie w okienku
     setSelectedDish(notYetArr[index]);
-    notYetArr.slice(index, 1);
     setIsSelected(false);
     setIsSelectedStorage(false);
     localStorage.removeItem("selectedDish");

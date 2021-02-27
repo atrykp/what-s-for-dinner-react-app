@@ -32,7 +32,7 @@ const checkBanStatus = (
         setAllMeals(meals);
         setLocalStorage(meals, "allMeals");
         // dania uzytkownika nowa tablica pozniej w niej zapisuje dane do local storage
-        compare(element, setUserMeals, allMeals);
+        compare(element, allMeals);
       }
     });
   }

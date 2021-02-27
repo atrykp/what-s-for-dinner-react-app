@@ -2,22 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import "../styles/BannedMeals.css";
-import { compare } from "../components/compare";
+import { useSelector, useDispatch } from "react-redux";
+import { changeBanStatus } from "../actions/actions";
 
-const BannedMeals = ({
-  allMeals,
-  setAllMeals,
-  setLocalStorage,
-  setUserMeals,
-}) => {
-  const bannedMeals = allMeals.filter((dish) => dish.ban.status);
+const BannedMeals = ({ setLocalStorage }) => {
+  const dispatch = useDispatch();
+  const mealsStore = useSelector((state) => state.mealsReducer);
+  const bannedMeals = mealsStore.filter((dish) => dish.ban.status);
+
   const removeFromBanned = (id) => {
-    const mealsArr = [...allMeals];
-    const index = mealsArr.findIndex((element) => element.id === id);
-    mealsArr[index].ban = { status: false, sinceWhen: "", howLong: "" };
-    setAllMeals(mealsArr);
-    setLocalStorage(mealsArr, "allMeals");
-    compare(mealsArr[index], setUserMeals, allMeals);
+    dispatch(
+      changeBanStatus(id, { status: false, sinceWhen: "", howLong: "" })
+    );
+    setLocalStorage(mealsStore, "allMeals");
   };
 
   const mealsList = bannedMeals.map((dish) => {
