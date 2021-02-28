@@ -14,8 +14,6 @@ import UserProducts from "./UserProducts";
 import checkBanStatus from "../components/checkBanStatus";
 import BannedMeals from "./BannedMeals";
 import MoreMenu from "../components/MoreMenu";
-import { compare } from "../components/compare";
-
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
 import NewFilterArr from "../pages/NewFilterArr";
@@ -27,10 +25,10 @@ export const setLocalStorage = (arr, name) => {
 function App() {
   const dispatch = useDispatch(changeBanStatus);
   const mealsStore = useSelector((state) => state.mealsReducer);
+  const filterStore = useSelector((state) => state.filtersReducer);
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
   );
-
   const [matchMeals, setMatchMeals] = useState([]);
   const [isUserProductsActive, setIsUserProductsActive] = useState(false);
   const [selectedDish, setSelectedDish] = useState(
@@ -67,8 +65,33 @@ function App() {
     if (isUserProductsActive) {
       return matchMeals;
     }
+    // pobranie nazw aktywnych filtrów
+    let activeFilters = [];
+    filterStore.forEach((element) => {
+      if (element.active) {
+        activeFilters.push(element.name);
+      }
+    });
+    // usuniecie zbanowanych
     let arr = mealsStore.filter((element) => !element.ban.status);
 
+    if (activeFilters.length > 0) {
+      const mealsArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        let flag = false;
+        for (let j = 0; j < arr[i].ingredient.length; j++) {
+          if (activeFilters.indexOf(arr[i].ingredient[j].name) !== -1) {
+            flag = true;
+          }
+        }
+        if (!flag) {
+          mealsArr.push(arr[i]);
+        }
+      }
+      console.log(mealsArr);
+
+      return mealsArr;
+    }
     return arr;
   };
 

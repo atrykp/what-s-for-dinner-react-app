@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Filter from "../components/filter";
 import TypeAheadDropDown from "./TypeAheadDropDown";
 import { v4 } from "uuid";
-
+import "../styles/FilterArr.css";
 const FileterArr = ({
   allMeals,
   updateUserMeals,
@@ -202,6 +202,11 @@ const FileterArr = ({
       (item) => item.name.length > 0 && !item.name.includes("sól")
     );
   };
+  const showAllFilters = () => {
+    const singleFiltersArr = allFiltersArr();
+    setAllFiltersSection(true);
+    setFileter(singleFiltersArr);
+  };
 
   const activeFilters = () => {
     const arr = [...filters];
@@ -220,6 +225,37 @@ const FileterArr = ({
     setFileter(allFilters);
     setFilterStorage(allFilters, "filterArr");
   };
+  const filterForm = filterSection && (
+    <>
+      <div className="filtersSectionButtons">
+        {!allFiltersSection && (
+          <button onClick={showAllFilters} className="filters__allFiltersBnt">
+            wszystkie filtry
+          </button>
+        )}
+        {allFiltersSection && (
+          <button
+            onClick={showActiveFilters}
+            className="filters__activeFiltersBnt"
+          >
+            tylko aktywne
+          </button>
+        )}
+        <button onClick={showUserFilters} className="filters__userFiltersBnt">
+          moje filtry
+        </button>
+      </div>
+
+      <form action="" onSubmit={addNewFilter} className="filters__addForm">
+        <TypeAheadDropDown
+          filterName={filterName}
+          allFiltersArr={allFiltersArr}
+          setFilterName={setFilterName}
+        />
+        <button className="filters__addFormBtn">dodaj</button>
+      </form>
+    </>
+  );
 
   const filterArr = filters.map((element) => (
     <Filter

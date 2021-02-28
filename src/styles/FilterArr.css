@@ -43,8 +43,7 @@
   justify-content: space-around;
 }
 .filters__allFiltersBnt,
-.filters__activeFiltersBnt,
-.filters__userFiltersBnt {
+.filters__activeFiltersBnt {
   font-size: 1rem;
   text-transform: uppercase;
   margin: 1% 0%;
