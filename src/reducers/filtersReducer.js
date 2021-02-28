@@ -1,7 +1,7 @@
 import { ADD_FITLER, EDIT_FITLER, REMOVE_FITLER } from "../actions/actions";
 import { filtersArray } from "../store/filtersArr";
-const store = JSON.parse(localStorage.getItem("allMeals")) || filtersArray;
-export const filtersReducer = (state = store, action) => {
+const store = filtersArray;
+export const filtersReducer = (state = store(), action) => {
   switch (action.type) {
     case ADD_FITLER:
       return [...state, action.payload];

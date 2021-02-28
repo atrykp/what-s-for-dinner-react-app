@@ -6,7 +6,7 @@ const TypeAheadDropDown = (props) => {
 
   const onTextChange = (e) => {
     const { allFiltersArr } = props;
-    const arr = allFiltersArr().map((item) => item.name);
+    const arr = allFiltersArr.map((item) => item.name);
 
     let suggestions = [];
     const value = e.target.value;

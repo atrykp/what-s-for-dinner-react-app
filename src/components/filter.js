@@ -4,7 +4,7 @@ import "../styles/Filter.css";
 const Filter = ({ filter, changeFilterActivity, removeFilter }) => {
   return (
     <div className={filter.active ? "filter activeFilter" : "filter"}>
-      <button onClick={() => changeFilterActivity(filter.id)}>
+      <button onClick={() => changeFilterActivity(filter.id, filter.active)}>
         {filter.name}
       </button>
       <button
