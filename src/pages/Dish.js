@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Dish.css";
 import Ingredients from "../components/Ingredients.js";
-
+import EditDish from "../components/EditDish";
 const Dish = (props) => {
   const [products, setProducts] = useState([]);
   const {
@@ -40,12 +40,14 @@ const Dish = (props) => {
           </li>
         ))
       : null;
+
   const handleCheck = (e) => {
     const arr = [...products];
     const index = arr.findIndex((item) => item.name === e.target.id);
     arr[index].isChecked = !arr[index].isChecked;
     setProducts(arr);
   };
+
   const shoppingList = products.map((item) => (
     <label htmlFor={item.name} key={v4()}>
       {item.name}
@@ -66,6 +68,7 @@ const Dish = (props) => {
   return (
     <div className="selectedDish">
       <Link to="/">Wróć</Link>
+      <Link to={`/edit/${name}`}>Edytuj</Link>
       <h1 className="selectedDish__name">{name}</h1>
       <p className="selectedDish__description">{description}</p>
       <div className="selectedDish__products">

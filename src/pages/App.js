@@ -17,6 +17,7 @@ import MoreMenu from "../components/MoreMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
 import NewFilterArr from "../pages/NewFilterArr";
+import EditDish from "../components/EditDish";
 
 export const setLocalStorage = (arr, name) => {
   localStorage.setItem(name, JSON.stringify(arr));
@@ -141,6 +142,14 @@ function App() {
         </Route>
         <Route path="/dish/:id">
           <Dish selectedDish={selectedDish} />
+        </Route>
+        <Route path="/edit/:id">
+          <EditDish
+            selectedDish={selectedDish}
+            allMeals={allMeals}
+            setAllMeals={setAllMeals}
+            setSelectedDish={setSelectedDish}
+          />
         </Route>
       </Switch>
     </Router>
