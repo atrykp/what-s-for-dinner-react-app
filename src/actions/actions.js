@@ -4,6 +4,7 @@ export const CHANGE_BAN_DISH = "CHANGE_BAN_DISH";
 export const ADD_FITLER = "ADD_FILTER";
 export const EDIT_FITLER = "EDIT_FILTER";
 export const REMOVE_FITLER = "REMOVE_FILTER";
+export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const addDish = ({
   name,
   ingredient = [],
@@ -58,6 +59,15 @@ export const deleteFilter = (id) => {
   return {
     type: REMOVE_FITLER,
     payload: {
+      id,
+    },
+  };
+};
+export const editProduct = (id, active) => {
+  return {
+    type: EDIT_PRODUCT,
+    payload: {
+      active,
       id,
     },
   };

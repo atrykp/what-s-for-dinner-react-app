@@ -11,7 +11,6 @@ import {
   Switch,
 } from "react-router-dom";
 import UserProducts from "./UserProducts";
-// import checkBanStatus from "../components/checkBanStatus";
 import BannedMeals from "./BannedMeals";
 import MoreMenu from "../components/MoreMenu";
 import { useDispatch, useSelector } from "react-redux";

@@ -9,6 +9,8 @@ const UserProducts = ({
   setIsUserProductsActive,
   setSelectedDish,
 }) => {
+  const dispatch = useDispatch();
+  const filterStore = useSelector((state) => state.filtersReducer);
   const [mealsList, setMealsList] = useState([]);
   const [isActive, setIsActive] = useState(false);
   const [productsFilters, setProductsFilters] = useState([]);
