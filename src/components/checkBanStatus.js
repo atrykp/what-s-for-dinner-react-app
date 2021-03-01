@@ -7,6 +7,8 @@ const checkBanStatus = (
   setUserMeals,
   removeBanStatus
 ) => {
+  console.log("helo");
+
   const meals = [...allMeals];
   const banMeals = meals.filter(
     (element) => element.ban.status && element.ban.howLong !== "permament"

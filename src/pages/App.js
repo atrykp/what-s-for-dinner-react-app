@@ -62,6 +62,23 @@ function App() {
 
   const fileterSection = <NewFilterArr />;
 
+  const filterMeals = (arr, activeFilters) => {
+    const mealsArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      let flag = false;
+      for (let j = 0; j < arr[i].ingredient.length; j++) {
+        if (activeFilters.indexOf(arr[i].ingredient[j].name) !== -1) {
+          flag = true;
+        }
+      }
+      if (!flag) {
+        mealsArr.push(arr[i]);
+      }
+    }
+    console.log(mealsArr);
+
+    return mealsArr;
+  };
   const getMealsArray = () => {
     if (isUserProductsActive) {
       return matchMeals;
@@ -77,21 +94,7 @@ function App() {
     let arr = mealsStore.filter((element) => !element.ban.status);
 
     if (activeFilters.length > 0) {
-      const mealsArr = [];
-      for (let i = 0; i < arr.length; i++) {
-        let flag = false;
-        for (let j = 0; j < arr[i].ingredient.length; j++) {
-          if (activeFilters.indexOf(arr[i].ingredient[j].name) !== -1) {
-            flag = true;
-          }
-        }
-        if (!flag) {
-          mealsArr.push(arr[i]);
-        }
-      }
-      console.log(mealsArr);
-
-      return mealsArr;
+      return filterMeals(arr, activeFilters);
     }
     return arr;
   };
