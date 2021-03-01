@@ -11,7 +11,7 @@ import {
   Switch,
 } from "react-router-dom";
 import UserProducts from "./UserProducts";
-import checkBanStatus from "../components/checkBanStatus";
+// import checkBanStatus from "../components/checkBanStatus";
 import BannedMeals from "./BannedMeals";
 import MoreMenu from "../components/MoreMenu";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,7 +24,7 @@ export const setLocalStorage = (arr, name) => {
 };
 
 function App() {
-  const dispatch = useDispatch(changeBanStatus);
+  const dispatch = useDispatch();
   const mealsStore = useSelector((state) => state.mealsReducer);
   const filterStore = useSelector((state) => state.filtersReducer);
   const [allMeals, setAllMeals] = useState(
@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     const banInterval = setInterval(() => {
-      checkBanStatus(allMeals, setAllMeals, setLocalStorage, removeBanStatus);
+      checkBanStatus();
     }, 6000);
     return () => {
       clearInterval(banInterval);
@@ -49,6 +49,20 @@ function App() {
     dispatch(
       changeBanStatus(dish.id, { status: false, howLong: "", sinceWhen: "" })
     );
+  };
+
+  const checkBanStatus = () => {
+    const banMeals = mealsStore.filter(
+      (element) => element.ban.status && element.ban.howLong !== "permament"
+    );
+    if (banMeals.length !== 0) {
+      let date = new Date().getTime();
+      banMeals.forEach((element) => {
+        if (date - (element.ban.howLong + element.ban.sinceWhen) > 0) {
+          removeBanStatus(element);
+        }
+      });
+    }
   };
 
   const UserProductsSection = (
