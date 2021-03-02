@@ -9,7 +9,7 @@ const EditDish = ({
   userMeals,
   setUserMeals,
 }) => {
-  const { name, description, steps, ingredients } = selectedDish;
+  const { name } = selectedDish;
   const [dish, setDish] = useState({ ...selectedDish });
   const handleChange = (e) => {
     setDish({ ...selectedDish, name: e.target.value });

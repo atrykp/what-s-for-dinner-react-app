@@ -30,7 +30,6 @@ function App() {
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
   );
-  const [matchMeals, setMatchMeals] = useState([]);
   const [isUserProductsActive, setIsUserProductsActive] = useState(false);
   const [selectedDish, setSelectedDish] = useState(
     JSON.parse(localStorage.getItem("selectedDish")) || ""
@@ -43,7 +42,7 @@ function App() {
     return () => {
       clearInterval(banInterval);
     };
-  }, [allMeals]);
+  }, []);
 
   const removeBanStatus = (dish) => {
     dispatch(
@@ -64,17 +63,6 @@ function App() {
       });
     }
   };
-
-  const UserProductsSection = (
-    <UserProducts
-      setSelectedDish={setSelectedDish}
-      allMeals={allMeals}
-      setMatchMeals={setMatchMeals}
-      setIsUserProductsActive={setIsUserProductsActive}
-    />
-  );
-
-  const fileterSection = <NewFilterArr />;
 
   const filterMeals = (arr, activeFilters) => {
     const mealsArr = [];
@@ -128,9 +116,13 @@ function App() {
   const mainPageStructure = (
     <div className="appWrapper">
       <div className="upperNav">
-        <div className="upperNav__userProducts">{UserProductsSection}</div>
+        <div className="upperNav__userProducts">
+          <UserProducts setIsUserProductsActive={setIsUserProductsActive} />
+        </div>
         <div className="upperNav__counter">{mealsCounter}</div>
-        <div className="upperNav__filters">{fileterSection}</div>
+        <div className="upperNav__filters">
+          <NewFilterArr />
+        </div>
       </div>
       <div>
         <DrawnDishList

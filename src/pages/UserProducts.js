@@ -5,27 +5,14 @@ import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct } from "../actions/actions";
 
-const UserProducts = ({
-  allMeals,
-  setMatchMeals,
-  setIsUserProductsActive,
-  setSelectedDish,
-}) => {
+const UserProducts = ({ setIsUserProductsActive }) => {
   const dispatch = useDispatch();
   const productsStore = useSelector((state) => state.productsReducer);
 
-  const [mealsList, setMealsList] = useState([]);
   const [isActive, setIsActive] = useState(false);
-  const [activeFilters, setActiveFilters] = useState([]);
 
   const showSection = () => {
     setIsActive((prevValue) => {
-      if (prevValue) {
-        setMealsList([]);
-        setMatchMeals([]);
-      } else if (!localStorage.getItem("selectedDish")) {
-        setSelectedDish("");
-      }
       setIsUserProductsActive(!prevValue);
       return !prevValue;
     });

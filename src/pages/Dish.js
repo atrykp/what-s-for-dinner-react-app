@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Dish.css";
 import Ingredients from "../components/Ingredients.js";
-import EditDish from "../components/EditDish";
 const Dish = (props) => {
   const [products, setProducts] = useState([]);
   const {

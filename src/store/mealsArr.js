@@ -41,6 +41,7 @@ export let mealsArr = [
     ],
     id: 1,
     ban: { status: false, howLong: "", sinceWhen: "" },
+    isSelected: false,
   },
   {
     name: "Tagliatelle z mascarpone",
@@ -76,6 +77,7 @@ export let mealsArr = [
     ],
     id: 2,
     ban: { status: false, howLong: "", sinceWhen: "" },
+    isSelected: false,
   },
   {
     name: "Schab pieczony w ziemniakach",
@@ -111,6 +113,7 @@ export let mealsArr = [
     ],
     id: 3,
     ban: { status: false, howLong: "", sinceWhen: "" },
+    isSelected: false,
   },
   {
     name: "Spaghetti",
@@ -150,6 +153,7 @@ export let mealsArr = [
     ],
     id: 4,
     ban: { status: false, howLong: "", sinceWhen: "" },
+    isSelected: false,
   },
   {
     name: "Schab w sosie koperkowym",
@@ -196,6 +200,7 @@ export let mealsArr = [
     ],
     id: 5,
     ban: { status: false, howLong: "", sinceWhen: "" },
+    isSelected: false,
   },
   {
     name: "Zapiekanka ziemniaczana z mięsem mielonym",
@@ -250,5 +255,6 @@ export let mealsArr = [
     ],
     id: 6,
     ban: { status: false, howLong: "", sinceWhen: "" },
+    isSelected: false,
   },
 ];
