@@ -85,12 +85,12 @@ function App() {
           flag = true;
         }
       }
-      if (!flag) {
+      if (isUserProductsActive && flag) {
+        mealsArr.push(arr[i]);
+      } else if (!isUserProductsActive && !flag) {
         mealsArr.push(arr[i]);
       }
     }
-    console.log(mealsArr);
-
     return mealsArr;
   };
   const getActiveElements = (arr) => {
@@ -103,17 +103,15 @@ function App() {
     return active;
   };
   const getMealsArray = () => {
-    // pobranie nazw aktywnych filtrów
     let activeFilters = getActiveElements(filterStore);
     let activeProducts = getActiveElements(productsStore);
 
-    // usuniecie zbanowanych
+    // remove banned
     let arr = mealsStore.filter((element) => !element.ban.status);
 
     if (isUserProductsActive) {
-      // jeżeli sekcja jest aktywna
-
-      return matchMeals;
+      // if products section is active
+      return filterMeals(arr, activeProducts);
     }
 
     if (activeFilters.length > 0) {
