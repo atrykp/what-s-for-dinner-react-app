@@ -1,6 +1,8 @@
 import { v4 } from "uuid";
 export const ADD_DISH = "ADD_DISH";
 export const CHANGE_BAN_DISH = "CHANGE_BAN_DISH";
+export const CHANGE_IS_SELECTED_DISH = "CHANGE_IS_SELECTED_DISH";
+
 export const ADD_FITLER = "ADD_FILTER";
 export const EDIT_FITLER = "EDIT_FILTER";
 export const REMOVE_FITLER = "REMOVE_FILTER";
@@ -31,6 +33,15 @@ export const changeBanStatus = (id, ban) => {
     payload: {
       id,
       ban,
+    },
+  };
+};
+export const changeIsSelected = (id, status) => {
+  return {
+    type: CHANGE_IS_SELECTED_DISH,
+    payload: {
+      id,
+      status: !status,
     },
   };
 };

@@ -1,4 +1,8 @@
-import { ADD_DISH, CHANGE_BAN_DISH } from "../actions/actions";
+import {
+  ADD_DISH,
+  CHANGE_BAN_DISH,
+  CHANGE_IS_SELECTED_DISH,
+} from "../actions/actions";
 import { mealsArr } from "../store/mealsArr";
 const store = JSON.parse(localStorage.getItem("userFilterArr")) || mealsArr;
 
@@ -12,6 +16,15 @@ export const mealsReducer = (state = store, action) => {
           return dish;
         } else {
           dish.ban = action.payload.ban;
+          return dish;
+        }
+      });
+    case CHANGE_IS_SELECTED_DISH:
+      return state.map((dish) => {
+        if (dish.id !== action.payload.id) {
+          return dish;
+        } else {
+          dish.isSelected = action.payload.status;
           return dish;
         }
       });

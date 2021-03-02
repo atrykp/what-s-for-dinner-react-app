@@ -4,7 +4,7 @@ import Ingredient from "../components/Ingredients";
 import { v4 } from "uuid";
 import "../styles/DrawnDishList.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBanStatus } from "../actions/actions";
+import { changeBanStatus, changeIsSelected } from "../actions/actions";
 import { setLocalStorage } from "./App";
 const DrawnDishList = ({
   customedArr,
@@ -64,6 +64,10 @@ const DrawnDishList = ({
   const ingredientSection = ingredientsView ? (
     <Ingredient drawnDish={selectedDish} />
   ) : null;
+  const setSelectedDishReducer = (id, status) => {
+    dispatch(changeIsSelected(id, status));
+  };
+  console.log(mealsStore);
 
   const drawnDishView = (
     <>
@@ -107,6 +111,7 @@ const DrawnDishList = ({
             setIsSelectedStorage(!isSelected);
             setSelectedDishStorage(selectedDish);
             setIsUserProductsActive(false);
+            setSelectedDishReducer(selectedDish.id, selectedDish.isSelected);
           }}
           className="drawnDish__choose"
         >
