@@ -26,6 +26,7 @@ function App() {
   const dispatch = useDispatch();
   const mealsStore = useSelector((state) => state.mealsReducer);
   const filterStore = useSelector((state) => state.filtersReducer);
+  const productsStore = useSelector((state) => state.productsReducer);
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
   );
@@ -92,19 +93,28 @@ function App() {
 
     return mealsArr;
   };
-  const getMealsArray = () => {
-    if (isUserProductsActive) {
-      return matchMeals;
-    }
-    // pobranie nazw aktywnych filtrów
-    let activeFilters = [];
-    filterStore.forEach((element) => {
+  const getActiveElements = (arr) => {
+    let active = [];
+    arr.forEach((element) => {
       if (element.active) {
-        activeFilters.push(element.name);
+        active.push(element.name);
       }
     });
+    return active;
+  };
+  const getMealsArray = () => {
+    // pobranie nazw aktywnych filtrów
+    let activeFilters = getActiveElements(filterStore);
+    let activeProducts = getActiveElements(productsStore);
+
     // usuniecie zbanowanych
     let arr = mealsStore.filter((element) => !element.ban.status);
+
+    if (isUserProductsActive) {
+      // jeżeli sekcja jest aktywna
+
+      return matchMeals;
+    }
 
     if (activeFilters.length > 0) {
       return filterMeals(arr, activeFilters);
