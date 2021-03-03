@@ -14,6 +14,12 @@ const DrawnDishList = ({
 }) => {
   const dispatch = useDispatch(changeBanStatus);
   const mealsStore = useSelector((state) => state.mealsReducer);
+  const isSelectedDish = [...mealsStore].filter(
+    (element) => element.isSelected
+  );
+
+  const [drawnDish, setDrawnDish] = useState([]);
+
   const [ingredientsView, setIngredientView] = useState(false);
   const [productsView, setProductsView] = useState(false);
   const [isSelected, setIsSelected] = useState(
@@ -64,9 +70,13 @@ const DrawnDishList = ({
   const ingredientSection = ingredientsView ? (
     <Ingredient drawnDish={selectedDish} />
   ) : null;
+
+  // ---------------------------
   const setSelectedDishReducer = (id, status) => {
     dispatch(changeIsSelected(id, status));
   };
+  // ---------------------------
+
   console.log(mealsStore);
 
   const drawnDishView = (
