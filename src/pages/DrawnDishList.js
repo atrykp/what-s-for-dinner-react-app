@@ -6,16 +6,15 @@ import "../styles/DrawnDishList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus, changeIsSelected } from "../actions/actions";
 import { setLocalStorage } from "./App";
+
 const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const dispatch = useDispatch(changeBanStatus);
   const mealsStore = useSelector((state) => state.mealsReducer);
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
   );
-  console.log(isSelectedDish);
 
   const [drawnDish, setDrawnDish] = useState("");
-
   const [ingredientsView, setIngredientView] = useState(false);
   const [productsView, setProductsView] = useState(false);
 
@@ -25,6 +24,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   };
   // ---------------------------
   const showDish = isSelectedDish.length > 0 ? isSelectedDish[0] : drawnDish;
+
   const getDate = () => {
     let date = new Date();
     return date.getTime();
@@ -47,14 +47,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
     }
 
     let index = Math.floor(Math.random() * notYetArr.length);
-    // ustaw wylosowane danie w okienku
     setDrawnDish(notYetArr[index]);
-    // setSelectedDish(notYetArr[index]);
-
-    setIsSelectedStorage(false);
-    localStorage.removeItem("selectedDish");
-    localStorage.removeItem("productsList");
-    // usuń z local storage zaznaczone wcześniej składniki
   };
 
   const ban = (id, howLong = "permament") => {
@@ -62,6 +55,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
     banDish(id, sinceWhenDate, howLong);
     setDrawnDish("");
   };
+
   const showIngredients = () => {
     setIngredientView((prevValue) => !prevValue);
   };
@@ -72,9 +66,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const ingredientSection = ingredientsView ? (
     <Ingredient drawnDish={showDish} />
   ) : null;
-
   console.log(showDish);
-
   const drawnDishView = (
     <>
       <button onClick={showIngredients} className="drawnDish__ingredientsBtn">
@@ -84,7 +76,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
       <div
         className={`drawnDish__name ${
           showDish.name
-            ? showDish.name.length > 30
+            ? showDish.name.length > 20
               ? "drawnDish__name--small"
               : ""
             : null
@@ -93,7 +85,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
         <h1
           className={` ${
             showDish.name
-              ? showDish.name.length > 30
+              ? showDish.name.length > 20
                 ? "drawnDish__name--small"
                 : ""
               : null
@@ -158,7 +150,17 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
       </button>
       {ingredientSection}
       <div className="drawnDish__name">
-        <h1>{showDish.name || null}</h1>
+        <h1
+          className={` ${
+            showDish.name
+              ? showDish.name.length > 20
+                ? "drawnDish__name--small"
+                : ""
+              : null
+          }`}
+        >
+          {showDish.name || null}
+        </h1>
       </div>
       <div className="drawnDish__buttons">
         <button onClick={markDishAsDone} className="drawnDish__doneBtn">
@@ -181,12 +183,6 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const showDishSection = showDish && (
     <div className="drawnDish">{dishView}</div>
   );
-  const setIsSelectedStorage = (value) => {
-    localStorage.setItem("isSelected", value);
-  };
-  const setSelectedDishStorage = (arr) => {
-    localStorage.setItem("selectedDish", JSON.stringify(arr));
-  };
 
   return (
     <>
