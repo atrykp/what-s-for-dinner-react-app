@@ -27,6 +27,9 @@ function App() {
   const mealsStore = useSelector((state) => state.mealsReducer);
   const filterStore = useSelector((state) => state.filtersReducer);
   const productsStore = useSelector((state) => state.productsReducer);
+  const isSelectedDish = [...mealsStore].filter(
+    (element) => element.isSelected
+  );
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
   );
@@ -157,7 +160,7 @@ function App() {
           <AddDish />
         </Route>
         <Route path="/dish/:id">
-          <Dish selectedDish={selectedDish} />
+          <Dish selectedDish={isSelectedDish[0]} />
         </Route>
         <Route path="/edit/:id">
           <EditDish

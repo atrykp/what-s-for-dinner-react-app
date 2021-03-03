@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import "../styles/Ingredients.css";
 
 const Ingredients = ({ drawnDish, className = null }) => {
+  console.log(drawnDish);
   const ingredientsArr = [...drawnDish.ingredient];
   const ingredientsList = ingredientsArr.map((element) => (
     <li key={v4()} className={className}>

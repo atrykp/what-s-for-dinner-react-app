@@ -6,28 +6,25 @@ import "../styles/DrawnDishList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus, changeIsSelected } from "../actions/actions";
 import { setLocalStorage } from "./App";
-const DrawnDishList = ({
-  customedArr,
-  setSelectedDish,
-  selectedDish,
-  setIsUserProductsActive,
-}) => {
+const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const dispatch = useDispatch(changeBanStatus);
   const mealsStore = useSelector((state) => state.mealsReducer);
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
   );
+  console.log(isSelectedDish);
 
-  const [drawnDish, setDrawnDish] = useState([]);
+  const [drawnDish, setDrawnDish] = useState("");
 
   const [ingredientsView, setIngredientView] = useState(false);
   const [productsView, setProductsView] = useState(false);
-  const [isSelected, setIsSelected] = useState(
-    localStorage.getItem("isSelected") === null
-      ? false
-      : localStorage.getItem("isSelected")
-  );
 
+  // ---------------------------
+  const setSelectedDishReducer = (id, status) => {
+    dispatch(changeIsSelected(id, status));
+  };
+  // ---------------------------
+  const showDish = isSelectedDish.length > 0 ? isSelectedDish[0] : drawnDish;
   const getDate = () => {
     let date = new Date();
     return date.getTime();
@@ -44,11 +41,16 @@ const DrawnDishList = ({
     if (notYetArr.length < 1) {
       return alert("Brak dań do losowania");
     }
+    if (isSelectedDish.length > 0) {
+      const { id, isSelected } = isSelectedDish[0];
+      setSelectedDishReducer(id, isSelected);
+    }
 
     let index = Math.floor(Math.random() * notYetArr.length);
     // ustaw wylosowane danie w okienku
-    setSelectedDish(notYetArr[index]);
-    setIsSelected(false);
+    setDrawnDish(notYetArr[index]);
+    // setSelectedDish(notYetArr[index]);
+
     setIsSelectedStorage(false);
     localStorage.removeItem("selectedDish");
     localStorage.removeItem("productsList");
@@ -58,7 +60,7 @@ const DrawnDishList = ({
   const ban = (id, howLong = "permament") => {
     const sinceWhenDate = getDate();
     banDish(id, sinceWhenDate, howLong);
-    setSelectedDish("");
+    setDrawnDish("");
   };
   const showIngredients = () => {
     setIngredientView((prevValue) => !prevValue);
@@ -68,16 +70,10 @@ const DrawnDishList = ({
     : "pokaż składniki";
 
   const ingredientSection = ingredientsView ? (
-    <Ingredient drawnDish={selectedDish} />
+    <Ingredient drawnDish={showDish} />
   ) : null;
 
-  // ---------------------------
-  const setSelectedDishReducer = (id, status) => {
-    dispatch(changeIsSelected(id, status));
-  };
-  // ---------------------------
-
-  console.log(mealsStore);
+  console.log(showDish);
 
   const drawnDishView = (
     <>
@@ -87,8 +83,8 @@ const DrawnDishList = ({
       {ingredientSection}
       <div
         className={`drawnDish__name ${
-          selectedDish.name
-            ? selectedDish.name.length > 30
+          showDish.name
+            ? showDish.name.length > 30
               ? "drawnDish__name--small"
               : ""
             : null
@@ -96,41 +92,36 @@ const DrawnDishList = ({
       >
         <h1
           className={` ${
-            selectedDish.name
-              ? selectedDish.name.length > 30
+            showDish.name
+              ? showDish.name.length > 30
                 ? "drawnDish__name--small"
                 : ""
               : null
           }`}
         >
-          {selectedDish.name}
+          {showDish.name}
         </h1>
       </div>
       <div className="drawnDish__buttons">
         <button
-          onClick={() => ban(selectedDish.id, 7000)}
+          onClick={() => ban(showDish.id, 7000)}
           className="drawnDish__shortBanBtn"
         >
           Nie dzisiaj
         </button>
         <Link
-          to={`dish/${selectedDish.name}${selectedDish.id}`}
+          to={`dish/${showDish.name}${showDish.id}`}
           onClick={() => {
-            ban(selectedDish.id, 15000);
-            setSelectedDish(selectedDish);
-            setIsSelectedStorage(!isSelected);
-            setSelectedDishStorage(selectedDish);
+            ban(showDish.id, 15000);
+
             setIsUserProductsActive(false);
-            setSelectedDishReducer(selectedDish.id, selectedDish.isSelected);
+            setSelectedDishReducer(showDish.id, showDish.isSelected);
           }}
           className="drawnDish__choose"
         >
           Ok
         </Link>
-        <button
-          onClick={() => ban(selectedDish.id)}
-          className="drawnDish__banBtn"
-        >
+        <button onClick={() => ban(showDish.id)} className="drawnDish__banBtn">
           Nie lubię
         </button>
       </div>
@@ -155,11 +146,9 @@ const DrawnDishList = ({
     } else return null;
   };
   const markDishAsDone = () => {
-    setIsSelected(false);
-    setIsSelectedStorage(false);
     localStorage.removeItem("selectedDish");
     localStorage.removeItem("productsList");
-    setSelectedDish("");
+    setDrawnDish([]);
   };
 
   const selectedDishView = (
@@ -169,14 +158,14 @@ const DrawnDishList = ({
       </button>
       {ingredientSection}
       <div className="drawnDish__name">
-        <h1>{selectedDish.name}</h1>
+        <h1>{showDish.name || null}</h1>
       </div>
       <div className="drawnDish__buttons">
         <button onClick={markDishAsDone} className="drawnDish__doneBtn">
           Zrobione
         </button>
         <Link
-          to={`dish/${selectedDish.name}${selectedDish.id}`}
+          to={`dish/${showDish.name}${showDish.id}`}
           className="drawnDish__choose"
         >
           pokaż
@@ -188,9 +177,10 @@ const DrawnDishList = ({
       <div className="selectedDish__shoppingList"></div> {productsListArr()}
     </>
   );
-  const dishView = isSelected ? selectedDishView : drawnDishView;
-
-  const showDish = selectedDish && <div className="drawnDish">{dishView}</div>;
+  const dishView = isSelectedDish.length > 0 ? selectedDishView : drawnDishView;
+  const showDishSection = showDish && (
+    <div className="drawnDish">{dishView}</div>
+  );
   const setIsSelectedStorage = (value) => {
     localStorage.setItem("isSelected", value);
   };
@@ -204,7 +194,7 @@ const DrawnDishList = ({
         <button onClick={handleDraw} className="drawnDishSection__drawBtn">
           Losuj
         </button>
-        {showDish}
+        {showDishSection}
       </div>
     </>
   );
