@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Dish.css";
 import Ingredients from "../components/Ingredients.js";
+
 const Dish = (props) => {
   const [products, setProducts] = useState([]);
   const {
@@ -18,10 +19,7 @@ const Dish = (props) => {
     isChecked: false,
   }));
   useEffect(() => {
-    const arr = JSON.parse(localStorage.getItem("productsList"));
-    if (arr) {
-      setProducts(arr);
-    } else setProducts(productsList);
+    setProducts(productsList);
   }, []);
 
   const ingredientArr = (

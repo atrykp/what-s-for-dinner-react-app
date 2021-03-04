@@ -32,7 +32,6 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
 
   const banDish = (id, time, howLong) => {
     dispatch(changeBanStatus(id, { status: true, howLong, sinceWhen: time }));
-    setLocalStorage(mealsStore, "allMeals");
   };
 
   const handleDraw = () => {
@@ -66,7 +65,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const ingredientSection = ingredientsView ? (
     <Ingredient drawnDish={showDish} />
   ) : null;
-  console.log(showDish);
+
   const drawnDishView = (
     <>
       <button onClick={showIngredients} className="drawnDish__ingredientsBtn">
@@ -119,6 +118,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
       </div>
     </>
   );
+
   const showProductsList = () => {
     setProductsView((prevValue) => !prevValue);
   };
@@ -135,7 +135,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
             </p>
           ));
       } else return;
-    } else return null;
+    } else return;
   };
   const markDishAsDone = () => {
     localStorage.removeItem("selectedDish");
@@ -179,7 +179,9 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
       <div className="selectedDish__shoppingList"></div> {productsListArr()}
     </>
   );
+
   const dishView = isSelectedDish.length > 0 ? selectedDishView : drawnDishView;
+
   const showDishSection = showDish && (
     <div className="drawnDish">{dishView}</div>
   );
