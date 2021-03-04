@@ -1,6 +1,19 @@
 import { CHANGE_ACTIVE_STATUS } from "../actions/actions";
 
-const store = {};
+const store = [
+  {
+    name: "ingredientsView",
+    status: false,
+  },
+  {
+    name: "productsView",
+    status: false,
+  },
+  {
+    name: "isUserProductsActive",
+    status: false,
+  },
+];
 
 export const activeSectionReducer = (status = store, action) => {
   switch (action.type) {
