@@ -7,6 +7,7 @@ export const ADD_FITLER = "ADD_FILTER";
 export const EDIT_FITLER = "EDIT_FILTER";
 export const REMOVE_FITLER = "REMOVE_FILTER";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
+export const CHANGE_ACTIVE_STATUS = "CHANGE_ACTIVE_STATUS";
 export const addDish = ({
   name,
   ingredient = [],
@@ -80,6 +81,16 @@ export const editProduct = (id, active) => {
     payload: {
       active,
       id,
+    },
+  };
+};
+
+export const changeActiveStatus = (name, status) => {
+  return {
+    type: CHANGE_ACTIVE_STATUS,
+    payload: {
+      name,
+      status: !status,
     },
   };
 };
