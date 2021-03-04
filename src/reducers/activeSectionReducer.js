@@ -22,7 +22,8 @@ export const activeSectionReducer = (status = store, action) => {
         if (element.name !== action.payload.name) {
           return element;
         } else {
-          return (element.status = action.payload.status);
+          element.status = action.payload.status;
+          return element;
         }
       });
     default:

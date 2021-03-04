@@ -90,7 +90,7 @@ export const changeActiveStatus = (name, status) => {
     type: CHANGE_ACTIVE_STATUS,
     payload: {
       name,
-      status: !status,
+      status,
     },
   };
 };

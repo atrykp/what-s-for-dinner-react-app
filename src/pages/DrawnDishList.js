@@ -4,8 +4,11 @@ import Ingredient from "../components/Ingredients";
 import { v4 } from "uuid";
 import "../styles/DrawnDishList.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBanStatus, changeIsSelected } from "../actions/actions";
-import { setLocalStorage } from "./App";
+import {
+  changeBanStatus,
+  changeIsSelected,
+  changeActiveStatus,
+} from "../actions/actions";
 
 const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const dispatch = useDispatch(changeBanStatus);
@@ -13,9 +16,13 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
   );
+  const isSectionActive = useSelector((state) => state.activeSectionReducer);
+  const ingredientsView = isSectionActive.find(
+    (element) => element.name === "ingredientsView"
+  );
 
   const [drawnDish, setDrawnDish] = useState("");
-  const [ingredientsView, setIngredientView] = useState(false);
+
   const [productsView, setProductsView] = useState(false);
 
   // ---------------------------
@@ -56,13 +63,13 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   };
 
   const showIngredients = () => {
-    setIngredientView((prevValue) => !prevValue);
+    dispatch(changeActiveStatus(ingredientsView.name, !ingredientsView.status));
   };
-  const ingredientBtnTxt = ingredientsView
+  const ingredientBtnTxt = ingredientsView.status
     ? "ukryj składniki"
     : "pokaż składniki";
 
-  const ingredientSection = ingredientsView ? (
+  const ingredientSection = ingredientsView.status ? (
     <Ingredient drawnDish={showDish} />
   ) : null;
 
