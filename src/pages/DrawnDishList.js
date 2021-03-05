@@ -181,6 +181,14 @@ const DrawnDishList = ({ customedArr }) => {
         <Link
           to={`dish/${showDish.name}${showDish.id}`}
           className="drawnDish__choose"
+          onClick={() => {
+            dispatch(
+              changeActiveStatus(
+                setIsUserProductsActive.name,
+                !setIsUserProductsActive.status
+              )
+            );
+          }}
         >
           pokaż
         </Link>

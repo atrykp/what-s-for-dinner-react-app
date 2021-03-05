@@ -34,10 +34,12 @@ function App() {
   const isUserProductsActive = isSectionActive.find(
     (element) => element.name === "isUserProductsActive"
   );
+  console.log(isUserProductsActive);
+
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
   );
-  // const [isUserProductsActive, setIsUserProductsActive] = useState(false);
+
   const [selectedDish, setSelectedDish] = useState(
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
@@ -132,11 +134,7 @@ function App() {
         </div>
       </div>
       <div>
-        <DrawnDishList
-          selectedDish={selectedDish}
-          setSelectedDish={setSelectedDish}
-          customedArr={getMealsArray()}
-        />
+        <DrawnDishList customedArr={getMealsArray()} />
       </div>
 
       <div className="lowerNav">
