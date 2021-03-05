@@ -10,7 +10,7 @@ import {
   changeActiveStatus,
 } from "../actions/actions";
 
-const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
+const DrawnDishList = ({ customedArr }) => {
   const dispatch = useDispatch(changeBanStatus);
   const mealsStore = useSelector((state) => state.mealsReducer);
   const isSelectedDish = [...mealsStore].filter(
@@ -19,6 +19,9 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
   const isSectionActive = useSelector((state) => state.activeSectionReducer);
   const ingredientsView = isSectionActive.find(
     (element) => element.name === "ingredientsView"
+  );
+  const setIsUserProductsActive = isSectionActive.find(
+    (element) => element.name === "isUserProductsActive"
   );
 
   const [drawnDish, setDrawnDish] = useState("");
@@ -111,7 +114,12 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
           onClick={() => {
             ban(showDish.id, 15000);
 
-            setIsUserProductsActive(false);
+            dispatch(
+              changeActiveStatus(
+                setIsUserProductsActive.name,
+                !setIsUserProductsActive.status
+              )
+            );
             setSelectedDishReducer(showDish.id, showDish.isSelected);
           }}
           className="drawnDish__choose"
