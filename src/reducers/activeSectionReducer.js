@@ -15,10 +15,10 @@ const store = [
   },
 ];
 
-export const activeSectionReducer = (status = store, action) => {
+export const activeSectionReducer = (state = store, action) => {
   switch (action.type) {
     case CHANGE_ACTIVE_STATUS:
-      return status.map((element) => {
+      return state.map((element) => {
         if (element.name !== action.payload.name) {
           return element;
         } else {
@@ -27,6 +27,6 @@ export const activeSectionReducer = (status = store, action) => {
         }
       });
     default:
-      return status;
+      return state;
   }
 };

@@ -30,10 +30,14 @@ function App() {
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
   );
+  const isSectionActive = useSelector((state) => state.activeSectionReducer);
+  const isUserProductsActive = isSectionActive.find(
+    (element) => element.name === "isUserProductsActive"
+  );
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
   );
-  const [isUserProductsActive, setIsUserProductsActive] = useState(false);
+  // const [isUserProductsActive, setIsUserProductsActive] = useState(false);
   const [selectedDish, setSelectedDish] = useState(
     JSON.parse(localStorage.getItem("selectedDish")) || ""
   );
@@ -76,9 +80,9 @@ function App() {
           flag = true;
         }
       }
-      if (isUserProductsActive && flag) {
+      if (isUserProductsActive.status && flag) {
         mealsArr.push(arr[i]);
-      } else if (!isUserProductsActive && !flag) {
+      } else if (!isUserProductsActive.status && !flag) {
         mealsArr.push(arr[i]);
       }
     }
@@ -100,7 +104,7 @@ function App() {
     // remove banned
     let arr = mealsStore.filter((element) => !element.ban.status);
 
-    if (isUserProductsActive) {
+    if (isUserProductsActive.status) {
       // if products section is active
       return filterMeals(arr, activeProducts);
     }
@@ -120,7 +124,7 @@ function App() {
     <div className="appWrapper">
       <div className="upperNav">
         <div className="upperNav__userProducts">
-          <UserProducts setIsUserProductsActive={setIsUserProductsActive} />
+          <UserProducts />
         </div>
         <div className="upperNav__counter">{mealsCounter}</div>
         <div className="upperNav__filters">
@@ -132,7 +136,6 @@ function App() {
           selectedDish={selectedDish}
           setSelectedDish={setSelectedDish}
           customedArr={getMealsArray()}
-          setIsUserProductsActive={setIsUserProductsActive}
         />
       </div>
 

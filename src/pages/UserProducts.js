@@ -1,24 +1,27 @@
-import React, { useState } from "react";
 import { v4 } from "uuid";
 import "../styles/UserProducts.css";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
-import { editProduct } from "../actions/actions";
+import { editProduct, changeActiveStatus } from "../actions/actions";
 
-const UserProducts = ({ setIsUserProductsActive }) => {
+const UserProducts = () => {
   const dispatch = useDispatch();
   const productsStore = useSelector((state) => state.productsReducer);
-
-  const [isActive, setIsActive] = useState(false);
+  const isSectionActive = useSelector((state) => state.activeSectionReducer);
+  const setIsUserProductsActive = isSectionActive.find(
+    (element) => element.name === "isUserProductsActive"
+  );
 
   const showSection = () => {
-    setIsActive((prevValue) => {
-      setIsUserProductsActive(!prevValue);
-      return !prevValue;
-    });
+    dispatch(
+      changeActiveStatus(
+        setIsUserProductsActive.name,
+        !setIsUserProductsActive.status
+      )
+    );
   };
 
-  const changeActiveStatus = (id, status) => {
+  const changeActiveStat = (id, status) => {
     dispatch(editProduct(id, !status));
   };
   const filters = productsStore.map((item) => (
@@ -27,7 +30,7 @@ const UserProducts = ({ setIsUserProductsActive }) => {
         className={`${
           item.active ? "activeFilter" : ""
         } userProducts__filterBtn`}
-        onClick={() => changeActiveStatus(item.id, item.active)}
+        onClick={() => changeActiveStat(item.id, item.active)}
       >
         {item.name}
       </button>
@@ -35,7 +38,7 @@ const UserProducts = ({ setIsUserProductsActive }) => {
   ));
   const section = (
     <CSSTransition
-      in={isActive}
+      in={setIsUserProductsActive.status}
       timeout={300}
       classNames="sample"
       unmountOnExit
@@ -54,7 +57,7 @@ const UserProducts = ({ setIsUserProductsActive }) => {
         <button
           onClick={showSection}
           className={`userProducts__activeBtn ${
-            isActive && "userProducts__activeBtn--active"
+            setIsUserProductsActive.status && "userProducts__activeBtn--active"
           }`}
         >
           Produkty
