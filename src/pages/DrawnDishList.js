@@ -25,11 +25,10 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
 
   const [productsView, setProductsView] = useState(false);
 
-  // ---------------------------
   const setSelectedDishReducer = (id, status) => {
     dispatch(changeIsSelected(id, status));
   };
-  // ---------------------------
+
   const showDish = isSelectedDish.length > 0 ? isSelectedDish[0] : drawnDish;
 
   const getDate = () => {
@@ -145,9 +144,7 @@ const DrawnDishList = ({ customedArr, setIsUserProductsActive }) => {
     } else return;
   };
   const markDishAsDone = () => {
-    localStorage.removeItem("selectedDish");
-    localStorage.removeItem("productsList");
-    setDrawnDish([]);
+    setSelectedDishReducer(showDish.id, showDish.isSelected);
   };
 
   const selectedDishView = (
