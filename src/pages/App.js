@@ -97,6 +97,7 @@ function App() {
     });
     return active;
   };
+
   const getMealsArray = () => {
     let activeFilters = getActiveElements(filterStore);
     let activeProducts = getActiveElements(productsStore);

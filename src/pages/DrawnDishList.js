@@ -17,12 +17,9 @@ const DrawnDishList = ({ customedArr }) => {
     (element) => element.isSelected
   );
   const isSectionActive = useSelector((state) => state.activeSectionReducer);
-  const { ingredientsView } = isSectionActive;
+  const { ingredientsView, productsView } = isSectionActive;
 
   const [drawnDish, setDrawnDish] = useState("");
-
-  const [productsView, setProductsView] = useState(false);
-
   const setSelectedDishReducer = (id, status) => {
     dispatch(changeIsSelected(id, status));
   };
@@ -124,7 +121,7 @@ const DrawnDishList = ({ customedArr }) => {
   );
 
   const showProductsList = () => {
-    setProductsView((prevValue) => !prevValue);
+    dispatch(changeActiveStatus("productsView", !productsView));
   };
   const productsListArr = () => {
     if (productsView) {
