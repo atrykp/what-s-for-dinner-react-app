@@ -31,10 +31,8 @@ function App() {
     (element) => element.isSelected
   );
   const isSectionActive = useSelector((state) => state.activeSectionReducer);
-  const isUserProductsActive = isSectionActive.find(
-    (element) => element.name === "isUserProductsActive"
-  );
-  console.log(isUserProductsActive);
+
+  const { isUserProductsActive } = isSectionActive;
 
   const [allMeals, setAllMeals] = useState(
     JSON.parse(localStorage.getItem("allMeals")) || mealsStore
@@ -82,9 +80,9 @@ function App() {
           flag = true;
         }
       }
-      if (isUserProductsActive.status && flag) {
+      if (isUserProductsActive && flag) {
         mealsArr.push(arr[i]);
-      } else if (!isUserProductsActive.status && !flag) {
+      } else if (!isUserProductsActive && !flag) {
         mealsArr.push(arr[i]);
       }
     }
@@ -106,7 +104,7 @@ function App() {
     // remove banned
     let arr = mealsStore.filter((element) => !element.ban.status);
 
-    if (isUserProductsActive.status) {
+    if (isUserProductsActive) {
       // if products section is active
       return filterMeals(arr, activeProducts);
     }

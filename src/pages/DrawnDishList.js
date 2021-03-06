@@ -17,12 +17,7 @@ const DrawnDishList = ({ customedArr }) => {
     (element) => element.isSelected
   );
   const isSectionActive = useSelector((state) => state.activeSectionReducer);
-  const ingredientsView = isSectionActive.find(
-    (element) => element.name === "ingredientsView"
-  );
-  const setIsUserProductsActive = isSectionActive.find(
-    (element) => element.name === "isUserProductsActive"
-  );
+  const { ingredientsView } = isSectionActive;
 
   const [drawnDish, setDrawnDish] = useState("");
 
@@ -65,13 +60,13 @@ const DrawnDishList = ({ customedArr }) => {
   };
 
   const showIngredients = () => {
-    dispatch(changeActiveStatus(ingredientsView.name, false));
+    dispatch(changeActiveStatus("ingredientsView", !ingredientsView));
   };
-  const ingredientBtnTxt = ingredientsView.status
+  const ingredientBtnTxt = ingredientsView
     ? "ukryj składniki"
     : "pokaż składniki";
 
-  const ingredientSection = ingredientsView.status ? (
+  const ingredientSection = ingredientsView ? (
     <Ingredient drawnDish={showDish} />
   ) : null;
 
@@ -114,12 +109,7 @@ const DrawnDishList = ({ customedArr }) => {
           onClick={() => {
             ban(showDish.id, 15000);
 
-            dispatch(
-              changeActiveStatus(
-                setIsUserProductsActive.name,
-                !setIsUserProductsActive.status
-              )
-            );
+            dispatch(changeActiveStatus("isUserProductsActive", false));
             setSelectedDishReducer(showDish.id, showDish.isSelected);
           }}
           className="drawnDish__choose"
@@ -182,7 +172,7 @@ const DrawnDishList = ({ customedArr }) => {
           to={`dish/${showDish.name}${showDish.id}`}
           className="drawnDish__choose"
           onClick={() => {
-            dispatch(changeActiveStatus(setIsUserProductsActive.name, false));
+            dispatch(changeActiveStatus("isUserProductsActive", false));
           }}
         >
           pokaż

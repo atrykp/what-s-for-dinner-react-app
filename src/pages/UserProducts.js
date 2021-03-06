@@ -8,17 +8,10 @@ const UserProducts = () => {
   const dispatch = useDispatch();
   const productsStore = useSelector((state) => state.productsReducer);
   const isSectionActive = useSelector((state) => state.activeSectionReducer);
-  const setIsUserProductsActive = isSectionActive.find(
-    (element) => element.name === "isUserProductsActive"
-  );
+  const { isUserProductsActive } = isSectionActive;
 
   const showSection = () => {
-    dispatch(
-      changeActiveStatus(
-        setIsUserProductsActive.name,
-        !setIsUserProductsActive.status
-      )
-    );
+    dispatch(changeActiveStatus("isUserProductsActive", !isUserProductsActive));
   };
 
   const changeActiveStat = (id, status) => {
@@ -38,7 +31,7 @@ const UserProducts = () => {
   ));
   const section = (
     <CSSTransition
-      in={setIsUserProductsActive.status}
+      in={isUserProductsActive}
       timeout={300}
       classNames="sample"
       unmountOnExit
@@ -57,7 +50,7 @@ const UserProducts = () => {
         <button
           onClick={showSection}
           className={`userProducts__activeBtn ${
-            setIsUserProductsActive.status && "userProducts__activeBtn--active"
+            isUserProductsActive && "userProducts__activeBtn--active"
           }`}
         >
           Produkty
