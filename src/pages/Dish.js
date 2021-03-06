@@ -59,7 +59,7 @@ const Dish = (props) => {
   ));
   const handleSaveProducts = (e) => {
     e.preventDefault();
-    localStorage.setItem("productsList", JSON.stringify(products));
+
     // zapisz do local storage cały obiekt
   };
   return (

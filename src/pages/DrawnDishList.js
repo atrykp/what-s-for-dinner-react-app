@@ -123,6 +123,7 @@ const DrawnDishList = ({ customedArr }) => {
   const showProductsList = () => {
     dispatch(changeActiveStatus("productsView", !productsView));
   };
+  // lista produktów do kupienia do reducer--------------------------------------
   const productsListArr = () => {
     if (productsView) {
       const list = JSON.parse(localStorage.getItem("productsList"));

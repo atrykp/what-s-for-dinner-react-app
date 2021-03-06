@@ -5,7 +5,7 @@ import "../styles/BannedMeals.css";
 import { useSelector, useDispatch } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
 
-const BannedMeals = ({ setLocalStorage }) => {
+const BannedMeals = () => {
   const dispatch = useDispatch();
   const mealsStore = useSelector((state) => state.mealsReducer);
   const bannedMeals = mealsStore.filter((dish) => dish.ban.status);
@@ -14,7 +14,6 @@ const BannedMeals = ({ setLocalStorage }) => {
     dispatch(
       changeBanStatus(id, { status: false, sinceWhen: "", howLong: "" })
     );
-    setLocalStorage(mealsStore, "allMeals");
   };
 
   const mealsList = bannedMeals.map((dish) => {

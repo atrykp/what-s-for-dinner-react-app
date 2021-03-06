@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../styles/App.css";
 
 import DrawnDishList from "./DrawnDishList";
@@ -16,11 +16,7 @@ import MoreMenu from "../components/MoreMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
 import NewFilterArr from "../pages/NewFilterArr";
-import EditDish from "../components/EditDish";
-
-export const setLocalStorage = (arr, name) => {
-  localStorage.setItem(name, JSON.stringify(arr));
-};
+// import EditDish from "../components/EditDish";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,14 +29,6 @@ function App() {
   const isSectionActive = useSelector((state) => state.activeSectionReducer);
 
   const { isUserProductsActive } = isSectionActive;
-
-  const [allMeals, setAllMeals] = useState(
-    JSON.parse(localStorage.getItem("allMeals")) || mealsStore
-  );
-
-  const [selectedDish, setSelectedDish] = useState(
-    JSON.parse(localStorage.getItem("selectedDish")) || ""
-  );
 
   useEffect(() => {
     const banInterval = setInterval(() => {
@@ -154,7 +142,7 @@ function App() {
           {mainPageStructure}
         </Route>
         <Route path="/bannedMeals">
-          <BannedMeals setLocalStorage={setLocalStorage} />
+          <BannedMeals />
         </Route>
         <Route path="/addDish">
           <AddDish />
@@ -163,12 +151,12 @@ function App() {
           <Dish selectedDish={isSelectedDish[0]} />
         </Route>
         <Route path="/edit/:id">
-          <EditDish
+          {/* <EditDish
             selectedDish={selectedDish}
             allMeals={allMeals}
             setAllMeals={setAllMeals}
             setSelectedDish={setSelectedDish}
-          />
+          /> */}
         </Route>
       </Switch>
     </Router>
