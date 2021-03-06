@@ -65,7 +65,7 @@ const DrawnDishList = ({ customedArr }) => {
   };
 
   const showIngredients = () => {
-    dispatch(changeActiveStatus(ingredientsView.name, !ingredientsView.status));
+    dispatch(changeActiveStatus(ingredientsView.name, false));
   };
   const ingredientBtnTxt = ingredientsView.status
     ? "ukryj składniki"
@@ -182,12 +182,7 @@ const DrawnDishList = ({ customedArr }) => {
           to={`dish/${showDish.name}${showDish.id}`}
           className="drawnDish__choose"
           onClick={() => {
-            dispatch(
-              changeActiveStatus(
-                setIsUserProductsActive.name,
-                !setIsUserProductsActive.status
-              )
-            );
+            dispatch(changeActiveStatus(setIsUserProductsActive.name, false));
           }}
         >
           pokaż
