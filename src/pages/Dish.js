@@ -3,15 +3,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Dish.css";
 import Ingredients from "../components/Ingredients.js";
+import { useDispatch, useSelector } from "react-redux";
 
-const Dish = (props) => {
+const Dish = () => {
   const [products, setProducts] = useState([]);
+
+  const mealsStore = useSelector((state) => state.mealsReducer);
+  const productsListRe = useSelector((state) => state.shoppingListReducer);
+  const isSelectedDish = [...mealsStore].filter(
+    (element) => element.isSelected
+  );
+  console.log(isSelectedDish);
   const {
     name,
     description = null,
     ingredient = [],
     steps = [],
-  } = props.selectedDish;
+  } = isSelectedDish[0];
 
   const productsList = ingredient.map((item) => ({
     name: item.name,
@@ -25,7 +33,7 @@ const Dish = (props) => {
 
   const ingredientArr = (
     <Ingredients
-      drawnDish={props.selectedDish}
+      drawnDish={isSelectedDish[0]}
       className={"selectedDish__ingredient"}
     />
   );

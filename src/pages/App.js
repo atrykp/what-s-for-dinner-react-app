@@ -23,9 +23,6 @@ function App() {
   const mealsStore = useSelector((state) => state.mealsReducer);
   const filterStore = useSelector((state) => state.filtersReducer);
   const productsStore = useSelector((state) => state.productsReducer);
-  const isSelectedDish = [...mealsStore].filter(
-    (element) => element.isSelected
-  );
   const isSectionActive = useSelector((state) => state.activeSectionReducer);
 
   const { isUserProductsActive } = isSectionActive;
@@ -148,7 +145,7 @@ function App() {
           <AddDish />
         </Route>
         <Route path="/dish/:id">
-          <Dish selectedDish={isSelectedDish[0]} />
+          <Dish />
         </Route>
         <Route path="/edit/:id">
           {/* <EditDish
