@@ -17,6 +17,7 @@ const Dish = (props) => {
     name: item.name,
     quantity: item.quantity,
     isChecked: false,
+    id: v4(),
   }));
   useEffect(() => {
     setProducts(productsList);

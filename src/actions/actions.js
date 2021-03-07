@@ -8,6 +8,11 @@ export const EDIT_FITLER = "EDIT_FILTER";
 export const REMOVE_FITLER = "REMOVE_FILTER";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const CHANGE_ACTIVE_STATUS = "CHANGE_ACTIVE_STATUS";
+export const ADD_TO_SHOPPING_LIST = "ADD_TO_SHOPPING_LIST";
+export const REMOVE_FROM_SHOPPING_LIST = "REMOVE_FROM_SHOPPING_LIST";
+
+export const EDIT_SHOPPING_LIST_ELEMENT = "EDIT_SHOPPING_LIST_ELEMENTS";
+
 export const addDish = ({
   name,
   ingredient = [],
@@ -91,6 +96,37 @@ export const changeActiveStatus = (name, status) => {
     payload: {
       name,
       status,
+    },
+  };
+};
+
+export const addToShoppingList = (name, quantity, isChecked = false) => {
+  return {
+    type: ADD_TO_SHOPPING_LIST,
+    payload: {
+      name,
+      quantity,
+      isChecked,
+      id: v4(),
+    },
+  };
+};
+
+export const removeFromShoppingList = (id) => {
+  return {
+    type: REMOVE_FROM_SHOPPING_LIST,
+    payload: {
+      id,
+    },
+  };
+};
+
+export const editShoppingList = (id, isChecked) => {
+  return {
+    type: EDIT_SHOPPING_LIST_ELEMENT,
+    payload: {
+      id,
+      isChecked: !isChecked,
     },
   };
 };
