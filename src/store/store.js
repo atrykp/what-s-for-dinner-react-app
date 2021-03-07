@@ -12,6 +12,7 @@ store.subscribe(
       filtersReducer: store.getState().filtersReducer,
       mealsReducer: store.getState().mealsReducer,
       productsReducer: store.getState().productsReducer,
+      shoppingListReducer: store.getState().shoppingListReducer,
     });
   }, 1000)
 );

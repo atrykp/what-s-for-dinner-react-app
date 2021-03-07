@@ -1,19 +1,19 @@
 import { v4 } from "uuid";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Dish.css";
 import Ingredients from "../components/Ingredients.js";
 import { useDispatch, useSelector } from "react-redux";
+import { addToShoppingList, editShoppingList } from "../actions/actions";
 
 const Dish = () => {
-  const [products, setProducts] = useState([]);
-
+  const dispatch = useDispatch();
   const mealsStore = useSelector((state) => state.mealsReducer);
-  const productsListRe = useSelector((state) => state.shoppingListReducer);
+  const productsList = useSelector((state) => state.shoppingListReducer);
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
   );
-  console.log(isSelectedDish);
+  // destructuring selected dish
   const {
     name,
     description = null,
@@ -21,14 +21,17 @@ const Dish = () => {
     steps = [],
   } = isSelectedDish[0];
 
-  const productsList = ingredient.map((item) => ({
-    name: item.name,
-    quantity: item.quantity,
-    isChecked: false,
-    id: v4(),
-  }));
+  const addProductsToStore = () => {
+    const productsList = ingredient.map((item) => ({
+      name: item.name,
+      quantity: item.quantity,
+      isChecked: false,
+      id: v4(),
+    }));
+    dispatch(addToShoppingList(productsList));
+  };
   useEffect(() => {
-    setProducts(productsList);
+    if (productsList.length === 0) addProductsToStore();
   }, []);
 
   const ingredientArr = (
@@ -48,13 +51,12 @@ const Dish = () => {
       : null;
 
   const handleCheck = (e) => {
-    const arr = [...products];
+    const arr = [...productsList];
     const index = arr.findIndex((item) => item.name === e.target.id);
-    arr[index].isChecked = !arr[index].isChecked;
-    setProducts(arr);
+    dispatch(editShoppingList(arr[index].id, arr[index].isChecked));
   };
 
-  const shoppingList = products.map((item) => (
+  const shoppingList = productsList.map((item) => (
     <label htmlFor={item.name} key={v4()}>
       {item.name}
       <input

@@ -8,10 +8,12 @@ import {
   changeBanStatus,
   changeIsSelected,
   changeActiveStatus,
+  removeShoppingList,
 } from "../actions/actions";
 
 const DrawnDishList = ({ customedArr }) => {
-  const dispatch = useDispatch(changeBanStatus);
+  const dispatch = useDispatch();
+  const productsList = useSelector((state) => state.shoppingListReducer);
   const mealsStore = useSelector((state) => state.mealsReducer);
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
@@ -123,10 +125,9 @@ const DrawnDishList = ({ customedArr }) => {
   const showProductsList = () => {
     dispatch(changeActiveStatus("productsView", !productsView));
   };
-  // lista produktów do kupienia do reducer--------------------------------------
   const productsListArr = () => {
     if (productsView) {
-      const list = JSON.parse(localStorage.getItem("productsList"));
+      const list = productsList;
       if (list) {
         return list
           .filter((item) => item.isChecked)
@@ -141,6 +142,7 @@ const DrawnDishList = ({ customedArr }) => {
   };
   const markDishAsDone = () => {
     setSelectedDishReducer(showDish.id, showDish.isSelected);
+    dispatch(removeShoppingList());
   };
 
   const selectedDishView = (
@@ -171,6 +173,7 @@ const DrawnDishList = ({ customedArr }) => {
           className="drawnDish__choose"
           onClick={() => {
             dispatch(changeActiveStatus("isUserProductsActive", false));
+            dispatch(changeActiveStatus("productsView", false));
           }}
         >
           pokaż
