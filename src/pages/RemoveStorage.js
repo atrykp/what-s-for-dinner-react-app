@@ -1,15 +1,7 @@
 import { useState } from "react";
 import "../styles/RemoveStorage.css";
 
-const storageItems = [
-  "userMeals",
-  "allMeals",
-  "filterArr",
-  "userFilterArr",
-  "selectedDish",
-  "productsList",
-  "isSelected",
-];
+const storageItems = ["state"];
 
 const RemoveStorage = () => {
   const [popupActive, setPopupActive] = useState(false);
