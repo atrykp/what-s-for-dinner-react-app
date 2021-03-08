@@ -16,16 +16,12 @@ import MoreMenu from "../components/MoreMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
 import NewFilterArr from "../pages/NewFilterArr";
+import { useMealsArray } from "../components/useMealsArray";
 // import EditDish from "../components/EditDish";
 
 function App() {
   const dispatch = useDispatch();
   const mealsStore = useSelector((state) => state.mealsReducer);
-  const filterStore = useSelector((state) => state.filtersReducer);
-  const productsStore = useSelector((state) => state.productsReducer);
-  const isSectionActive = useSelector((state) => state.activeSectionReducer);
-
-  const { isUserProductsActive } = isSectionActive;
 
   useEffect(() => {
     const banInterval = setInterval(() => {
@@ -56,54 +52,9 @@ function App() {
     }
   };
 
-  const filterMeals = (arr, activeFilters) => {
-    const mealsArr = [];
-    for (let i = 0; i < arr.length; i++) {
-      let flag = false;
-      for (let j = 0; j < arr[i].ingredient.length; j++) {
-        if (activeFilters.indexOf(arr[i].ingredient[j].name) !== -1) {
-          flag = true;
-        }
-      }
-      if (isUserProductsActive && flag) {
-        mealsArr.push(arr[i]);
-      } else if (!isUserProductsActive && !flag) {
-        mealsArr.push(arr[i]);
-      }
-    }
-    return mealsArr;
-  };
-  const getActiveElements = (arr) => {
-    let active = [];
-    arr.forEach((element) => {
-      if (element.active) {
-        active.push(element.name);
-      }
-    });
-    return active;
-  };
-
-  const getMealsArray = () => {
-    let activeFilters = getActiveElements(filterStore);
-    let activeProducts = getActiveElements(productsStore);
-
-    // remove banned
-    let arr = mealsStore.filter((element) => !element.ban.status);
-
-    if (isUserProductsActive) {
-      // if products section is active
-      return filterMeals(arr, activeProducts);
-    }
-
-    if (activeFilters.length > 0) {
-      return filterMeals(arr, activeFilters);
-    }
-    return arr;
-  };
-
   const mealsCounter = (
     <p>
-      Liczba dań <span>{getMealsArray().length}</span>
+      Liczba dań <span>{useMealsArray().length}</span>
     </p>
   );
   const mainPageStructure = (
@@ -118,7 +69,7 @@ function App() {
         </div>
       </div>
       <div>
-        <DrawnDishList customedArr={getMealsArray()} />
+        <DrawnDishList customedArr={useMealsArray()} />
       </div>
 
       <div className="lowerNav">
