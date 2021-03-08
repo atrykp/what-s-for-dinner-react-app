@@ -5,6 +5,7 @@ import { addFilter, deleteFilter, editFilter } from "../actions/actions";
 import Filter from "../components/filter";
 import { v4 } from "uuid";
 import "../styles/FilterArr.css";
+import AnimateHeight from "react-animate-height";
 
 const NewFilterArr = () => {
   const dispatch = useDispatch();
@@ -84,8 +85,9 @@ const NewFilterArr = () => {
       />
     );
   });
+  const height = !filtersSection ? "auto" : 0;
 
-  const filterForm = !filtersSection && (
+  const filterForm = (
     <>
       <div className="filtersSectionButtons">
         {!allFiltersSection && (
@@ -93,6 +95,7 @@ const NewFilterArr = () => {
             wszystkie filtry
           </button>
         )}
+
         {allFiltersSection && (
           <button
             onClick={showActiveFilters}
@@ -116,7 +119,7 @@ const NewFilterArr = () => {
       </form>
     </div>
   );
-  const arr = !filtersSection && (
+  const arr = (
     <div className="filterArr">
       {allFiltersSection ? allFiltersArr : activeFilters()}
     </div>
@@ -133,9 +136,13 @@ const NewFilterArr = () => {
           {`filtry ${activeFilters().length}`}
         </button>
       </div>
-      {!filtersSection && sectionStructure}
-      {filterForm}
-      {arr}
+      <AnimateHeight duration={600} height={height}>
+        <div>
+          <div>{sectionStructure}</div>
+          <div>{filterForm}</div>
+          <div>{arr}</div>
+        </div>
+      </AnimateHeight>
     </>
   );
 };

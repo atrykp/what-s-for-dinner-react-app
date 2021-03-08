@@ -123,7 +123,6 @@ export let mealsArr = [
       { name: "mięso mielone", quantity: "500g" },
       { name: "sól, pieprz, słodka papryka, ostra papryka", quantity: "" },
       { name: "olej do smażenia", quantity: "" },
-      { name: "", quantity: "" },
     ],
     description:
       "Spaghetti to szybkie i pożywne danie, które z pewnością gości na większości stołów. Sposobów na jego wykonanie jest wiele- można je zrobić z pomidorami z puszki, z passatą pomidorową czy też z gotowym sosem z torebki. Ja zastępuję passatę sosem pomidorowym Dawtona, który można kupić w Auchan.",

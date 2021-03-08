@@ -1,6 +1,7 @@
 import { v4 } from "uuid";
+import AnimateHeight from "react-animate-height";
 import "../styles/UserProducts.css";
-import { CSSTransition } from "react-transition-group";
+
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct, changeActiveStatus } from "../actions/actions";
 
@@ -29,19 +30,15 @@ const UserProducts = () => {
       </button>
     </li>
   ));
+  const height = isUserProductsActive ? "auto" : 0;
+
   const section = (
-    <CSSTransition
-      in={isUserProductsActive}
-      timeout={300}
-      classNames="sample"
-      unmountOnExit
-      appear
-    >
+    <AnimateHeight duration={600} height={height}>
       <div className="userProducts__filters">
         <p>Zaznacz poniżej, które produkty już masz</p>
         <ul className="userProducts__filtersList">{filters}</ul>
       </div>
-    </CSSTransition>
+    </AnimateHeight>
   );
 
   return (
