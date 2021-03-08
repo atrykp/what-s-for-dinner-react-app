@@ -10,6 +10,7 @@ import {
   changeActiveStatus,
   removeShoppingList,
 } from "../actions/actions";
+import DrawnDish from "../components/DrawnDish";
 
 const DrawnDishList = ({ customedArr }) => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const DrawnDishList = ({ customedArr }) => {
   const { ingredientsView, productsView } = isSectionActive;
 
   const [drawnDish, setDrawnDish] = useState("");
+
   const setSelectedDishReducer = (id, status) => {
     dispatch(changeIsSelected(id, status));
   };
@@ -198,6 +200,16 @@ const DrawnDishList = ({ customedArr }) => {
         <button onClick={handleDraw} className="drawnDishSection__drawBtn">
           Losuj
         </button>
+        {/* <DrawnDish
+          showIngredients={showIngredients}
+          ingredientsView={ingredientsView}
+          showDish={showDish}
+          ban={ban}
+          setSelectedDishReducer={setSelectedDishReducer}
+          dispatch={dispatch}
+          changeActiveStatus={changeActiveStatus}
+          ingredientSection={ingredientSection}
+        /> */}
         {showDishSection}
       </div>
     </>
