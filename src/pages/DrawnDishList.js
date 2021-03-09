@@ -9,6 +9,7 @@ import {
   removeShoppingList,
 } from "../actions/actions";
 import DrawnDish from "../components/DrawnDish";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const DrawnDishList = ({ customedArr }) => {
   const dispatch = useDispatch();
@@ -85,19 +86,19 @@ const DrawnDishList = ({ customedArr }) => {
     dispatch(removeShoppingList());
   };
 
-  const showDishSection = showDish && (
-    <div className="drawnDish">
-      <DrawnDish
-        showIngredients={showIngredients}
-        showDish={showDish}
-        ban={ban}
-        setSelectedDishReducer={setSelectedDishReducer}
-        markDishAsDone={markDishAsDone}
-        showProductsList={showProductsList}
-        productsListArr={productsListArr}
-      />
-    </div>
-  );
+  // const showDishSection = showDish && (
+  //   <div className="drawnDish">
+  //     <DrawnDish
+  //       showIngredients={showIngredients}
+  //       showDish={showDish}
+  //       ban={ban}
+  //       setSelectedDishReducer={setSelectedDishReducer}
+  //       markDishAsDone={markDishAsDone}
+  //       showProductsList={showProductsList}
+  //       productsListArr={productsListArr}
+  //     />
+  //   </div>
+  // );
 
   return (
     <>
@@ -105,8 +106,35 @@ const DrawnDishList = ({ customedArr }) => {
         <button onClick={handleDraw} className="drawnDishSection__drawBtn">
           Losuj
         </button>
-
-        {showDishSection}
+        <CSSTransition
+          in={Boolean(showDish)}
+          timeout={500}
+          classNames="display"
+          unmountOnExit
+          appear
+        >
+          <TransitionGroup>
+            <CSSTransition
+              key={showDish.id}
+              timeout={500}
+              classNames="display"
+              unmountOnExit
+              appear
+            >
+              <div className="drawnDish">
+                <DrawnDish
+                  showIngredients={showIngredients}
+                  showDish={showDish}
+                  ban={ban}
+                  setSelectedDishReducer={setSelectedDishReducer}
+                  markDishAsDone={markDishAsDone}
+                  showProductsList={showProductsList}
+                  productsListArr={productsListArr}
+                />
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
+        </CSSTransition>
       </div>
     </>
   );

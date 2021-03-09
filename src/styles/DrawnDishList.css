@@ -100,6 +100,20 @@
 .drawnDish__name--small {
   font-size: 1.6rem;
 }
+.display-enter {
+  opacity: 0;
+}
+.display-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+.display-exit {
+  opacity: 1;
+}
+.display-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
 
 @media (min-width: 500px) {
   .drawnDishSection__drawBtn {
