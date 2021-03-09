@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeBanStatus } from "../actions/actions";
 import NewFilterArr from "../pages/NewFilterArr";
 import { useMealsArray } from "../components/useMealsArray";
-// import EditDish from "../components/EditDish";
+import EditDish from "../components/EditDish";
 
 function App() {
   const dispatch = useDispatch();
@@ -98,14 +98,7 @@ function App() {
         <Route path="/dish/:id">
           <Dish />
         </Route>
-        <Route path="/edit/:id">
-          {/* <EditDish
-            selectedDish={selectedDish}
-            allMeals={allMeals}
-            setAllMeals={setAllMeals}
-            setSelectedDish={setSelectedDish}
-          /> */}
-        </Route>
+        <Route path="/edit/:id">{/* <EditDish /> */}</Route>
       </Switch>
     </Router>
   );

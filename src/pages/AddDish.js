@@ -13,7 +13,7 @@ const validation = (dish) => {
   return null;
 };
 
-const AddDish = (props) => {
+const AddDish = () => {
   const nameDishInput = createRef();
   const [errorMsg, setErrorMsg] = useState("");
   const [dish, setDish] = useState({

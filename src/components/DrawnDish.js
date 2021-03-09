@@ -82,7 +82,7 @@ const DrawnDish = ({
       <div
         className={`drawnDish__name ${
           showDish.name
-            ? showDish.name.length > 20
+            ? showDish.name.length > 25
               ? "drawnDish__name--small"
               : ""
             : null
@@ -91,7 +91,7 @@ const DrawnDish = ({
         <h1
           className={` ${
             showDish.name
-              ? showDish.name.length > 20
+              ? showDish.name.length > 25
                 ? "drawnDish__name--small"
                 : ""
               : null
