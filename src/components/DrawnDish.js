@@ -1,20 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Ingredient from "../components/Ingredients";
+import { useDispatch, useSelector } from "react-redux";
+import { changeActiveStatus } from "../actions/actions";
 
 const DrawnDish = ({
   showIngredients,
-  ingredientsView,
   showDish,
   ban,
   setSelectedDishReducer,
-  dispatch,
-  changeActiveStatus,
   markDishAsDone,
   showProductsList,
-  productsView,
+
   productsListArr,
 }) => {
+  const dispatch = useDispatch();
+  const isSectionActive = useSelector((state) => state.activeSectionReducer);
+  const { ingredientsView, productsView } = isSectionActive;
   const drawnDishButtons = (
     <div className="drawnDish__buttons">
       <button

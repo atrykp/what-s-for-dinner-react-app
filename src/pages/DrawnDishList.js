@@ -89,15 +89,11 @@ const DrawnDishList = ({ customedArr }) => {
     <div className="drawnDish">
       <DrawnDish
         showIngredients={showIngredients}
-        ingredientsView={ingredientsView}
         showDish={showDish}
         ban={ban}
         setSelectedDishReducer={setSelectedDishReducer}
-        dispatch={dispatch}
-        changeActiveStatus={changeActiveStatus}
         markDishAsDone={markDishAsDone}
         showProductsList={showProductsList}
-        productsView={productsView}
         productsListArr={productsListArr}
       />
     </div>

@@ -70,8 +70,6 @@ const Dish = () => {
   ));
   const handleSaveProducts = (e) => {
     e.preventDefault();
-
-    // zapisz do local storage cały obiekt
   };
   return (
     <div className="selectedDish">
@@ -86,7 +84,6 @@ const Dish = () => {
         <p>Zaznacz co musisz jeszcze kupić:</p>
         <form action="" onSubmit={(e) => handleSaveProducts(e)}>
           {shoppingList}
-          <button>Zapisz</button>
         </form>
       </div>
       <div className="selectedDish__steps">
