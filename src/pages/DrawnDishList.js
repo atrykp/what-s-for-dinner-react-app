@@ -51,6 +51,7 @@ const DrawnDishList = ({ customedArr }) => {
 
     let index = Math.floor(Math.random() * notYetArr.length);
     setDrawnDish(notYetArr[index]);
+    dispatch(removeShoppingList());
   };
 
   const ban = (id, howLong = "permament") => {
@@ -85,20 +86,6 @@ const DrawnDishList = ({ customedArr }) => {
     setSelectedDishReducer(showDish.id, showDish.isSelected);
     dispatch(removeShoppingList());
   };
-
-  // const showDishSection = showDish && (
-  //   <div className="drawnDish">
-  //     <DrawnDish
-  //       showIngredients={showIngredients}
-  //       showDish={showDish}
-  //       ban={ban}
-  //       setSelectedDishReducer={setSelectedDishReducer}
-  //       markDishAsDone={markDishAsDone}
-  //       showProductsList={showProductsList}
-  //       productsListArr={productsListArr}
-  //     />
-  //   </div>
-  // );
 
   return (
     <>
