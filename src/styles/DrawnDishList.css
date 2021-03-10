@@ -1,10 +1,10 @@
 .drawnDishSection {
   position: relative;
-  min-height: 70vh;
+  min-height: 80vh;
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-auto-rows: min-content;
+  padding-bottom: 15vh;
 }
 
 .drawnDishSection__drawBtn {
@@ -17,24 +17,20 @@
   color: white;
   border: none;
   left: 50%;
-  bottom: 2%;
+  bottom: 35px;
   transform: translate(-50%, -10%);
   z-index: 1;
   cursor: pointer;
 }
 .drawnDish {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -77%);
+  min-height: 220px;
+  width: 320px;
+  margin-top: 0.1vh;
+
   background: linear-gradient(rgba(37, 37, 37, 0.6), rgba(31, 22, 22, 0.6));
-  width: 90%;
-  min-height: 35vh;
   border-radius: 10px;
   display: grid;
   grid-template-rows: auto auto auto;
-  margin-bottom: 20vh;
-  margin-top: 2vh;
   color: white;
 }
 .drawnDish__buttons {
@@ -100,7 +96,7 @@
 .drawnDish__name--small {
   font-size: 1.6rem;
 }
-.display-enter {
+/* .display-enter {
   opacity: 0;
 }
 .display-enter-active {
@@ -113,18 +109,17 @@
 .display-exit-active {
   opacity: 0;
   transition: opacity 500ms;
-}
+} */
 
 @media (min-width: 500px) {
   .drawnDishSection__drawBtn {
     padding: 1% 5%;
     font-size: 1.7rem;
+    bottom: 2%;
   }
   .drawnDish {
-    width: 70%;
     min-height: 250px;
-
-    max-width: 400px;
+    width: 400px;
     margin-top: 0.1vh;
   }
   .drawnDish__name {
@@ -149,14 +144,8 @@
   }
 }
 @media (min-width: 770px) {
-  .drawnDish {
-    transform: translate(-50%, -50%);
-  }
 }
 @media (min-width: 770px) {
-  .drawnDish {
-    top: 45%;
-  }
 }
 
 @media (min-width: 1024px) {
