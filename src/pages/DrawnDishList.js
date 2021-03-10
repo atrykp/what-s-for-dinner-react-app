@@ -93,7 +93,7 @@ const DrawnDishList = ({ customedArr }) => {
         <button onClick={handleDraw} className="drawnDishSection__drawBtn">
           Losuj
         </button>
-        {/* <CSSTransition
+        <CSSTransition
           in={Boolean(showDish)}
           timeout={500}
           classNames="display"
@@ -101,27 +101,21 @@ const DrawnDishList = ({ customedArr }) => {
           appear
         >
           <TransitionGroup>
-            <CSSTransition
-              key={showDish.id}
-              timeout={500}
-              classNames="display"
-              unmountOnExit
-              appear
-            > */}
-        <div className="drawnDish">
-          <DrawnDish
-            showIngredients={showIngredients}
-            showDish={showDish}
-            ban={ban}
-            setSelectedDishReducer={setSelectedDishReducer}
-            markDishAsDone={markDishAsDone}
-            showProductsList={showProductsList}
-            productsListArr={productsListArr}
-          />
-        </div>
-        {/* </CSSTransition>
+            <CSSTransition key={showDish.id} timeout={200} classNames="slide">
+              <div className="drawnDish">
+                <DrawnDish
+                  showIngredients={showIngredients}
+                  showDish={showDish}
+                  ban={ban}
+                  setSelectedDishReducer={setSelectedDishReducer}
+                  markDishAsDone={markDishAsDone}
+                  showProductsList={showProductsList}
+                  productsListArr={productsListArr}
+                />
+              </div>
+            </CSSTransition>
           </TransitionGroup>
-        </CSSTransition> */}
+        </CSSTransition>
       </div>
     </>
   );

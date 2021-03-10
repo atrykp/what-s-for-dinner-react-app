@@ -96,7 +96,7 @@
 .drawnDish__name--small {
   font-size: 1.6rem;
 }
-/* .display-enter {
+.display-enter {
   opacity: 0;
 }
 .display-enter-active {
@@ -109,8 +109,25 @@
 .display-exit-active {
   opacity: 0;
   transition: opacity 500ms;
-} */
+}
+.slide-enter {
+  opacity: 0;
+  display: none;
+}
+.slide-enter.slide-enter-active {
+}
 
+/* slide exit */
+.slide-exit {
+  opacity: 1;
+}
+.slide-exit.slide-exit-active {
+  opacity: 0;
+  transition: opacity 200ms linear;
+}
+.slide-exit-done {
+  opacity: 0;
+}
 @media (min-width: 500px) {
   .drawnDishSection__drawBtn {
     padding: 1% 5%;
