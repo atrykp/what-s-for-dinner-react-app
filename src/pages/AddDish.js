@@ -13,6 +13,7 @@ const validation = (dish) => {
   }
   return null;
 };
+const addTxt = "Przepis został dodany";
 
 const AddDish = () => {
   const nameDishInput = createRef();
@@ -195,7 +196,7 @@ const AddDish = () => {
           }
           message="Czy na pewno chcesz opuścić stronę?"
         />
-        <Modal />
+        <Modal txt={addTxt} />
         <Link className="backBtn" to="/">
           Wróć
         </Link>
