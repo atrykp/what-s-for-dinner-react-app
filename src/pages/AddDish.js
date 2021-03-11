@@ -5,6 +5,7 @@ import "../styles/AddDish.css";
 import { v4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { addDish } from "../actions/actions";
+import Modal from "../components/Modal";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -194,6 +195,7 @@ const AddDish = () => {
           }
           message="Czy na pewno chcesz opuścić stronę?"
         />
+        <Modal />
         <Link className="backBtn" to="/">
           Wróć
         </Link>
