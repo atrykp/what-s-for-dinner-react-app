@@ -10,6 +10,8 @@ import {
 } from "../actions/actions";
 import DrawnDish from "../components/DrawnDish";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Modal from "../components/Modal";
+let permamentBanTxt = "";
 
 const DrawnDishList = ({ customedArr }) => {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const DrawnDishList = ({ customedArr }) => {
   const { ingredientsView, productsView } = isSectionActive;
 
   const [drawnDish, setDrawnDish] = useState("");
+  const [modalView, setModalView] = useState(false);
 
   const setSelectedDishReducer = (id, status) => {
     dispatch(changeIsSelected(id, status));
@@ -53,11 +56,17 @@ const DrawnDishList = ({ customedArr }) => {
     setDrawnDish(notYetArr[index]);
     dispatch(removeShoppingList());
   };
-
+  const forHowLong = (number) => {
+    return number === 7000 ? "na 24 godziny" : "";
+  };
   const ban = (id, howLong = "permament") => {
     const sinceWhenDate = getDate();
     banDish(id, sinceWhenDate, howLong);
     setDrawnDish("");
+    permamentBanTxt = `Przepis został przeniesiony do wstrzymane ${forHowLong(
+      howLong
+    )}`;
+    setModalView(true);
   };
 
   const showIngredients = () => {
@@ -86,6 +95,10 @@ const DrawnDishList = ({ customedArr }) => {
     setSelectedDishReducer(showDish.id, showDish.isSelected);
     dispatch(removeShoppingList());
   };
+  const setView = (status) => {
+    setModalView(status);
+  };
+  const modal = modalView && <Modal txt={permamentBanTxt} setView={setView} />;
 
   return (
     <>
@@ -93,6 +106,7 @@ const DrawnDishList = ({ customedArr }) => {
         <button onClick={handleDraw} className="drawnDishSection__drawBtn">
           Losuj
         </button>
+        {modal}
         <CSSTransition
           in={Boolean(showDish)}
           timeout={500}
@@ -101,7 +115,13 @@ const DrawnDishList = ({ customedArr }) => {
           appear
         >
           <TransitionGroup>
-            <CSSTransition key={showDish.id} timeout={200} classNames="slide">
+            <CSSTransition
+              key={showDish.id}
+              timeout={200}
+              classNames="slide"
+              unmountOnExit
+              appear
+            >
               <div className="drawnDish">
                 <DrawnDish
                   showIngredients={showIngredients}
