@@ -1,9 +1,11 @@
 import "../styles/Modal.css";
-const Modal = ({ txt }) => {
+const Modal = ({ txt, setView }) => {
   return (
     <div className="modal">
       <p className="modal__txt">{txt}</p>
-      <button className="modal__btn">Ok</button>
+      <button className="modal__btn" onClick={() => setView(false)}>
+        Ok
+      </button>
     </div>
   );
 };

@@ -18,6 +18,7 @@ const addTxt = "Przepis został dodany";
 const AddDish = () => {
   const nameDishInput = createRef();
   const [errorMsg, setErrorMsg] = useState("");
+  const [modalView, setModalView] = useState(false);
   const [dish, setDish] = useState({
     name: "",
     ingredient: [{ name: "", quantity: "" }],
@@ -111,6 +112,7 @@ const AddDish = () => {
         sinceWhen: "",
       },
     });
+    setModalView(true);
   };
 
   let stepsInputs = dish.steps.map((x, i) => {
@@ -184,6 +186,10 @@ const AddDish = () => {
       </div>
     );
   });
+  const setView = (status) => {
+    setModalView(status);
+  };
+  const modal = modalView && <Modal txt={addTxt} setView={setView} />;
   return (
     <>
       <div className="addDish">
@@ -196,7 +202,7 @@ const AddDish = () => {
           }
           message="Czy na pewno chcesz opuścić stronę?"
         />
-        <Modal txt={addTxt} />
+        {modal}
         <Link className="backBtn" to="/">
           Wróć
         </Link>
