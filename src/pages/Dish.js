@@ -5,6 +5,9 @@ import "../styles/Dish.css";
 import Ingredients from "../components/Ingredients.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addToShoppingList, editShoppingList } from "../actions/actions";
+import { useState } from "react";
+import Modal from "../components/Modal";
+const modalTxt = "Przepis dodany do wstrzymane na 7 dni";
 
 const Dish = () => {
   const dispatch = useDispatch();
@@ -13,6 +16,8 @@ const Dish = () => {
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
   );
+  const [modalView, setModalView] = useState(true);
+
   // destructuring selected dish
   const {
     name,
@@ -71,8 +76,14 @@ const Dish = () => {
   const handleSaveProducts = (e) => {
     e.preventDefault();
   };
+  const setView = (status) => {
+    setModalView(status);
+  };
+  const modal = modalView && <Modal txt={modalTxt} setView={setView} />;
+
   return (
     <div className="selectedDish">
+      {modal}
       <Link to="/">Wróć</Link>
       <Link to={`/edit/${name}`}>Edytuj</Link>
       <h1 className="selectedDish__name">{name}</h1>
