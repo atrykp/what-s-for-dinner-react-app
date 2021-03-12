@@ -22,8 +22,10 @@ const EditDish = () => {
 
   const nameDishInput = createRef();
   const [errorMsg, setErrorMsg] = useState("");
-  const [dish, setDish] = useState(isSelectedDish);
+  const [dish, setDish] = useState(isSelectedDish[0]);
   const dispatch = useDispatch();
+  console.log(dish);
+  console.log("ładuje od nowa");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +52,10 @@ const EditDish = () => {
     const dishObj = { ...dish };
     const ingredientArr = dishObj.ingredient;
     ingredientArr.splice(index, 1);
+    console.log(ingredientArr);
+
+    dishObj.ingredient = ingredientArr;
+
     setDish(dishObj);
   };
 
@@ -108,7 +114,7 @@ const EditDish = () => {
 
   let stepsInputs = dish.steps.map((x, i) => {
     return (
-      <div className="addDishForm__stepsBox" key={i}>
+      <div className="addDishForm__stepsBox" key={x.value}>
         <span className="addDishForm__txt">{i + 1}.</span>
         <input
           className="addDishForm__stepInput"
@@ -138,8 +144,10 @@ const EditDish = () => {
   });
 
   let ingredientImputs = dish.ingredient.map((x, i) => {
+    console.log(x);
+
     return (
-      <div className="addDishForm__ingredientsBox" key={`${x}${i}`}>
+      <div className="addDishForm__ingredientsBox" key={`${x.name}`}>
         <input
           className="addDishForm__ingredientsInput"
           type="text"

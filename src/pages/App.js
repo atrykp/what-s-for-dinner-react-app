@@ -98,7 +98,9 @@ function App() {
         <Route path="/dish/:id">
           <Dish />
         </Route>
-        <Route path="/edit/:id">{/* <EditDish /> */}</Route>
+        <Route path="/edit/:id">
+          <EditDish />
+        </Route>
       </Switch>
     </Router>
   );
