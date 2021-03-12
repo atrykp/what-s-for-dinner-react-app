@@ -4,6 +4,7 @@ const store = {
   ingredientsView: false,
   productsView: false,
   isUserProductsActive: false,
+  dishModal: true,
 };
 
 export const activeSectionReducer = (state = store, action) => {

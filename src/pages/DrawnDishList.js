@@ -56,6 +56,7 @@ const DrawnDishList = ({ customedArr }) => {
     let index = Math.floor(Math.random() * notYetArr.length);
     setDrawnDish(notYetArr[index]);
     dispatch(removeShoppingList());
+    dispatch(changeActiveStatus("dishModal", true));
   };
   const forHowLong = (number) => {
     return number === 7000 ? "na 24 godziny" : "";

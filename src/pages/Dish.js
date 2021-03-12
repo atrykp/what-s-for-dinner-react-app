@@ -7,12 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToShoppingList, editShoppingList } from "../actions/actions";
 import { useState } from "react";
 import Modal from "../components/Modal";
+import { changeActiveStatus } from "../actions/actions";
 const modalTxt = "Przepis dodany do wstrzymane na 7 dni";
 
 const Dish = () => {
   const dispatch = useDispatch();
   const mealsStore = useSelector((state) => state.mealsReducer);
   const productsList = useSelector((state) => state.shoppingListReducer);
+  const dishModal = useSelector(
+    (state) => state.activeSectionReducer.dishModal
+  );
+  console.log(dishModal);
+
   const isSelectedDish = [...mealsStore].filter(
     (element) => element.isSelected
   );
@@ -77,9 +83,9 @@ const Dish = () => {
     e.preventDefault();
   };
   const setView = (status) => {
-    setModalView(status);
+    dispatch(changeActiveStatus("dishModal", false));
   };
-  const modal = modalView && <Modal txt={modalTxt} setView={setView} />;
+  const modal = dishModal && <Modal txt={modalTxt} setView={setView} />;
 
   return (
     <div className="selectedDish">
