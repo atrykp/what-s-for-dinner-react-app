@@ -2,9 +2,8 @@ import React, { createRef, useState } from "react";
 import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
-import { v4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { addDish } from "../actions/actions";
+import { editDish } from "../actions/actions";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -92,10 +91,8 @@ const EditDish = () => {
     } else {
       setErrorMsg("");
     }
-    const completeDish = dish;
-    completeDish.id = v4();
 
-    dispatch(addDish(completeDish));
+    dispatch(editDish(dish.id, dish));
     // ------------------------------------------------
 
     setDish({
