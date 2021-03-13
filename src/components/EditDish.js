@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/AddDish.css";
 import { useDispatch, useSelector } from "react-redux";
 import { editDish } from "../actions/actions";
+import { v4 } from "uuid";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -23,7 +24,6 @@ const EditDish = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [dish, setDish] = useState(isSelectedDish[0]);
   const dispatch = useDispatch();
-  console.log(dish);
   console.log("ładuje od nowa");
 
   const handleInputChange = (e) => {
@@ -35,6 +35,9 @@ const EditDish = () => {
 
   const changeIngredientInputs = (e, index) => {
     const { name, value } = e.target;
+    // console.log("name", name);
+    // console.log("value", value);
+
     const element = { ...dish };
     element.ingredient[index][name] = value;
     setDish(element);
@@ -42,14 +45,14 @@ const EditDish = () => {
 
   const addNewIngredientInputs = (e) => {
     const element = { ...dish };
-    const arr = [...element.ingredient, { name: "", quantity: "" }];
+    const arr = [...element.ingredient, { name: "", quantity: "", id: v4() }];
     element.ingredient = arr;
     setDish(element);
   };
 
   const removeIngredient = (index) => {
     const dishObj = { ...dish };
-    const ingredientArr = dishObj.ingredient;
+    const ingredientArr = [...dishObj.ingredient];
     ingredientArr.splice(index, 1);
     console.log(ingredientArr);
 
@@ -68,7 +71,7 @@ const EditDish = () => {
 
   const addStepsInput = () => {
     const dishObj = { ...dish };
-    const stepsArr = [...dishObj.steps, { number: "", value: "" }];
+    const stepsArr = [...dishObj.steps, { number: "", value: "", id: v4() }];
     dishObj.steps = stepsArr;
     setDish(dishObj);
   };
@@ -91,6 +94,7 @@ const EditDish = () => {
     } else {
       setErrorMsg("");
     }
+    console.log(dish.id);
 
     dispatch(editDish(dish.id, dish));
     // ------------------------------------------------
@@ -111,7 +115,7 @@ const EditDish = () => {
 
   let stepsInputs = dish.steps.map((x, i) => {
     return (
-      <div className="addDishForm__stepsBox" key={x.value}>
+      <div className="addDishForm__stepsBox" key={x.id}>
         <span className="addDishForm__txt">{i + 1}.</span>
         <input
           className="addDishForm__stepInput"
@@ -141,10 +145,10 @@ const EditDish = () => {
   });
 
   let ingredientImputs = dish.ingredient.map((x, i) => {
-    console.log(x);
-
+    // console.log("x", x.name);
+    // console.log("y", x.quantity);
     return (
-      <div className="addDishForm__ingredientsBox" key={`${x.name}`}>
+      <div className="addDishForm__ingredientsBox" key={x.id}>
         <input
           className="addDishForm__ingredientsInput"
           type="text"

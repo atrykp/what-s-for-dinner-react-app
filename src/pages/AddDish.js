@@ -49,7 +49,7 @@ const AddDish = () => {
 
   const addNewIngredientInputs = (e) => {
     const element = { ...dish };
-    const arr = [...element.ingredient, { name: "", quantity: "" }];
+    const arr = [...element.ingredient, { name: "", quantity: "", id: v4() }];
     element.ingredient = arr;
     setDish(element);
   };
@@ -71,7 +71,7 @@ const AddDish = () => {
 
   const addStepsInput = () => {
     const dishObj = { ...dish };
-    const stepsArr = [...dishObj.steps, { number: "", value: "" }];
+    const stepsArr = [...dishObj.steps, { number: "", value: "", id: v4() }];
     dishObj.steps = stepsArr;
     setDish(dishObj);
   };
@@ -117,7 +117,7 @@ const AddDish = () => {
 
   let stepsInputs = dish.steps.map((x, i) => {
     return (
-      <div className="addDishForm__stepsBox" key={i}>
+      <div className="addDishForm__stepsBox" key={x.id}>
         <span className="addDishForm__txt">{i + 1}.</span>
         <input
           className="addDishForm__stepInput"
@@ -148,7 +148,7 @@ const AddDish = () => {
 
   let ingredientImputs = dish.ingredient.map((x, i) => {
     return (
-      <div className="addDishForm__ingredientsBox" key={`${x}${i}`}>
+      <div className="addDishForm__ingredientsBox" key={x.id}>
         <input
           className="addDishForm__ingredientsInput"
           type="text"
