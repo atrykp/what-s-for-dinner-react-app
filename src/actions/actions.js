@@ -12,6 +12,7 @@ export const ADD_TO_SHOPPING_LIST = "ADD_TO_SHOPPING_LIST";
 export const REMOVE_SHOPPING_LIST = "REMOVE_SHOPPING_LIST";
 
 export const EDIT_SHOPPING_LIST_ELEMENT = "EDIT_SHOPPING_LIST_ELEMENTS";
+export const EDIT_DISH = "EDIT_DISH";
 
 export const addDish = ({
   name,
@@ -29,6 +30,16 @@ export const addDish = ({
       steps,
       id: v4(),
       ban,
+    },
+  };
+};
+
+export const editDish = (id, updatedDish) => {
+  return {
+    type: EDIT_DISH,
+    payload: {
+      id,
+      updatedDish,
     },
   };
 };

@@ -2,6 +2,7 @@ import {
   ADD_DISH,
   CHANGE_BAN_DISH,
   CHANGE_IS_SELECTED_DISH,
+  EDIT_DISH,
 } from "../actions/actions";
 import { mealsArr } from "../store/mealsArr";
 const store = mealsArr;
@@ -10,6 +11,14 @@ export const mealsReducer = (state = store, action) => {
   switch (action.type) {
     case ADD_DISH:
       return [...state, action.payload];
+    case EDIT_DISH:
+      return state.map((dish) => {
+        if (dish.id !== action.payload.id) {
+          return dish;
+        } else {
+          return action.payload.updatedDish;
+        }
+      });
     case CHANGE_BAN_DISH:
       return state.map((dish) => {
         if (dish.id !== action.payload.id) {
