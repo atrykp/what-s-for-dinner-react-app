@@ -6,7 +6,6 @@ import { v4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { addDish } from "../actions/actions";
 import Modal from "../components/Modal";
-import { filtersArray } from "../store/filtersArr";
 
 const validation = (dish) => {
   if (dish.name.trim().length < 2) {
@@ -114,7 +113,6 @@ const AddDish = () => {
       },
     });
     setModalView(true);
-    filtersArray();
   };
 
   let stepsInputs = dish.steps.map((x, i) => {
