@@ -1,7 +1,11 @@
 import { mealsArr } from "./mealsArr";
 import { v4 } from "uuid";
 export const userProducts = () => {
-  let mealsArray = JSON.parse(localStorage.getItem("allMeals")) || mealsArr;
+  let localStore = JSON.parse(localStorage.getItem("state"));
+
+  let mealsArray = localStore
+    ? JSON.parse(localStorage.getItem("state")).mealsReducer
+    : mealsArr;
   const setElem = new Set();
   mealsArray.forEach((element) => {
     for (let i = 0; i < element.ingredient.length; i++) {

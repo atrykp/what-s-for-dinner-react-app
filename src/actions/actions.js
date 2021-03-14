@@ -8,6 +8,7 @@ export const EDIT_FITLER = "EDIT_FILTER";
 export const REMOVE_FITLER = "REMOVE_FILTER";
 export const UPDATE_FILTERS = "UPDATE_FILTERS";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
+export const UPDATE_PRODUCTS = "UPDATE_PRODUCTS";
 export const CHANGE_ACTIVE_STATUS = "CHANGE_ACTIVE_STATUS";
 export const ADD_TO_SHOPPING_LIST = "ADD_TO_SHOPPING_LIST";
 export const REMOVE_SHOPPING_LIST = "REMOVE_SHOPPING_LIST";
@@ -106,6 +107,14 @@ export const editProduct = (id, active) => {
     payload: {
       active,
       id,
+    },
+  };
+};
+export const updateProducts = (productsArr) => {
+  return {
+    type: UPDATE_PRODUCTS,
+    payload: {
+      productsArr,
     },
   };
 };

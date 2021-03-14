@@ -8,8 +8,6 @@ const store = createStore(rootReducer, persistedState);
 
 store.subscribe(
   throttle(() => {
-    console.log("działam");
-
     saveState({
       filtersReducer: store.getState().filtersReducer,
       mealsReducer: store.getState().mealsReducer,

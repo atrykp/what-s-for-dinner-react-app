@@ -14,11 +14,16 @@ import UserProducts from "./UserProducts";
 import BannedMeals from "./BannedMeals";
 import MoreMenu from "../components/MoreMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBanStatus, updateFilters } from "../actions/actions";
+import {
+  changeBanStatus,
+  updateFilters,
+  updateProducts,
+} from "../actions/actions";
 import NewFilterArr from "../pages/NewFilterArr";
 import { useMealsArray } from "../components/useMealsArray";
 import EditDish from "../components/EditDish";
 import { filtersArray } from "../store/filtersArr";
+import { userProducts } from "../store/userProducts";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +31,7 @@ function App() {
 
   useEffect(() => {
     dispatch(updateFilters(filtersArray()));
+    dispatch(updateProducts(userProducts()));
     const banInterval = setInterval(() => {
       checkBanStatus();
     }, 6000);

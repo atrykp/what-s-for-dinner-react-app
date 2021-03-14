@@ -10,8 +10,6 @@ import AnimateHeight from "react-animate-height";
 const NewFilterArr = () => {
   const dispatch = useDispatch();
   const filterStore = useSelector((state) => state.filtersReducer);
-  console.log(filterStore);
-
   const [filtersSection, setFiltersSection] = useState("false");
   const [allFiltersSection, setAllFiltersSection] = useState(false);
   const [filterName, setFilterName] = useState("");
