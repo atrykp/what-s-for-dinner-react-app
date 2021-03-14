@@ -31,7 +31,6 @@ const DrawnDishList = ({ customedArr }) => {
   };
 
   const showDish = isSelectedDish.length > 0 ? isSelectedDish[0] : drawnDish;
-  const flagDishModal = false;
 
   const getDate = () => {
     let date = new Date();

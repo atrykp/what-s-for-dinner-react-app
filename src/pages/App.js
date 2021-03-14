@@ -30,7 +30,7 @@ function App() {
     return () => {
       clearInterval(banInterval);
     };
-  }, []);
+  }, [mealsStore]);
 
   const removeBanStatus = (dish) => {
     dispatch(

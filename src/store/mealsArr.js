@@ -299,15 +299,3 @@ export let mealsArr = [
     isSelected: false,
   },
 ];
-
-// let ingredientId = mealsArr.map((dish) => {
-//   dish.ingredient.forEach((ingredient, index) => (ingredient.id = index + 1));
-//   return dish;
-// });
-
-// let stepsId = ingredientId.map((dish) => {
-//   dish.steps.forEach((step, index) => (step.id = index + 1));
-//   return dish;
-// });
-
-// console.log(JSON.stringify(stepsId));

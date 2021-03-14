@@ -24,7 +24,6 @@ const EditDish = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [dish, setDish] = useState(isSelectedDish[0]);
   const dispatch = useDispatch();
-  console.log("ładuje od nowa");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -94,23 +93,8 @@ const EditDish = () => {
     } else {
       setErrorMsg("");
     }
-    console.log(dish.id);
 
     dispatch(editDish(dish.id, dish));
-    // ------------------------------------------------
-
-    setDish({
-      name: "",
-      ingredient: [{ name: "", quantity: "" }],
-      description: "",
-      steps: [{ number: "", value: "" }],
-      id: 1,
-      ban: {
-        status: false,
-        howLong: "",
-        sinceWhen: "",
-      },
-    });
   };
 
   let stepsInputs = dish.steps.map((x, i) => {
