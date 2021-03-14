@@ -6,6 +6,7 @@ export const CHANGE_IS_SELECTED_DISH = "CHANGE_IS_SELECTED_DISH";
 export const ADD_FITLER = "ADD_FILTER";
 export const EDIT_FITLER = "EDIT_FILTER";
 export const REMOVE_FITLER = "REMOVE_FILTER";
+export const UPDATE_FILTERS = "UPDATE_FILTERS";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const CHANGE_ACTIVE_STATUS = "CHANGE_ACTIVE_STATUS";
 export const ADD_TO_SHOPPING_LIST = "ADD_TO_SHOPPING_LIST";
@@ -88,6 +89,14 @@ export const deleteFilter = (id) => {
     type: REMOVE_FITLER,
     payload: {
       id,
+    },
+  };
+};
+export const updateFilters = (filtersArr) => {
+  return {
+    type: UPDATE_FILTERS,
+    payload: {
+      filtersArr,
     },
   };
 };

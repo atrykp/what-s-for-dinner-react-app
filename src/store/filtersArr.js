@@ -1,7 +1,11 @@
 import { mealsArr } from "./mealsArr";
 import { v4 } from "uuid";
 export const filtersArray = () => {
-  let mealsArray = JSON.parse(localStorage.getItem("allMeals")) || mealsArr;
+  let localStore = JSON.parse(localStorage.getItem("state"));
+  let mealsArray = localStore
+    ? JSON.parse(localStorage.getItem("state")).mealsReducer
+    : mealsArr;
+
   const setElem = new Set();
 
   mealsArray.forEach((element) => {
@@ -21,5 +25,6 @@ export const filtersArray = () => {
       id: v4(),
     };
   });
+
   return filters;
 };
