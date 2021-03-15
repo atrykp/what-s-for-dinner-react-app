@@ -1,6 +1,6 @@
 import React, { createRef, useState } from "react";
-import { Prompt } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Prompt, Link, useHistory } from "react-router-dom";
+import Modal from "../components/Modal";
 import "../styles/AddDish.css";
 import { useDispatch, useSelector } from "react-redux";
 import { editDish } from "../actions/actions";
@@ -13,7 +13,7 @@ const validation = (dish) => {
   }
   return null;
 };
-
+const addTxt = "Zapisano zmiany";
 const EditDish = () => {
   const mealsStore = useSelector((state) => state.mealsReducer);
 
@@ -23,9 +23,10 @@ const EditDish = () => {
 
   const nameDishInput = createRef();
   const [errorMsg, setErrorMsg] = useState("");
+  const [modalView, setModalView] = useState(false);
   const [dish, setDish] = useState(isSelectedDish[0]);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let dishObj = { ...dish };
@@ -35,9 +36,6 @@ const EditDish = () => {
 
   const changeIngredientInputs = (e, index) => {
     const { name, value } = e.target;
-    // console.log("name", name);
-    // console.log("value", value);
-
     const element = { ...dish };
     element.ingredient[index][name] = value;
     setDish(element);
@@ -96,8 +94,11 @@ const EditDish = () => {
     }
 
     dispatch(editDish(dish.id, dish));
+    setModalView(true);
   };
-
+  const modal = modalView && (
+    <Modal txt={addTxt} setView={setModalView} history={history} />
+  );
   let stepsInputs = dish.steps.map((x, i) => {
     return (
       <div className="addDishForm__stepsBox" key={x.id}>
@@ -130,8 +131,6 @@ const EditDish = () => {
   });
 
   let ingredientImputs = dish.ingredient.map((x, i) => {
-    // console.log("x", x.name);
-    // console.log("y", x.quantity);
     return (
       <div className="addDishForm__ingredientsBox" key={x.id}>
         <input
@@ -186,7 +185,9 @@ const EditDish = () => {
         <Link className="backBtn" to="/">
           Wróć
         </Link>
+        {modal}
         <form action="" className="addDishForm" onSubmit={saveDish}>
+          <h1>Edytuj przepis</h1>
           <input
             className="addDishForm__txtInput"
             ref={nameDishInput}
@@ -210,7 +211,7 @@ const EditDish = () => {
           <p className="addDishForm__txt">Opisz sposób przyrządzenia</p>
           {stepsInputs}
           <button className="addDishForm__submitBtn" onSubmit={saveDish}>
-            Zapisz przepis
+            Zapisz
           </button>
         </form>
       </div>
