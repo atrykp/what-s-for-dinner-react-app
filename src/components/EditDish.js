@@ -1,5 +1,5 @@
 import React, { createRef, useState } from "react";
-import { Prompt, Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Modal from "../components/Modal";
 import "../styles/AddDish.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -173,18 +173,9 @@ const EditDish = () => {
   return (
     <>
       <div className="addDish">
-        <Prompt
-          when={
-            dish.name ||
-            dish.description ||
-            dish.ingredient[0].name ||
-            dish.steps[0].value
-          }
-          message="Czy na pewno chcesz opuścić stronę?"
-        />
-        <Link className="backBtn" to="/">
+        <div className="backBtn" onClick={() => history.goBack()}>
           Wróć
-        </Link>
+        </div>
         {modal}
         <form action="" className="addDishForm" onSubmit={saveDish}>
           <h1>Edytuj przepis</h1>

@@ -1,5 +1,5 @@
 import "../styles/Modal.css";
-const Modal = ({ txt, setView }) => {
+const Modal = ({ txt, setView, history = null }) => {
   return (
     <div className="modal">
       <p className="modal__txt">{txt}</p>
@@ -7,6 +7,7 @@ const Modal = ({ txt, setView }) => {
         className="modal__btn"
         onClick={() => {
           setView(false);
+          history && history.goBack();
         }}
       >
         Ok
