@@ -108,13 +108,7 @@ const DrawnDishList = ({ customedArr }) => {
           Losuj
         </button>
         {modal}
-        <CSSTransition
-          in={Boolean(showDish)}
-          timeout={500}
-          classNames="display"
-          unmountOnExit
-          appear
-        >
+        {drawnDish ? (
           <TransitionGroup>
             <CSSTransition
               key={showDish.id}
@@ -136,7 +130,7 @@ const DrawnDishList = ({ customedArr }) => {
               </div>
             </CSSTransition>
           </TransitionGroup>
-        </CSSTransition>
+        ) : null}
       </div>
     </>
   );
