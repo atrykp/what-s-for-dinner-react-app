@@ -20,7 +20,7 @@ const DrawnDish = ({
   const drawnDishButtons = (
     <div className="drawnDish__buttons">
       <button
-        onClick={() => ban(showDish.id, 7000)}
+        onClick={() => ban(showDish.id, 86400000)}
         className="drawnDish__shortBanBtn"
       >
         Nie dzisiaj
@@ -28,7 +28,7 @@ const DrawnDish = ({
       <Link
         to={`dish/${showDish.name}${showDish.id}`}
         onClick={() => {
-          ban(showDish.id, 15000);
+          ban(showDish.id, 604800000);
 
           dispatch(changeActiveStatus("isUserProductsActive", false));
           setSelectedDishReducer(showDish.id, showDish.isSelected);

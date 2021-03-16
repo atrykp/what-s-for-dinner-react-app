@@ -16,7 +16,7 @@
   display: grid;
   grid-template-rows: 60% 40%;
   width: 100%;
-  min-height: 30vh;
+  height: 250px;
   z-index: 1;
   position: fixed;
   top: 50%;
@@ -28,6 +28,7 @@
   border-radius: 20px;
   transform-origin: left;
   animation: appear 0.2s ease-in;
+  padding: 0.5%;
 }
 .modal__txt {
   color: white;
@@ -62,7 +63,7 @@
 @media (min-width: 760px) {
   .modal {
     width: 50%;
-    height: 25%;
+    height: 30%;
   }
 }
 @media (min-width: 760px) {
@@ -73,6 +74,5 @@
 @media (min-width: 1024px) {
   .modal {
     width: 35%;
-    height: 25%;
   }
 }

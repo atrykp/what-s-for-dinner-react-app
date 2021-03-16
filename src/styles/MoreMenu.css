@@ -1,3 +1,12 @@
+@keyframes show {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .moreMenu {
   position: fixed;
   bottom: 11%;
@@ -5,6 +14,7 @@
   background-color: rgba(0, 0, 0, 0.829);
   padding: 1%;
   border-radius: 10px;
+  animation: show 0.5s ease-in;
 }
 i {
   color: rgba(71, 71, 71, 0.705);

@@ -58,12 +58,14 @@ const DrawnDishList = ({ customedArr }) => {
     dispatch(changeActiveStatus("dishModal", true));
   };
   const forHowLong = (number) => {
-    return number === 7000 ? "na 24 godziny" : "";
+    return number === 86400000 ? "na 24 godziny" : "";
   };
   const ban = (id, howLong = "permament") => {
     const sinceWhenDate = getDate();
     banDish(id, sinceWhenDate, howLong);
     setDrawnDish("");
+    console.log(howLong);
+
     permamentBanTxt = `Przepis został przeniesiony do wstrzymane ${forHowLong(
       howLong
     )}`;
