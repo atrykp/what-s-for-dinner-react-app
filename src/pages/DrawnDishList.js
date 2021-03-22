@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 } from "uuid";
 import "../styles/DrawnDishList.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ let permamentBanTxt = "";
 
 const DrawnDishList = ({ customedArr }) => {
   const dispatch = useDispatch();
+
   const productsList = useSelector((state) => state.shoppingListReducer);
   const mealsStore = useSelector((state) => state.mealsReducer);
   const isSelectedDish = [...mealsStore].filter(
